@@ -1,34 +1,26 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { poppins } from '@/shared/assets/Fonts';
+import { Toaster } from 'sonner';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import '@styles/tailwind.css';
+import '@styles/globals.css';
 
 export const metadata: Metadata = {
-  title: "Tulk",
-  description: "Soluciones Náuticas de Alta Tecnología",
+    title: 'Tulk',
+    description: 'Soluciones Náuticas de Alta Tecnología',
 };
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  return (
-    <html lang="es">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
-  );
+    return (
+        <html lang="es">
+            <body className={`${poppins.variable}  antialiased`}>
+                {children}
+                <Toaster position="bottom-right" richColors/>
+            </body>
+        </html>
+    );
 }

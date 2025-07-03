@@ -1,0 +1,25 @@
+@import 'tailwindcss';
+
+@theme {
+    /* Base colors */
+    --color-primary: #0f172a;
+    --color-secondary: #2d3748;
+
+    --color-tertiary: #cbd5e1;
+    --color-tertiary-hover: #94a3b8;
+
+    /* Orange colors */
+    --color-orange-01: #db5800;
+    --color-orange-02: #ff8000;
+    --color-orange-03: #ffb366;
+
+    /* Fonts */
+    --font-sans: 'Poppins', sans-serif;
+}
+
+@layer base {
+    body {
+        font-family: var(--font-sans);
+        background-color: black;
+    }
+}
