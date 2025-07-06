@@ -8,6 +8,7 @@ export const textVariants = cva('font-normal', {
             primary: 'text-primary',
             secondary: 'text-secondary',
             tertiary: 'text-tertiary',
+            white: 'text-white',
         },
         size: {
             sm: 'text-sm',

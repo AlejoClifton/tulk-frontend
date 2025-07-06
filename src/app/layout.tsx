@@ -4,7 +4,6 @@ import { Toaster } from 'sonner';
 
 import '@styles/tailwind.css';
 import '@styles/globals.css';
-import Footer from '@/modules/layout/Footer';
 
 export const metadata: Metadata = {
     title: 'Tulk',
@@ -21,7 +20,6 @@ export default function RootLayout({
             <body className={`${poppins.variable}  antialiased`}>
                 {children}
                 <Toaster position="bottom-right" richColors/>
-                <Footer />
             </body>
         </html>
     );
