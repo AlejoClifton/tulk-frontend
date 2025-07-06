@@ -1,0 +1,30 @@
+import React from 'react';
+import { cva } from 'class-variance-authority';
+import type { ClassedComponentProps } from '@/shared/types/classed-component-props';
+
+export const textVariants = cva('font-normal', {
+    variants: {
+        variant: {
+            primary: 'text-primary',
+            secondary: 'text-secondary',
+            tertiary: 'text-tertiary',
+        },
+        size: {
+            sm: 'text-sm',
+            md: 'text-base',
+            lg: 'text-lg',
+        },
+    },
+    defaultVariants: {
+        variant: 'tertiary',
+        size: 'md',
+    },
+});
+
+export interface TextProps extends ClassedComponentProps<typeof textVariants> {
+    children: React.ReactNode;
+}
+
+export const Text = ({ children, className, ...variantProps }: TextProps) => {
+    return <p className={textVariants({ ...variantProps, className })}>{children}</p>;
+};

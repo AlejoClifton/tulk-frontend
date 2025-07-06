@@ -1,10 +1,12 @@
 import Image from 'next/image';
 
 import { BrandContactInfo, BrandForm } from '@/modules/brand/components';
+import HeaderHome from '@/modules/layout/Header-Home';
 
 export default function Home() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+            <HeaderHome />
             <main className="container mx-auto px-4 py-16">
                 <div className="mx-auto max-w-3xl text-center">
                     <div className="mb-8 flex justify-center">

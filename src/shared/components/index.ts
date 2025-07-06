@@ -5,3 +5,5 @@ export * from './PanelCard';
 export * from './SectionTitle';
 export * from './Subtitle';
 export * from './Title';
+export * from './Text';
+export * from './Link';

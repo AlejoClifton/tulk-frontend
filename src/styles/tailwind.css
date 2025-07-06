@@ -3,6 +3,7 @@
 @theme {
     /* Base colors */
     --color-primary: #0f172a;
+    --color-primary-hover: #db5800;
     --color-secondary: #2d3748;
 
     --color-tertiary: #cbd5e1;
@@ -21,5 +22,9 @@
     body {
         font-family: var(--font-sans);
         background-color: black;
+    }
+
+    .card-dark {
+        @apply bg-gradient-to-br from-slate-900 to-[#1e40af];
     }
 }
