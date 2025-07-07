@@ -7,3 +7,4 @@ export * from './Subtitle';
 export * from './Title';
 export * from './Text';
 export * from './Link';
+export * from './Navegation';

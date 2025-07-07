@@ -5,7 +5,7 @@ import { Button, PanelCard, Subtitle, Text } from '@/shared/components';
 
 const ProductsOutstanding = () => {
     return (
-        <div className="my-16 flex flex-col gap-8 rounded-2xl bg-slate-50 py-16">
+        <div id="products" className="my-16 flex flex-col gap-8 rounded-2xl bg-slate-50 py-16">
             <div className="flex flex-col items-center gap-4">
                 <Subtitle variant="xl">Productos Destacados</Subtitle>
                 <Text size="xl" variant="secondary" className="max-w-xl text-center">

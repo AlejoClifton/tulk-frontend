@@ -4,7 +4,7 @@ import { Subtitle, Text } from '@/shared/components';
 
 const BrandContainer = () => {
     return (
-        <div className="my-16 flex flex-col gap-8">
+        <div id="contact" className="my-16 flex flex-col gap-8">
             <div className="flex flex-col items-center gap-4">
                 <Subtitle variant="xl">Contactanos</Subtitle>
                 <Text size="xl" variant="secondary" className="max-w-xl text-center">
