@@ -5,6 +5,7 @@ import type { ClassedComponentProps } from '@/shared/types/classed-component-pro
 const subtitleVariants = cva('text-2xl font-bold', {
     variants: {
         variant: {
+            xl: 'text-4xl',
             lg: 'text-2xl',
             md: 'text-xl',
             sm: 'text-lg',
