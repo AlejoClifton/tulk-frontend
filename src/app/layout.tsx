@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { poppins } from '@/shared/assets/Fonts';
+import { poppins } from '@/styles/Fonts';
 import { Toaster } from 'sonner';
 
 import '@styles/tailwind.css';

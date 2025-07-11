@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { MailIcon, MapPinIcon, PhoneIcon } from '@/shared/assets/SvgContainer';
-import { PanelCard, SectionTitle, Subtitle } from '@/shared/components';
+import { BrandApi } from '@features/brand/infrastructure/brand-api';
 
-import { BrandApi } from '@contexts/brand/infrastructure/brand-api';
-import { CustomLink } from '@/shared/components/Link';
+import { PanelCard, SectionTitle, Subtitle, CustomLink } from '@/shared/components';
+import { MailIcon, MapPinIcon, PhoneIcon } from '@/shared/components/icons/SvgContainer';
 
 export const BrandContactInfo = async () => {
     const brand = await new BrandApi().getBrands('123');
@@ -55,7 +54,7 @@ export const BrandContactInfo = async () => {
             <div className="mt-10 flex flex-col gap-4">
                 <SectionTitle color="primary">Horario de atención</SectionTitle>
                 <ul className="flex list-none flex-col gap-2 text-tertiary">
-                    {brand.hours.map((hour) => (
+                    {brand.hours.map((hour: string) => (
                         <li key={hour}>{hour}</li>
                     ))}
                 </ul>

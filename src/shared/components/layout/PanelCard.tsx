@@ -19,3 +19,4 @@ const panelVariants = cva('rounded-2xl md:rounded-3xl', {
 export const PanelCard = ({ children, className, ...variantProps }: ClassedComponentProps<typeof panelVariants>) => {
     return <div className={panelVariants({ ...variantProps, className })}>{children}</div>;
 };
+

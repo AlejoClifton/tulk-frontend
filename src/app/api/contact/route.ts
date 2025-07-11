@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { Resend } from 'resend';
 
-import { EmailTemplate } from '@/shared/components/EmailTemplate';
+import { EmailTemplate } from '@/shared/components/templates/EmailTemplate';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 

@@ -42,7 +42,7 @@ export const SliderHeroProduct = () => {
                 } as React.CSSProperties
             }
             navigation
-            className="aspect-[1580/700] w-full overflow-hidden rounded-lg">
+            className="aspect-[1580/700] w-full overflow-hidden">
             {slides.map((slide, idx) => (
                 <SwiperSlide key={idx}>
                     <a href={slide.link} className="relative block h-full w-full">

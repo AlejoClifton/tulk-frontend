@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Input, Button, PanelCard, Subtitle } from '@/shared/components';
-import { useBrandForm } from '@modules/brand/hooks/useBrandForm';
+import { useBrandForm } from '@features/brand/ui/hooks/useBrandForm';
 
 export const BrandForm = () => {
     const { form, loading, handleChange, handleSubmit } = useBrandForm();

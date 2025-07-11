@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-import { BrandApi } from '@/contexts/brand/infrastructure/brand-api';
+import { BrandApi } from '@features/brand/infrastructure/brand-api';
 
 import { SectionTitle, CustomLink, Text, Navegation } from '@/shared/components';
 
