@@ -2,13 +2,15 @@ import React from 'react';
 import { cva } from 'class-variance-authority';
 import type { ClassedComponentProps } from '@/shared/types/classed-component-props';
 
-export const textVariants = cva('font-normal', {
+export const textVariants = cva('', {
     variants: {
         variant: {
             primary: 'text-primary',
             secondary: 'text-secondary',
             tertiary: 'text-tertiary',
             white: 'text-white',
+            success: 'text-success',
+            error: 'text-error',
         },
         size: {
             sm: 'text-sm',
@@ -16,10 +18,18 @@ export const textVariants = cva('font-normal', {
             lg: 'text-lg',
             xl: 'text-xl',
         },
+        weight: {
+            normal: 'font-normal',
+            medium: 'font-medium',
+            semibold: 'font-semibold',
+            bold: 'font-bold',
+            extraBold: 'font-extrabold',
+        },
     },
     defaultVariants: {
         variant: 'tertiary',
         size: 'md',
+        weight: 'normal',
     },
 });
 

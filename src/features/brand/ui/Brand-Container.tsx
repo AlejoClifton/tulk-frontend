@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { BrandContactInfo, BrandForm } from './components';
 import { Subtitle, Text } from '@/shared/components';

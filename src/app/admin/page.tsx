@@ -1,37 +1,57 @@
-import React from 'react';
-import { Table, TableHeader, TableBody, TableRow, TableHeaderCell, TableCell, Button } from '@/shared/components/index';
+'use client';
+import React, { useState } from 'react';
+
+import { ModalProduct } from '@/features/products/ui/components/ModalProduct';
+import { ProductInterface } from '@/features/products/domain/product.entity';
+import { Button, Subtitle } from '@/shared/components/ui';
+import { PlusIcon } from '@/shared/components/icons/SvgContainer';
+import { ProductTable } from '@/features/products/ui/components/ProductTable';
+
+const productInitialState: ProductInterface = {
+    id: '',
+    name: '',
+    description: '',
+    categoryId: '',
+    mainImageUrl: '',
+    imagesUrl: [],
+    isActive: true,
+};
 
 const Admin = () => {
+    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [product, setProduct] = useState<ProductInterface | null>(null);
+
+    const handleOpenModal = (product: ProductInterface) => {
+        setIsOpenModal(true);
+        setProduct(product);
+    };
+
+    const handleDelete = (id: string) => {
+        console.log(id);
+    };
+
+    const handleCloseModal = () => {
+        setIsOpenModal(false);
+        setProduct(null);
+    };
+
     return (
-        <div className="container mx-auto flex flex-col gap-4 p-4">
-            <Table>
-                <TableHeader>
-                    <TableRow>
-                        <TableHeaderCell>Nombre</TableHeaderCell>
-                        <TableHeaderCell>Descripción</TableHeaderCell>
-                        <TableHeaderCell>Categoría</TableHeaderCell>
-                        <TableHeaderCell>Imagen</TableHeaderCell>
-                        <TableHeaderCell>Imagenes</TableHeaderCell>
-                        <TableHeaderCell>Estado</TableHeaderCell>
-                        <TableHeaderCell>Acciones</TableHeaderCell>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    <TableRow>
-                        <TableCell>Lámpara de escritorio</TableCell>
-                        <TableCell>Es una lámpara de escritorio</TableCell>
-                        <TableCell>Lámparas</TableCell>
-                        <TableCell>imagen.jpg</TableCell>
-                        <TableCell>imagen2.jpg, imagen3.jpg</TableCell>
-                        <TableCell>Activo</TableCell>
-                        <TableCell>
-                            <Button>Editar</Button>
-                            <Button>Eliminar</Button>
-                        </TableCell>
-                    </TableRow>
-                </TableBody>
-            </Table>
-        </div>
+        <>
+            <div className="container mx-auto flex flex-col gap-4 p-4">
+                <div className="flex justify-between">
+                    <Subtitle variant="lg">Listado de productos</Subtitle>
+                    <Button
+                        variant="success"
+                        onClick={() => handleOpenModal(productInitialState)}
+                        size="icon"
+                        className="flex h-10 w-10 items-center justify-center">
+                        <PlusIcon className="h-5 w-5" />
+                    </Button>
+                </div>
+                <ProductTable handleOpenModal={handleOpenModal} handleDelete={handleDelete} />
+            </div>
+            {isOpenModal && product && <ModalProduct product={product} onClose={handleCloseModal} />}
+        </>
     );
 };
 

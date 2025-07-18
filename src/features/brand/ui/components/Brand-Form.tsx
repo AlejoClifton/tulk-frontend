@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Input, Button, PanelCard, Subtitle } from '@/shared/components';
+import { Input, Button, PanelCard, Subtitle, Label, Textarea } from '@/shared/components';
 import { useBrandForm } from '@features/brand/ui/hooks/useBrandForm';
 
 export const BrandForm = () => {
@@ -12,40 +12,25 @@ export const BrandForm = () => {
             <Subtitle variant="lg" className="mb-8">
                 Consulta técnica
             </Subtitle>
-            <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
+            <form className="flex flex-col gap-6" onSubmit={handleSubmit} suppressHydrationWarning={true}>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                    <Input
-                        label="Nombre"
-                        name="name"
-                        placeholder="Tu nombre"
-                        value={form.name}
-                        onChange={handleChange}
-                    />
-                    <Input
-                        label="Teléfono"
-                        name="phone"
-                        placeholder="Tu teléfono"
-                        type="tel"
-                        value={form.phone}
-                        onChange={handleChange}
-                    />
+                    <div className="flex flex-col gap-2">
+                        <Label>Nombre</Label>
+                        <Input name="name" placeholder="Tu nombre" value={form.name} onChange={handleChange} />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                        <Label>Teléfono</Label>
+                        <Input name="phone" placeholder="Tu teléfono" value={form.phone} onChange={handleChange} />
+                    </div>
                 </div>
-                <Input
-                    label="Email"
-                    name="email"
-                    placeholder="Tu email"
-                    type="email"
-                    value={form.email}
-                    onChange={handleChange}
-                />
-                <Input
-                    label="Mensaje"
-                    name="message"
-                    placeholder="Tu mensaje"
-                    type="textarea"
-                    value={form.message}
-                    onChange={handleChange}
-                />
+                <div className="flex flex-col gap-2">
+                    <Label>Email</Label>
+                    <Input name="email" placeholder="Tu email" value={form.email} onChange={handleChange} />
+                </div>
+                <div className="flex flex-col gap-2">
+                    <Label>Mensaje</Label>
+                    <Textarea name="message" placeholder="Tu mensaje" value={form.message} onChange={handleChange} />
+                </div>
                 <Button size="lg" type="submit" disabled={loading}>
                     {loading ? 'Enviando...' : 'Enviar'}
                 </Button>

@@ -6,10 +6,13 @@ import Providers from '@/shared/providers/react-query-provider';
 
 import '@styles/tailwind.css';
 import '@styles/globals.css';
+import Hydrate from '@/shared/providers/hydrate';
+import { getAllProductsOptions } from '@/features/products/application/queries/getAllProducts.option';
+import { getAllCategoriesOptions } from '@/features/categories/application/getAllCategories.option';
 
 export const metadata: Metadata = {
-    title: 'Tulk',
-    description: 'Soluciones Náuticas de Alta Tecnología',
+    title: 'Administrador',
+    description: 'Administrador',
 };
 
 export default function RootLayout({
@@ -20,7 +23,9 @@ export default function RootLayout({
     return (
         <html lang="es">
             <body className={`${poppins.variable} antialiased`}>
-                <Providers>{children}</Providers>
+                <Providers>
+                    <Hydrate queryOptions={[getAllProductsOptions, getAllCategoriesOptions]}>{children}</Hydrate>
+                </Providers>
                 <Toaster position="bottom-right" richColors />
             </body>
         </html>

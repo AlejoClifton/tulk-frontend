@@ -1,0 +1,45 @@
+import React from 'react';
+import { cva } from 'class-variance-authority';
+import type { ClassedComponentProps } from '@/shared/types/classed-component-props';
+
+import { Subtitle, Button } from '@/shared/components/ui';
+import { TrashIcon } from '@/shared/components/icons/SvgContainer';
+
+export const modalVariants = cva(
+    `fixed inset-0 z-50 flex items-center justify-center
+    rounded-lg p-10 shadow-lg shadow-slate-200 border-1 border-slate-200 w-full max-w-2xl overflow-y-auto
+    top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+    `,
+    {
+        variants: {
+            variant: {
+                primary: 'bg-white',
+                secondary: 'bg-black',
+            },
+        },
+    },
+);
+
+export interface ModalProps extends ClassedComponentProps<typeof modalVariants> {
+    children: React.ReactNode;
+    title: string;
+    onClose: () => void;
+}
+
+export const Modal = ({ children, className, title, onClose, ...variantProps }: ModalProps) => {
+    return (
+        <dialog className={modalVariants({ ...variantProps, className })}>
+            <div className="flex max-h-[90vh] flex-col gap-4 overflow-y-auto">
+                <div className="flex items-center justify-between">
+                    <Subtitle weight="semibold" variant="lg">
+                        {title}
+                    </Subtitle>
+                    <Button variant="error" onClick={onClose}>
+                        <TrashIcon />
+                    </Button>
+                </div>
+                {children}
+            </div>
+        </dialog>
+    );
+};

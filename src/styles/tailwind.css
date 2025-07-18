@@ -5,6 +5,12 @@
     --color-primary: #0f172a;
     --color-primary-hover: #db5800;
     --color-secondary: #2d3748;
+    --color-success: #10b981;
+    --color-error: #ef4444;
+    --color-success-light: #d1fae5;
+    --color-error-light: #fee2e2;
+    --color-success-hover: #047857;
+    --color-error-hover: #b91c1c;
 
     --color-tertiary: #cbd5e1;
     --color-tertiary-hover: #94a3b8;

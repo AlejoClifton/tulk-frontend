@@ -2,7 +2,7 @@ import React from 'react';
 import { cva } from 'class-variance-authority';
 import type { ClassedComponentProps } from '@/shared/types/classed-component-props';
 
-const subtitleVariants = cva('text-2xl font-bold', {
+const subtitleVariants = cva('', {
     variants: {
         variant: {
             xl: 'text-4xl',
@@ -14,10 +14,17 @@ const subtitleVariants = cva('text-2xl font-bold', {
             default: 'text-slate-900',
             primary: 'text-white',
         },
+        weight: {
+            normal: 'font-normal',
+            medium: 'font-medium',
+            semibold: 'font-semibold',
+            bold: 'font-bold',
+        },
     },
     defaultVariants: {
         variant: 'lg',
         color: 'default',
+        weight: 'bold',
     },
 });
 

@@ -8,10 +8,13 @@ export const buttonVariants = cva('cursor-pointer rounded-md font-bold transitio
         variant: {
             default: 'bg-gradient-to-r from-orange-01 to-orange-02 text-white hover:from-orange-01 hover:to-orange-01',
             outline: 'border border-tertiary text-tertiary hover:bg-tertiary-hover hover:text-secondary',
+            success: 'bg-success text-white hover:bg-success-hover',
+            error: 'bg-error text-white hover:bg-error-hover',
         },
         size: {
             md: 'py-2 px-4',
             lg: 'py-4 px-8',
+            icon: 'p-2',
         },
     },
     defaultVariants: {

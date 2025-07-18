@@ -21,7 +21,7 @@ export class BackendAdapter {
         return data;
     }
 
-    async get<T>(url: string, token: string): Promise<T> {
+    async get<T>(url: string, token?: string): Promise<T> {
         const header = {
             Authorization: `Bearer ${token}`,
         };
@@ -57,6 +57,16 @@ export class BackendAdapter {
         };
 
         const { data } = await backendApi.post<T>(url, dataJson, { headers: header });
+
+        return data;
+    }
+
+    async putFormData<T>(url: string, dataJson: object, token: string): Promise<T> {
+        const header = {
+            Authorization: `Bearer ${token}`,
+        };
+
+        const { data } = await backendApi.put<T>(url, dataJson, { headers: header });
 
         return data;
     }
