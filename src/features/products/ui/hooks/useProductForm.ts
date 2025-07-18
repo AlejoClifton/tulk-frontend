@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { ProductInterface } from '@/features/products/domain/product.entity';
-import { createProduct, updateProduct } from '@/features/products/application/commands';
+import { useProductMutations } from '@/features/products/ui/hooks/useProductMutations';
 
 import { IOptions } from '@/shared/types/selectedOption.interface';
 
@@ -29,6 +29,8 @@ export function useProductForm(product: ProductInterface, onClose: () => void) {
             imagesToDelete: [],
         },
     });
+
+    const { createProduct, updateProduct } = useProductMutations();
 
     const queryClient = useQueryClient();
     const mainImageFile = watch('mainImageFile');
@@ -78,8 +80,6 @@ export function useProductForm(product: ProductInterface, onClose: () => void) {
         formData.append('mainImageUrl', data.mainImageUrl || '');
         formData.append('imagesUrl', data.imagesUrl ? JSON.stringify(data.imagesUrl) : JSON.stringify([]));
 
-        console.log(data);
-
         if (data.mainImageFile) {
             formData.append('mainImageFile', data.mainImageFile);
         }
@@ -95,10 +95,10 @@ export function useProductForm(product: ProductInterface, onClose: () => void) {
                 data.imagesToDelete ? JSON.stringify(data.imagesToDelete) : JSON.stringify([]),
             );
 
-            await updateProduct(formData as unknown as ProductInterface);
+            await updateProduct.mutateAsync(formData as unknown as ProductInterface);
             toast.success('Producto actualizado correctamente');
         } else {
-            await createProduct(formData as unknown as ProductInterface);
+            await createProduct.mutateAsync(formData as unknown as ProductInterface);
             toast.success('Producto creado correctamente');
         }
 

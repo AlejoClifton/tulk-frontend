@@ -6,6 +6,7 @@ import { ProductInterface } from '@/features/products/domain/product.entity';
 import { Button, Subtitle } from '@/shared/components/ui';
 import { PlusIcon } from '@/shared/components/icons/SvgContainer';
 import { ProductTable } from '@/features/products/ui/components/ProductTable';
+import { useProductMutations } from '@/features/products/ui/hooks/useProductMutations';
 
 const productInitialState: ProductInterface = {
     id: '',
@@ -21,13 +22,15 @@ const Admin = () => {
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [product, setProduct] = useState<ProductInterface | null>(null);
 
+    const { deleteProduct } = useProductMutations();
+
     const handleOpenModal = (product: ProductInterface) => {
         setIsOpenModal(true);
         setProduct(product);
     };
 
     const handleDelete = (id: string) => {
-        console.log(id);
+        deleteProduct.mutate(id);
     };
 
     const handleCloseModal = () => {
