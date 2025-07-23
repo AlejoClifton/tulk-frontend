@@ -9,11 +9,11 @@ import '@styles/tailwind.css';
 import '@styles/globals.css';
 
 import Hydrate from '@/shared/providers/hydrate';
-import { getAllProductsOptions } from '@/features/products/application/queries/getAllProducts.option';
-import { getAllCategoriesOptions } from '@/features/categories/application/getAllCategories.option';
+import { getAllProductsOptions } from '@/modules/products/application/queries/getAllProducts.option';
+import { getAllCategoriesOptions } from '@/modules/categories/application/getAllCategories.option';
 import { LoadingSpinner } from '@/shared/components/ui/LoadingSpinner';
 
-import HeaderAdmin from '@/features/layout/admin/HeaderAdmin';
+import HeaderAdmin from '@/layout/admin/HeaderAdmin';
 
 export const metadata: Metadata = {
     title: 'Administrador',

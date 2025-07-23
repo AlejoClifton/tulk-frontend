@@ -1,4 +1,4 @@
-import AsideAdmin from '@/features/layout/admin/AsideAdmin';
+import AsideAdmin from '@/layout/admin/AsideAdmin';
 import { Subtitle } from '@/shared/components/ui';
 import React from 'react';
 

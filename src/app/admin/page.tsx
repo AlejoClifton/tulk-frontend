@@ -2,8 +2,8 @@
 import React from 'react';
 
 import { Button, Subtitle, Text } from '@/shared/components/ui';
-import AsideAdmin from '@/features/layout/admin/AsideAdmin';
-import { BarchartIcon, PackageIcon, PlusIcon, TagIcon } from '@/shared/components/icons/SvgContainer';
+import AsideAdmin from '@/layout/admin/AsideAdmin';
+import { BarchartIcon, PackageIcon, PlusIcon, TagIcon } from '@/assets/SvgContainer';
 import { useRouter } from 'next/navigation';
 
 const Admin = () => {

@@ -1,13 +1,13 @@
 'use client';
 import React, { useState } from 'react';
 
-import { ModalProduct } from '@/features/products/ui/components/ModalProduct';
-import { ProductInterface } from '@/features/products/domain/product.entity';
+import { ModalProduct } from '@/features/products/components/ModalProduct';
+import { ProductInterface } from '@/modules/products/domain/product.entity';
 import { Button, Subtitle } from '@/shared/components/ui';
-import { PlusIcon } from '@/shared/components/icons/SvgContainer';
-import { ProductTable } from '@/features/products/ui/components/ProductTable';
-import { useProductMutations } from '@/features/products/ui/hooks/useProductMutations';
-import AsideAdmin from '@/features/layout/admin/AsideAdmin';
+import { PlusIcon } from '@/assets/SvgContainer';
+import { ProductTable } from '@/features/products/components/ProductTable';
+import { useProductMutations } from '@/features/products/hooks/useProductMutations';
+import AsideAdmin from '@/layout/admin/AsideAdmin';
 
 const productInitialState: ProductInterface = {
     id: '',

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AsideAdmin from '@/features/layout/admin/AsideAdmin';
+import AsideAdmin from '@/layout/admin/AsideAdmin';
 import { Subtitle } from '@/shared/components/ui';
 
 const Categories = () => {
