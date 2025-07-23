@@ -11,12 +11,16 @@ export const textVariants = cva('', {
             white: 'text-white',
             success: 'text-success',
             error: 'text-error',
+            blue: 'text-blue-600',
         },
         size: {
             sm: 'text-sm',
             md: 'text-base',
             lg: 'text-lg',
             xl: 'text-xl',
+            '2xl': 'text-2xl',
+            '3xl': 'text-3xl',
+            '4xl': 'text-4xl',
         },
         weight: {
             normal: 'font-normal',

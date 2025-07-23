@@ -1,14 +1,19 @@
 import type { Metadata } from 'next';
 import { Toaster } from 'sonner';
+import { Suspense } from 'react';
 
 import { poppins } from '@/styles/Fonts';
 import Providers from '@/shared/providers/react-query-provider';
 
 import '@styles/tailwind.css';
 import '@styles/globals.css';
+
 import Hydrate from '@/shared/providers/hydrate';
 import { getAllProductsOptions } from '@/features/products/application/queries/getAllProducts.option';
 import { getAllCategoriesOptions } from '@/features/categories/application/getAllCategories.option';
+import { LoadingSpinner } from '@/shared/components/ui/LoadingSpinner';
+
+import HeaderAdmin from '@/features/layout/admin/HeaderAdmin';
 
 export const metadata: Metadata = {
     title: 'Administrador',
@@ -23,9 +28,12 @@ export default function RootLayout({
     return (
         <html lang="es">
             <body className={`${poppins.variable} antialiased`}>
-                <Providers>
-                    <Hydrate queryOptions={[getAllProductsOptions, getAllCategoriesOptions]}>{children}</Hydrate>
-                </Providers>
+                <HeaderAdmin />
+                <Suspense fallback={<LoadingSpinner />}>
+                    <Providers>
+                        <Hydrate queryOptions={[getAllProductsOptions, getAllCategoriesOptions]}>{children}</Hydrate>
+                    </Providers>
+                </Suspense>
                 <Toaster position="bottom-right" richColors />
             </body>
         </html>

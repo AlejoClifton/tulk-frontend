@@ -6,6 +6,7 @@ import { Input, Button, Textarea, Label, ImageFileInput, ImagePreviewList } from
 import { useProductForm } from '@/features/products/ui/hooks/useProductForm';
 
 import SelectListCategories from '@/features/categories/ui/components/SelectListCategories';
+import { LoadingSpinner } from '@/shared/components/ui/LoadingSpinner';
 
 interface FormProductProps {
     product: ProductInterface;
@@ -26,6 +27,7 @@ export const FormProduct = ({ product, onClose }: FormProductProps) => {
         categoryId,
         mainImageUrl,
         imagesUrl,
+        isLoading,
     } = useProductForm(product, onClose);
 
     return (
@@ -86,11 +88,16 @@ export const FormProduct = ({ product, onClose }: FormProductProps) => {
             </Label>
 
             <div className="flex justify-end gap-4">
-                <Button variant="error" onClick={onClose} type="button">
+                <Button variant="error" onClick={onClose} type="button" size="md">
                     Cancelar
                 </Button>
-                <Button variant="default" type="submit">
-                    Guardar cambios
+                <Button
+                    variant={isLoading ? 'loading' : 'default'}
+                    type="submit"
+                    disabled={isLoading}
+                    size="md"
+                >
+                    {isLoading ? <LoadingSpinner /> : 'Guardar cambios'}
                 </Button>
             </div>
         </form>

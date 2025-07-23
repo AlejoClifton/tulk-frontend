@@ -1,60 +1,85 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 
-import { ModalProduct } from '@/features/products/ui/components/ModalProduct';
-import { ProductInterface } from '@/features/products/domain/product.entity';
-import { Button, Subtitle } from '@/shared/components/ui';
-import { PlusIcon } from '@/shared/components/icons/SvgContainer';
-import { ProductTable } from '@/features/products/ui/components/ProductTable';
-import { useProductMutations } from '@/features/products/ui/hooks/useProductMutations';
-
-const productInitialState: ProductInterface = {
-    id: '',
-    name: '',
-    description: '',
-    categoryId: '',
-    mainImageUrl: '',
-    imagesUrl: [],
-    isActive: true,
-};
+import { Button, Subtitle, Text } from '@/shared/components/ui';
+import AsideAdmin from '@/features/layout/admin/AsideAdmin';
+import { BarchartIcon, PackageIcon, PlusIcon, TagIcon } from '@/shared/components/icons/SvgContainer';
+import { useRouter } from 'next/navigation';
 
 const Admin = () => {
-    const [isOpenModal, setIsOpenModal] = useState(false);
-    const [product, setProduct] = useState<ProductInterface | null>(null);
+    const router = useRouter();
 
-    const { deleteProduct } = useProductMutations();
-
-    const handleOpenModal = (product: ProductInterface) => {
-        setIsOpenModal(true);
-        setProduct(product);
-    };
-
-    const handleDelete = (id: string) => {
-        deleteProduct.mutate(id);
-    };
-
-    const handleCloseModal = () => {
-        setIsOpenModal(false);
-        setProduct(null);
+    const handleRedirect = (path: string) => {
+        router.push(path);
     };
 
     return (
-        <>
-            <div className="container mx-auto flex flex-col gap-4 p-4">
-                <div className="flex justify-between">
-                    <Subtitle variant="lg">Listado de productos</Subtitle>
-                    <Button
-                        variant="success"
-                        onClick={() => handleOpenModal(productInitialState)}
-                        size="icon"
-                        className="flex h-10 w-10 items-center justify-center">
-                        <PlusIcon className="h-5 w-5" />
-                    </Button>
+        <div className="flex">
+            <AsideAdmin />
+            <main className="flex flex-1 flex-col gap-8 bg-slate-100 p-8">
+                <Subtitle variant="lg">Bienvenido al panel de administración</Subtitle>
+                <div className="flex w-full flex-row justify-between gap-4">
+                    <div className="flex w-full flex-row items-center justify-start gap-4 rounded-2xl bg-white p-8 shadow-lg">
+                        <PackageIcon className="h-15 w-15 rounded-2xl bg-orange-01/10 p-3 text-orange-01" />
+                        <div className="flex flex-col gap-2">
+                            <Text variant="secondary" size="sm" weight="semibold">
+                                Total de productos
+                            </Text>
+                            <Text variant="secondary" size="4xl" weight="semibold">
+                                5
+                            </Text>
+                        </div>
+                    </div>
+                    <div className="flex w-full flex-row items-center justify-start gap-4 rounded-2xl bg-white p-8 shadow-lg">
+                        <BarchartIcon className="h-15 w-15 rounded-2xl bg-success/10 p-3 text-success" />
+                        <div className="flex flex-col gap-2">
+                            <Text variant="secondary" size="sm" weight="semibold">
+                                Productos activos
+                            </Text>
+                            <Text variant="success" size="4xl" weight="semibold">
+                                5
+                            </Text>
+                        </div>
+                    </div>
+                    <div className="flex w-full flex-row items-center justify-start gap-4 rounded-2xl bg-white p-8 shadow-lg">
+                        <TagIcon className="h-15 w-15 rounded-2xl bg-blue-600/10 p-3 text-blue-600" />
+                        <div className="flex flex-col gap-2">
+                            <Text variant="secondary" size="sm" weight="semibold">
+                                Total de categorías
+                            </Text>
+                            <Text variant="blue" size="4xl" weight="semibold">
+                                5
+                            </Text>
+                        </div>
+                    </div>
                 </div>
-                <ProductTable handleOpenModal={handleOpenModal} handleDelete={handleDelete} />
-            </div>
-            {isOpenModal && product && <ModalProduct product={product} onClose={handleCloseModal} />}
-        </>
+                <div className="flex flex-col gap-4 rounded-2xl bg-white p-8 shadow-lg">
+                    <Subtitle variant="lg">Acciones rápidas</Subtitle>
+                    <div className="flex w-full flex-row gap-4">
+                        <Button
+                            onClick={() => handleRedirect('/admin/products')}
+                            className="flex w-full flex-1 items-center justify-center gap-3 px-6 py-4">
+                            <PlusIcon className="h-5 w-5" />
+                            Nuevo Producto
+                        </Button>
+                        <Button
+                            onClick={() => handleRedirect('/admin/products')}
+                            variant="blue"
+                            className="flex w-full flex-1 items-center justify-center gap-3 px-6 py-4">
+                            <PlusIcon className="h-5 w-5" />
+                            Nueva Categoría
+                        </Button>
+                        <Button
+                            onClick={() => handleRedirect('/admin/branding')}
+                            variant="gray"
+                            className="flex w-full flex-1 items-center justify-center gap-3 px-6 py-4">
+                            <TagIcon className="h-5 w-5" />
+                            Configurar Marca
+                        </Button>
+                    </div>
+                </div>
+            </main>
+        </div>
     );
 };
 

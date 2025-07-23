@@ -30,7 +30,7 @@ export function useProductForm(product: ProductInterface, onClose: () => void) {
         },
     });
 
-    const { createProduct, updateProduct } = useProductMutations();
+    const { createProduct, updateProduct, isLoading } = useProductMutations();
 
     const queryClient = useQueryClient();
     const mainImageFile = watch('mainImageFile');
@@ -122,5 +122,6 @@ export function useProductForm(product: ProductInterface, onClose: () => void) {
         imagesToDelete,
         mainImageUrl,
         imagesUrl,
+        isLoading,
     };
 }

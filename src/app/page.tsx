@@ -1,7 +1,7 @@
 import BrandContainer from '@features/brand/ui/Brand-Container';
 import Footer from '@features/layout/Footer';
-import HeaderHome from '@features/layout/Header-Home';
-import LinesProducts from '@features/layout/Lines-Products';
+import HeaderHome from '@/features/layout/home/HeaderHome';
+import LinesProducts from '@/features/layout/home/LinesProducts';
 import ProductsOutstanding from '@/features/products/ui/components/ProductsOutstanding';
 import { SliderHeroProduct } from '@/features/products/ui/components/SliderHeroProduct';
 

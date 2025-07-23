@@ -8,6 +8,7 @@ const linkVariants = cva('font-medium', {
         variant: {
             primary: 'text-primary hover:text-primary-hover',
             secondary: 'text-tertiary hover:text-tertiary-hover',
+            tertiary: 'text-slate-500 hover:text-slate-600',
         },
     },
     defaultVariants: {

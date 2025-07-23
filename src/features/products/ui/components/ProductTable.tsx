@@ -9,13 +9,15 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { getAllProductsOptions } from '../../application/queries/getAllProducts.option';
 import { getAllCategoriesOptions } from '@/features/categories/application/getAllCategories.option';
 import { CategoryInterface } from '@/features/categories/domain/category.entity';
+import { LoadingSpinner } from '@/shared/components/ui/LoadingSpinner';
 
 interface ProductTableProps {
     handleOpenModal: (product: ProductInterface) => void;
     handleDelete: (id: string) => void;
+    isLoading: boolean;
 }
 
-export function ProductTable({ handleOpenModal, handleDelete }: ProductTableProps) {
+export function ProductTable({ handleOpenModal, handleDelete, isLoading }: ProductTableProps) {
     const { data: products } = useSuspenseQuery(getAllProductsOptions);
     const { data: categories } = useSuspenseQuery(getAllCategoriesOptions);
 
@@ -95,11 +97,12 @@ export function ProductTable({ handleOpenModal, handleDelete }: ProductTableProp
                         <EditIcon className="h-5 w-5" />
                     </Button>
                     <Button
-                        variant="error"
+                        variant={isLoading ? 'loading' : 'error'}
                         size="icon"
                         className="flex h-10 w-120 items-center justify-center"
-                        onClick={() => handleDelete(row.original.id)}>
-                        <TrashIcon className="h-5 w-5" />
+                        onClick={() => handleDelete(row.original.id)}
+                        disabled={isLoading}>
+                        {isLoading ? <LoadingSpinner size={20} /> : <TrashIcon className="h-5 w-5" />}
                     </Button>
                 </div>
             ),
@@ -111,6 +114,14 @@ export function ProductTable({ handleOpenModal, handleDelete }: ProductTableProp
         columns,
         getCoreRowModel: getCoreRowModel(),
     });
+
+    if (isLoading) {
+        return <LoadingSpinner size={20} />;
+    }
+
+    if (products.length === 0) {
+        return <div className="flex items-center justify-center">No hay productos</div>;
+    }
 
     return (
         <Table>

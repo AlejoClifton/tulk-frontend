@@ -34,7 +34,7 @@ export const Modal = ({ children, className, title, onClose, ...variantProps }: 
                     <Subtitle weight="semibold" variant="lg">
                         {title}
                     </Subtitle>
-                    <Button variant="error" onClick={onClose}>
+                    <Button variant="error" onClick={onClose} size="icon">
                         <TrashIcon />
                     </Button>
                 </div>

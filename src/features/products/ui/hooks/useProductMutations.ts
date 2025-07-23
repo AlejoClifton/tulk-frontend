@@ -1,6 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { deleteProductCommand, updateProductCommand, createProductCommand } from '@/features/products/application/commands';
+import {
+    deleteProductCommand,
+    updateProductCommand,
+    createProductCommand,
+} from '@/features/products/application/commands';
 
 export const useProductMutations = () => {
     const queryClient = useQueryClient();
@@ -30,5 +34,6 @@ export const useProductMutations = () => {
         deleteProduct,
         updateProduct,
         createProduct,
+        isLoading: deleteProduct.isPending || updateProduct.isPending || createProduct.isPending,
     };
-}; 
+};
