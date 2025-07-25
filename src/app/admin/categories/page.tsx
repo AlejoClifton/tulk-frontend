@@ -1,16 +1,15 @@
+import { Subtitle } from '@/shared/components';
 import React from 'react';
-
-import AsideAdmin from '@/layout/admin/AsideAdmin';
-import { Subtitle } from '@/shared/components/ui';
 
 const Categories = () => {
     return (
-        <div className="flex">
-            <AsideAdmin />
-            <main className="flex flex-1 flex-col gap-4 bg-slate-50 p-8">
-                <Subtitle variant="lg">Categorías</Subtitle>
-            </main>
-        </div>
+        <main className="ml-64 flex h-full min-h-screen flex-1 flex-col gap-8 bg-slate-100 p-8">
+            <div className="flex flex-1 flex-col gap-4">
+                <div className="flex items-center justify-between gap-4">
+                    <Subtitle variant="lg">Categorías</Subtitle>
+                </div>
+            </div>
+        </main>
     );
 };
 

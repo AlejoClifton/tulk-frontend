@@ -7,6 +7,7 @@ import classNames from 'classnames';
 
 import { Navegation } from '@/shared/components';
 import { BarchartIcon, BuildingIcon, PackageIcon, TagIcon } from '@/assets/SvgContainer';
+import Logout from './Logout';
 
 const AsideAdmin = () => {
     const pathname = usePathname();
@@ -24,8 +25,8 @@ const AsideAdmin = () => {
     };
 
     return (
-        <aside className="min-h-screen w-64 border-r border-slate-200 bg-white p-4">
-            <Navegation variant="secondary" className="flex flex-col gap-4">
+        <aside className="fixed top-0 left-0 z-40 flex h-full w-64 flex-col justify-between border-r border-slate-200 bg-white p-4">
+            <Navegation variant="secondary" className="flex flex-col gap-4 mt-15">
                 <Link href="/admin" className={className('/admin')}>
                     <BarchartIcon className="h-6 w-6" />
                     Dashboard
@@ -43,6 +44,7 @@ const AsideAdmin = () => {
                     Marca
                 </Link>
             </Navegation>
+            <Logout />
         </aside>
     );
 };

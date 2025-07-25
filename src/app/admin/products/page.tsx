@@ -40,26 +40,23 @@ const Products = () => {
     };
 
     return (
-        <div className="flex">
-            <AsideAdmin />
-            <main className="flex flex-1 flex-col gap-4 bg-slate-50 p-8">
-                <div className="flex flex-1 flex-col gap-4">
-                    <div className="flex items-center justify-between gap-4">
-                        <Subtitle variant="lg">Productos</Subtitle>
-                        <Button
-                            variant="success"
-                            size="md"
-                            onClick={() => handleOpenModal(productInitialState)}
-                            className="flex items-center justify-center gap-2">
-                            <PlusIcon className="h-4 w-4" />
-                            Agregar
-                        </Button>
-                    </div>
-                    <ProductTable handleOpenModal={handleOpenModal} handleDelete={handleDelete} isLoading={isLoading} />
+        <main className="ml-64 flex h-full min-h-screen flex-1 flex-col gap-8 bg-slate-100 p-8">
+            <div className="flex flex-1 flex-col gap-4">
+                <div className="flex items-center justify-between gap-4">
+                    <Subtitle variant="lg">Productos</Subtitle>
+                    <Button
+                        variant="success"
+                        size="md"
+                        onClick={() => handleOpenModal(productInitialState)}
+                        className="flex items-center justify-center gap-2">
+                        <PlusIcon className="h-4 w-4" />
+                        Agregar
+                    </Button>
                 </div>
-                {isOpenModal && product && <ModalProduct product={product} onClose={handleCloseModal} />}
-            </main>
-        </div>
+                <ProductTable handleOpenModal={handleOpenModal} handleDelete={handleDelete} isLoading={isLoading} />
+            </div>
+            {isOpenModal && product && <ModalProduct product={product} onClose={handleCloseModal} />}
+        </main>
     );
 };
 
