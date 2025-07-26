@@ -1,5 +1,5 @@
-import { BackendAdapter } from '@/shared/http/adapters/backend.adapter';
 import { BrandInterface } from '@/modules/brand/domain/brand.entity';
+import { BackendAdapter } from '@/shared/http/adapters/backend.adapter';
 
 export class BrandApi {
     private readonly adapter: BackendAdapter;

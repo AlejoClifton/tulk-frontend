@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { Toaster } from 'sonner';
 
-import { poppins } from '@/styles/Fonts';
 import Providers from '@/shared/providers/react-query-provider';
+import { poppins } from '@/styles/Fonts';
 
 import '@styles/tailwind.css';
 import '@styles/globals.css';

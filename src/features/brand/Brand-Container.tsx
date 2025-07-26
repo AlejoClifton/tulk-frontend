@@ -1,8 +1,10 @@
 'use client';
 
 import React from 'react';
-import { BrandContactInfo, BrandForm } from './components';
+
 import { Subtitle, Text } from '@/shared/components';
+
+import { BrandContactInfo, BrandForm } from './components';
 
 const BrandContainer = () => {
     return (

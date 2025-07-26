@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { cva } from 'class-variance-authority';
+
 import type { ClassedComponentProps } from '@/shared/types/classed-component-props';
 
 export const navegationVariants = cva('flex gap-4', {

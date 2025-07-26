@@ -1,12 +1,11 @@
 'use client';
 
-import { toast } from 'sonner';
-import { useForm } from 'react-hook-form';
 import { useQueryClient } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
-import { ProductInterface } from '@/modules/products/domain/product.entity';
 import { useProductMutations } from '@/features/products/hooks/useProductMutations';
-
+import { ProductInterface } from '@/modules/products/domain/product.entity';
 import { IOptions } from '@/shared/types/selectedOption.interface';
 
 export type ProductFormData = ProductInterface & {

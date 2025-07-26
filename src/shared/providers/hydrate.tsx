@@ -1,4 +1,5 @@
 import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
+
 import { getQueryClient } from '@/shared/lib/get-query-client';
 
 type HydrateProps = {

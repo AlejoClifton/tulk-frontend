@@ -1,7 +1,9 @@
 'use client';
 
 import React, { TextareaHTMLAttributes } from 'react';
+
 import { cva } from 'class-variance-authority';
+
 import type { ClassedComponentProps } from '@/shared/types/classed-component-props';
 
 const TextareaVariants = cva('w-full rounded-md border border-gray-300 py-3 px-4 outline-none focus:border-orange-01', {

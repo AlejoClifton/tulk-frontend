@@ -1,7 +1,8 @@
 'use client';
 
-import { useSession, signOut } from 'next-auth/react';
 import { useEffect } from 'react';
+
+import { useSession, signOut } from 'next-auth/react';
 
 export const SessionGuard = ({ children }: { children: React.ReactNode }) => {
     const { data: session } = useSession();

@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { BrandApi } from '@/modules/brand/infrastructure/brand-api';
-
-import { PanelCard, SectionTitle, Subtitle, CustomLink } from '@/shared/components';
 import { MailIcon, MapPinIcon, PhoneIcon } from '@/assets/SvgContainer';
+import { BrandApi } from '@/modules/brand/infrastructure/brand-api';
+import { PanelCard, SectionTitle, Subtitle, CustomLink } from '@/shared/components';
 
 export const BrandContactInfo = async () => {
     const brand = await new BrandApi().getBrands('123');

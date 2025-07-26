@@ -1,11 +1,9 @@
 import React from 'react';
-import type { ProductInterface } from '@/modules/products/domain/product.entity';
-
-import { Input, Button, Textarea, Label, ImageFileInput, ImagePreviewList } from '@/shared/components';
-
-import { useProductForm } from '@/features/products/hooks/useProductForm';
 
 import SelectListCategories from '@/features/categories/components/SelectListCategories';
+import { useProductForm } from '@/features/products/hooks/useProductForm';
+import type { ProductInterface } from '@/modules/products/domain/product.entity';
+import { Input, Button, Textarea, Label, ImageFileInput, ImagePreviewList } from '@/shared/components';
 import { LoadingSpinner } from '@/shared/components/ui/LoadingSpinner';
 
 interface FormProductProps {

@@ -1,5 +1,6 @@
-import Image from 'next/image';
 import React from 'react';
+
+import Image from 'next/image';
 
 import { CustomLink, Title } from '@/shared/components';
 import Separator from '@/shared/components/ui/Separator';

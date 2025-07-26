@@ -1,9 +1,10 @@
 'use client';
 import React from 'react';
 
-import { Button, Subtitle, Text } from '@/shared/components/ui';
-import { BarchartIcon, PackageIcon, PlusIcon, TagIcon } from '@/assets/SvgContainer';
 import { useRouter } from 'next/navigation';
+
+import { BarchartIcon, PackageIcon, PlusIcon, TagIcon } from '@/assets/SvgContainer';
+import { Button, Subtitle, Text } from '@/shared/components/ui';
 
 const Admin = () => {
     const router = useRouter();

@@ -1,9 +1,11 @@
 import React from 'react';
+
 import { cva } from 'class-variance-authority';
+
+import { TrashIcon } from '@/assets/SvgContainer';
+import { Subtitle, Button } from '@/shared/components/ui';
 import type { ClassedComponentProps } from '@/shared/types/classed-component-props';
 
-import { Subtitle, Button } from '@/shared/components/ui';
-import { TrashIcon } from '@/assets/SvgContainer';
 
 export const modalVariants = cva(
     `fixed inset-0 z-50 flex items-center justify-center

@@ -1,7 +1,8 @@
 'use server';
 
-import { ICookies } from '@/shared/cookies/cookies.entity';
 import { cookies } from 'next/headers';
+
+import { ICookies } from '@/shared/cookies/cookies.entity';
 
 export async function setSession(data: ICookies) {
     const cookie = await cookies();

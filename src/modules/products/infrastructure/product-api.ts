@@ -1,6 +1,7 @@
-import { backendApi } from '@/shared/http/clients/backend.client';
-import { ProductInterface } from '../domain/product.entity';
+import { ProductInterface } from '@/modules/products/domain/product.entity';
 import { BackendAdapter } from '@/shared/http/adapters/backend.adapter';
+import { backendApi } from '@/shared/http/clients/backend.client';
+
 
 const backendAdapter = new BackendAdapter();
 

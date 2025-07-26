@@ -1,7 +1,8 @@
 import { queryOptions } from '@tanstack/react-query';
+
+import { auth } from '@/auth';
 import { GetAllCategoriesUseCase } from '@/modules/categories/application/use-cases/getAllCategories.use-case';
 import { CategoryApiAdapter } from '@/modules/categories/infrastructure/category.adapter';
-import { auth } from '@/auth';
 
 export const getAllCategoriesOptions = queryOptions({
     queryKey: ['categories'],

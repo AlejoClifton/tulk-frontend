@@ -1,5 +1,6 @@
-import { Subtitle } from '@/shared/components';
 import React from 'react';
+
+import { Subtitle } from '@/shared/components';
 
 const Categories = () => {
     return (

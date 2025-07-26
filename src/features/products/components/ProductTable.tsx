@@ -1,15 +1,18 @@
 import * as React from 'react';
-import Image from 'next/image';
-import { useReactTable, getCoreRowModel, flexRender, ColumnDef } from '@tanstack/react-table';
-import type { ProductInterface } from '@/modules/products/domain/product.entity';
-import { Button, Table, TableBody, TableCell, TableHeader, TableHeaderCell, TableRow } from '@/shared/components';
-import { EditIcon, TrashIcon } from '@/assets/SvgContainer';
-import { StatusBadge } from '@/shared/components/ui/StatusBadge';
+
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { getAllProductsOptions } from '../../../modules/products/application/queries/getAllProducts.option';
+import { useReactTable, getCoreRowModel, flexRender, ColumnDef } from '@tanstack/react-table';
+import Image from 'next/image';
+
+
+import { EditIcon, TrashIcon } from '@/assets/SvgContainer';
 import { getAllCategoriesOptions } from '@/modules/categories/application/getAllCategories.option';
 import { CategoryInterface } from '@/modules/categories/domain/category.entity';
+import { getAllProductsOptions } from '@/modules/products/application/queries/getAllProducts.option';
+import type { ProductInterface } from '@/modules/products/domain/product.entity';
+import { Button, Table, TableBody, TableCell, TableHeader, TableHeaderCell, TableRow } from '@/shared/components';
 import { LoadingSpinner } from '@/shared/components/ui/LoadingSpinner';
+import { StatusBadge } from '@/shared/components/ui/StatusBadge';
 
 interface ProductTableProps {
     handleOpenModal: (product: ProductInterface) => void;

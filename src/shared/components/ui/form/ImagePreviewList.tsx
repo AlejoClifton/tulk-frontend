@@ -1,7 +1,9 @@
 'use client';
 
 import React, { useEffect, useMemo } from 'react';
+
 import Image from 'next/image';
+
 import { Button } from '@/shared/components/ui';
 import { TrashIcon } from '@assets/SvgContainer';
 

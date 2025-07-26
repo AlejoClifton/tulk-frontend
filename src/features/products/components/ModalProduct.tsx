@@ -1,8 +1,10 @@
 import React from 'react';
-import { Modal } from '@/shared/components';
-import { FormProduct } from './FormProduct';
 
 import type { ProductInterface } from '@/modules/products/domain/product.entity';
+import { Modal } from '@/shared/components';
+
+import { FormProduct } from './FormProduct';
+
 
 interface FormModalProductProps {
     product: ProductInterface;

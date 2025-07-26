@@ -1,6 +1,8 @@
 import React from 'react';
-import Link from 'next/link';
+
 import { cva } from 'class-variance-authority';
+import Link from 'next/link';
+
 import type { ClassedComponentProps } from '@/shared/types/classed-component-props';
 
 const linkVariants = cva('font-medium', {

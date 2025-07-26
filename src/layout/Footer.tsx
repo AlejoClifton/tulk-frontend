@@ -1,8 +1,8 @@
 import React from 'react';
+
 import Image from 'next/image';
 
 import { BrandApi } from '@/modules/brand/infrastructure/brand-api';
-
 import { SectionTitle, CustomLink, Text, Navegation } from '@/shared/components';
 
 const Footer = async () => {

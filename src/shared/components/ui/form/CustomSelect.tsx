@@ -1,11 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
+
 import classNames from 'classnames';
-import OutsideClickHandler from '@shared/utils/OutsideClickHandler';
-import { IOptions } from '@/shared/types/selectedOption.interface';
 
 import { Text } from '@/shared/components';
+import { IOptions } from '@/shared/types/selectedOption.interface';
+
+import OutsideClickHandler from '@shared/utils/OutsideClickHandler';
+
 
 interface CustomSelectProps<T> {
     options: T[];

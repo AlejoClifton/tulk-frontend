@@ -1,5 +1,7 @@
 import React, { LabelHTMLAttributes } from 'react';
+
 import { cva } from 'class-variance-authority';
+
 import type { ClassedComponentProps } from '@/shared/types/classed-component-props';
 
 export const LabelVariants = cva('text-sm font-medium', {

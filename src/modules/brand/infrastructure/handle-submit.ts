@@ -1,7 +1,6 @@
 'use server';
 
 import axios from 'axios';
-
 import { z } from 'zod';
 
 const schema = z.object({

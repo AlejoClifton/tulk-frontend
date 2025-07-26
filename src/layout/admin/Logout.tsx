@@ -1,8 +1,9 @@
 'use client';
 
+import { signOut } from 'next-auth/react';
+
 import { PersonIcon } from '@/assets/SvgContainer';
 import { Button } from '@/shared/components/ui/Button';
-import { signOut } from 'next-auth/react';
 
 export default function Logout() {
     const handleLogout = async (e: React.FormEvent<HTMLFormElement>) => {

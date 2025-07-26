@@ -1,9 +1,10 @@
 import React from 'react';
+
 import Image from 'next/image';
 
 import { BrandApi } from '@/modules/brand/infrastructure/brand-api';
-
 import { CustomLink, Navegation } from '@/shared/components';
+
 import SignIn from './SignIn';
 
 const HeaderHome = async () => {

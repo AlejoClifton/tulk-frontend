@@ -1,6 +1,7 @@
-import { ClassedComponentProps } from '@/shared/types/classed-component-props';
 import { cva } from 'class-variance-authority';
+
 import { Text } from '@/shared/components/ui/Text';
+import { ClassedComponentProps } from '@/shared/types/classed-component-props';
 
 export const statusBadgeVariants = cva('flex items-center justify-center gap-2 rounded-full px-5 py-1', {
     variants: {
