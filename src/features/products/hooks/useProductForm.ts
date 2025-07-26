@@ -106,13 +106,9 @@ export function useProductForm(product: ProductInterface, onClose: () => void) {
             );
 
             await updateProduct.mutateAsync(formData);
-            toast.success('Producto actualizado correctamente');
         } else {
             await createProduct.mutateAsync(formData);
-            toast.success('Producto creado correctamente');
         }
-
-        await queryClient.invalidateQueries({ queryKey: ['products'] });
 
         reset();
         onClose();

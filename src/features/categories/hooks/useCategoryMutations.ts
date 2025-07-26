@@ -1,7 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
-import { toast } from 'sonner';
-
 import {
     createCategoryUseCase,
     deleteCategoryUseCase,
@@ -9,44 +6,32 @@ import {
 } from '@/modules/categories/application/use-cases';
 import { CategoryInterface } from '@/modules/categories/domain';
 import { CategoryApiAdapter } from '@/modules/categories/infrastructure/category.adapter';
+import { useBaseMutation } from '@/shared/hooks/useBaseMutation';
 
 export const useCategoryMutations = () => {
-    const queryClient = useQueryClient();
     const { data: session } = useSession();
     const token = session?.user?.accessToken;
     const categoryRepository = new CategoryApiAdapter(token || '');
 
-    const createCategory = useMutation({
+    const createCategory = useBaseMutation({
         mutationFn: (category: CategoryInterface) => createCategoryUseCase(categoryRepository, category),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['categories'] });
-            toast.success('Categoría creada con éxito');
-        },
-        onError: () => {
-            toast.error('Error al crear la categoría');
-        },
+        queryKey: ['categories'],
+        successMessage: 'Categoría creada con éxito',
+        errorMessage: 'Error al crear la categoría',
     });
 
-    const updateCategory = useMutation({
+    const updateCategory = useBaseMutation({
         mutationFn: (category: CategoryInterface) => updateCategoryUseCase(categoryRepository, category),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['categories'] });
-            toast.success('Categoría actualizada con éxito');
-        },
-        onError: () => {
-            toast.error('Error al actualizar la categoría');
-        },
+        queryKey: ['categories'],
+        successMessage: 'Categoría actualizada con éxito',
+        errorMessage: 'Error al actualizar la categoría',
     });
 
-    const deleteCategory = useMutation({
+    const deleteCategory = useBaseMutation({
         mutationFn: (id: string) => deleteCategoryUseCase(categoryRepository, id),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['categories'] });
-            toast.success('Categoría eliminada con éxito');
-        },
-        onError: () => {
-            toast.error('Error al eliminar la categoría');
-        },
+        queryKey: ['categories'],
+        successMessage: 'Categoría eliminada con éxito',
+        errorMessage: 'Error al eliminar la categoría',
     });
 
     return {

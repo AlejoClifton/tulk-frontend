@@ -38,8 +38,8 @@ export const ImagePreviewList: React.FC<Props> = ({ files = [], urls = [], class
                         key={idx}
                         src={url}
                         alt={`preview-${idx}`}
-                        className="h-24 w-24 rounded-xl border object-cover shadow"
-                        width={96}
+                        className={`h-24 w-24 rounded-xl border object-cover shadow ${className}`}
+                        width={className !== '' ? 300 : 96}
                         height={96}
                     />
                     {onRemoveImage && (

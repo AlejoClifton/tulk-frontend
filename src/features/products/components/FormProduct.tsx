@@ -60,6 +60,7 @@ export const FormProduct = ({ product, onClose }: FormProductProps) => {
                     files={mainImageFile ? [mainImageFile] : []}
                     urls={mainImageUrl ? [mainImageUrl] : []}
                     onRemoveImage={() => handleRemoveImage('main', 0)}
+                    className="w-75"
                 />
             </div>
 
@@ -89,12 +90,7 @@ export const FormProduct = ({ product, onClose }: FormProductProps) => {
                 <Button variant="error" onClick={onClose} type="button" size="md">
                     Cancelar
                 </Button>
-                <Button
-                    variant={isLoading ? 'loading' : 'default'}
-                    type="submit"
-                    disabled={isLoading}
-                    size="md"
-                >
+                <Button variant={isLoading ? 'loading' : 'default'} type="submit" disabled={isLoading} size="md">
                     {isLoading ? <LoadingSpinner /> : 'Guardar cambios'}
                 </Button>
             </div>

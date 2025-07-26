@@ -87,6 +87,7 @@ export const BrandEditForm = () => {
                         files={imageFile ? [imageFile] : []}
                         urls={imageUrl ? [imageUrl] : []}
                         onRemoveImage={handleRemoveImage}
+                        className="w-100"
                     />
                 </div>
                 <Button size="lg" type="submit" disabled={isUpdating}>
