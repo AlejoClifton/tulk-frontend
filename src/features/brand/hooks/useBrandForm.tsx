@@ -1,52 +1,71 @@
-import { useState } from 'react';
-
-import axios from 'axios';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { Brand } from '@/modules/brand/domain/brand.entity';
+import { useBrandMutations } from './useBrandMutations';
 import { toast } from 'sonner';
-import { z } from 'zod';
 
-const schema = z.object({
-    name: z.string().min(1, 'El nombre es obligatorio'),
-    email: z.string().email('Email inválido'),
-    phone: z.string().min(1, 'El teléfono es obligatorio'),
-    message: z.string().min(1, 'El mensaje es obligatorio'),
-});
+export type BrandFormData = Brand & {
+    imageFile?: File | null;
+};
 
-export const useBrandForm = () => {
-    const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
-    const [loading, setLoading] = useState(false);
+export function useBrandForm(brand: Brand | null) {
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        watch,
+        reset,
+        formState: { errors },
+    } = useForm<BrandFormData>();
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    };
+    const { updateBrand, isLoading } = useBrandMutations();
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+    useEffect(() => {
+        if (brand) {
+            reset(brand);
+        }
+    }, [brand, reset]);
 
-        try {
-            schema.parse(form);
-            setLoading(true);
+    const imageFile = watch('imageFile');
+    const imageUrl = watch('image');
 
-            await axios.post('/api/contact', form);
-
-            toast.success('Email enviado correctamente', {
-                description: 'Gracias por contactarnos.',
-            });
-
-            setForm({ name: '', email: '', phone: '', message: '' });
-        } catch (error: unknown) {
-            if (error instanceof z.ZodError) {
-                toast.error('Validación incorrecta', {
-                    description: error.errors[0]?.message,
-                });
-            } else {
-                toast.error('Error al enviar el email', {
-                    description: 'Por favor, intentá nuevamente.',
-                });
-            }
-        } finally {
-            setLoading(false);
+    const handleImageChange = (files: FileList | File[] | null) => {
+        if (files && files.length > 0) {
+            setValue('imageFile', files[0]);
+            setValue('image', '');
         }
     };
 
-    return { form, loading, handleChange, handleSubmit };
-};
+    const handleRemoveImage = () => {
+        setValue('imageFile', null);
+        setValue('image', '');
+    };
+
+    const onSubmit = (data: BrandFormData) => {
+        const formData = new FormData();
+
+        Object.keys(data).forEach((key) => {
+            const K = key as keyof BrandFormData;
+            if (K === 'imageFile' && data.imageFile) {
+                formData.append('imageFile', data.imageFile);
+            } else if (K !== 'imageFile' && data[K] !== null && data[K] !== undefined) {
+                formData.append(K, data[K] as string);
+            }
+        });
+
+        updateBrand.mutate(formData);
+    };
+
+    return {
+        register,
+        handleSubmit,
+        errors,
+        imageFile,
+        imageUrl,
+        isLoading,
+        onSubmit,
+        handleImageChange,
+        handleRemoveImage,
+        setValue,
+    };
+}

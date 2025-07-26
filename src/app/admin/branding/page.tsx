@@ -1,5 +1,6 @@
 'use client';
 
+import { BrandEditForm } from '@features/brand/components/BrandEditForm';
 import { Subtitle } from '@/shared/components';
 
 const BrandingPage = () => {
@@ -9,6 +10,7 @@ const BrandingPage = () => {
                 <div className="flex items-center justify-between gap-4">
                     <Subtitle variant="lg">Marca</Subtitle>
                 </div>
+                <BrandEditForm />
             </div>
         </main>
     );

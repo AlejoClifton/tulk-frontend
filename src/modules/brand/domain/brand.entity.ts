@@ -1,7 +1,7 @@
-import { EmailValueObject, PhoneValueObject, UuidValueObject } from '@/shared/value-objects';
+import { UuidValueObject } from '@shared/value-objects/uuid.vo';
 
 export interface BrandInterface {
-    id: string;
+    id: UuidValueObject;
     name: string;
     description: string;
     image: string;
@@ -12,21 +12,19 @@ export interface BrandInterface {
     hours: string[];
 }
 
-export class BrandEntity {
+export class Brand implements BrandInterface {
+    id: UuidValueObject;
+    name: string;
+    description: string;
+    image: string;
+    email: string;
+    phone: string;
+    address: string;
+    addressLink: string;
+    hours: string[];
+
     constructor(
-        public id: UuidValueObject,
-        public name: string,
-        public description: string,
-        public image: string,
-        public email: EmailValueObject,
-        public phone: PhoneValueObject,
-        public address: string,
-        public addressLink: string,
-        public hours: string[],
-    ) {}
-
-    static create(
-        id: string,
+        id: UuidValueObject,
         name: string,
         description: string,
         image: string,
@@ -36,54 +34,14 @@ export class BrandEntity {
         addressLink: string,
         hours: string[],
     ) {
-        return new BrandEntity(
-            UuidValueObject.create(id),
-            name,
-            description,
-            image,
-            EmailValueObject.create(email),
-            PhoneValueObject.create(phone),
-            address,
-            addressLink,
-            hours,
-        );
-    }
-
-    static fromJson(
-        id: string,
-        name: string,
-        description: string,
-        image: string,
-        email: string,
-        phone: string,
-        address: string,
-        addressLink: string,
-        hours: string[],
-    ) {
-        return new BrandEntity(
-            UuidValueObject.create(id),
-            name,
-            description,
-            image,
-            EmailValueObject.create(email),
-            PhoneValueObject.create(phone),
-            address,
-            addressLink,
-            hours,
-        );
-    }
-
-    toJson(): BrandInterface {
-        return {
-            id: this.id.toString(),
-            name: this.name,
-            description: this.description,
-            image: this.image,
-            email: this.email.toString(),
-            phone: this.phone.toString(),
-            address: this.address,
-            addressLink: this.addressLink,
-            hours: this.hours,
-        };
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.image = image;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.addressLink = addressLink;
+        this.hours = hours;
     }
 }

@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Subtitle, Text } from '@/shared/components';
 
-import { BrandContactInfo, BrandForm } from './components';
+import { BrandContactInfo, BrandContactForm } from './components';
 
 const BrandContainer = () => {
     return (
@@ -16,8 +16,8 @@ const BrandContainer = () => {
                 </Text>
             </div>
             <div className="flex flex-col gap-8 md:flex-row md:justify-center">
-                <BrandForm />
-                <BrandContactInfo />
+                <BrandContactForm />
+                {/* <BrandContactInfo /> */}
             </div>
         </div>
     );

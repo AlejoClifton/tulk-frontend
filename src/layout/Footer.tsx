@@ -6,15 +6,16 @@ import { BrandApi } from '@/modules/brand/infrastructure/brand-api';
 import { SectionTitle, CustomLink, Text, Navegation } from '@/shared/components';
 
 const Footer = async () => {
-    const brand = await new BrandApi().getBrands('123');
+    const brand = await new BrandApi().getBrand();
 
+    return null;
     return (
         <div className="card-dark">
             <div className="container mx-auto flex flex-col flex-wrap justify-between gap-10 px-5 py-10 md:gap-4 lg:flex-row">
                 <div className="flex flex-col gap-4">
-                    <Image src="/tulk.png" alt={brand.name} width={200} height={100} />
+                    <Image src={brand?.image || ''} alt={brand?.name || ''} width={200} height={100} />
                     <Text size="sm" variant="tertiary">
-                        {brand.description}
+                        {brand?.description}
                     </Text>
                 </div>
                 <div className="flex flex-col gap-4">
@@ -32,10 +33,10 @@ const Footer = async () => {
                         Contacto
                     </SectionTitle>
                     <div className="flex flex-col gap-2">
-                        <CustomLink href={`mailto:${brand.email}`}>{brand.email}</CustomLink>
-                        <CustomLink href={`tel:${brand.phone}`}>{brand.phone}</CustomLink>
-                        <CustomLink href={brand.addressLink} target="_blank">
-                            {brand.address}
+                        <CustomLink href={`mailto:${brand?.email || ''}`}>{brand?.email}</CustomLink>
+                        <CustomLink href={`tel:${brand?.phone || ''}`}>{brand?.phone}</CustomLink>
+                        <CustomLink href={brand?.addressLink || ''} target="_blank">
+                            {brand?.address || ''}
                         </CustomLink>
                     </div>
                 </div>

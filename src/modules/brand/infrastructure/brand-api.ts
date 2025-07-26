@@ -1,42 +1,37 @@
-import { BrandInterface } from '@/modules/brand/domain/brand.entity';
+import { backendApi } from '@/shared/http/clients/backend.client';
+import { Brand, BrandInterface } from '@/modules/brand/domain/brand.entity';
+import { BrandRepository, BrandUpdatePayload } from '@/modules/brand/domain/brand.repository';
 import { BackendAdapter } from '@/shared/http/adapters/backend.adapter';
 
-export class BrandApi {
-    private readonly adapter: BackendAdapter;
+export class BrandApi implements BrandRepository {
+    private readonly backendAdapter: BackendAdapter;
+    private readonly token: string;
     private readonly url: string;
 
-    constructor() {
-        this.adapter = new BackendAdapter();
-        this.url = '/brands';
+    constructor(token: string) {
+        this.token = token;
+        this.backendAdapter = new BackendAdapter();
+        this.url = '/brand';
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async getBrands(token: string): Promise<BrandInterface> {
-        // TODO: Descomentar cuando la API esté lista
-        // try {
-        //   const response = await this.adapter.get<BrandInterface>(this.url, token);
-        //   return response;
-        // } catch (error) {
-        //   console.error("Error fetching brands:", error);
-        //   throw error;
-        // }
+    async getBrand(): Promise<Brand | null> {
+        try {
+            const brand = await this.backendAdapter.get<BrandInterface>(this.url, this.token);
+            if (!brand) return null;
+            return brand as Brand;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    }
 
-        // Simulación de datos ficticios mientras la API no esté lista
-        const mockBrand: BrandInterface = {
-            id: '550e8400-e29b-41d4-a716-446655440000',
-            name: 'Tulk',
-            description: 'Estamos haciendo un proyecto de prueba',
-            image: 'https://via.placeholder.com/300x200/000000/FFFFFF?text=Nike',
-            email: 'contact@tulk.com.ar',
-            phone: '+541123871729',
-            address: 'Sarmiento 953, Garin, Buenos Aires, Argentina',
-            addressLink: 'https://maps.app.goo.gl/6AnqbxJ6D2Hknhdk8',
-            hours: ['Lunes a Viernes: 9:00 - 18:00', 'Sábado: 9:00 - 13:00', 'Domingo: Cerrado'],
-        };
-
-        // Simular delay de red
-        await new Promise((resolve) => setTimeout(resolve, 500));
-
-        return mockBrand;
+    async updateBrand(brand: BrandUpdatePayload): Promise<Brand> {
+        try {
+            const updatedBrand = await this.backendAdapter.putWithData<BrandInterface>(this.url, brand, this.token);
+            return updatedBrand as Brand;
+        } catch (error) {
+            console.error(error);
+            throw new Error('Error updating brand');
+        }
     }
 }
