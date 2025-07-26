@@ -71,19 +71,28 @@ export function useProductForm(product: ProductInterface, onClose: () => void) {
     const onSubmit = async (data: ProductFormData) => {
         const formData = new FormData();
 
-        formData.append('id', data.id);
+        if (product.id && product.id !== '') {
+            formData.append('id', data.id);
+        }
+
         formData.append('name', data.name);
         formData.append('description', data.description);
         formData.append('categoryId', data.categoryId);
         formData.append('isActive', String(data.isActive));
-        formData.append('mainImageUrl', data.mainImageUrl || '');
-        formData.append('imagesUrl', data.imagesUrl ? JSON.stringify(data.imagesUrl) : JSON.stringify([]));
+
+        if (data.mainImageUrl) {
+            formData.append('mainImageUrl', data.mainImageUrl);
+        }
+        formData.append(
+            'imagesUrl',
+            data.imagesUrl ? JSON.stringify(data.imagesUrl) : JSON.stringify([]),
+        );
 
         if (data.mainImageFile) {
             formData.append('mainImageFile', data.mainImageFile);
         }
-        if (data.imagesFiles) {
-            Array.from(data.imagesFiles).forEach((file) => {
+        if (data.imagesFiles && data.imagesFiles.length > 0) {
+            Array.from(data.imagesFiles).forEach(file => {
                 formData.append('imagesFiles', file);
             });
         }
@@ -91,13 +100,15 @@ export function useProductForm(product: ProductInterface, onClose: () => void) {
         if (product.id && product.id !== '') {
             formData.append(
                 'imagesToDelete',
-                data.imagesToDelete ? JSON.stringify(data.imagesToDelete) : JSON.stringify([]),
+                data.imagesToDelete
+                    ? JSON.stringify(data.imagesToDelete)
+                    : JSON.stringify([]),
             );
 
-            await updateProduct.mutateAsync(formData as unknown as ProductInterface);
+            await updateProduct.mutateAsync({ id: data.id, product: formData });
             toast.success('Producto actualizado correctamente');
         } else {
-            await createProduct.mutateAsync(formData as unknown as ProductInterface);
+            await createProduct.mutateAsync(formData);
             toast.success('Producto creado correctamente');
         }
 

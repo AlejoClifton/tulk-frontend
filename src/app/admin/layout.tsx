@@ -8,7 +8,7 @@ import { SessionGuard } from '@/features/auth/components/SessionGuard';
 import AsideAdmin from '@/layout/admin/AsideAdmin';
 import HeaderAdmin from '@/layout/admin/HeaderAdmin';
 import { getAllCategoriesOptions } from '@/modules/categories/application/getAllCategories.option';
-import { getAllProductsOptions } from '@/modules/products/application/queries/getAllProducts.option';
+import { getAllProductsOptions } from '@/modules/products/application/getAllProducts.option';
 import { LoadingSpinner } from '@/shared/components/ui/LoadingSpinner';
 import Hydrate from '@/shared/providers/hydrate';
 import Providers from '@/shared/providers/react-query-provider';

@@ -1,10 +1,7 @@
-import { CategoryInterface } from '@/modules/categories/domain/category.entity';
-import { CategoryRepository } from '@/modules/categories/domain/category.repository';
+import { CategoryRepository } from '@/modules/categories/domain';
 
-export class GetAllCategoriesUseCase {
-    constructor(private readonly categoryRepository: CategoryRepository) {}
-
-    async execute(): Promise<CategoryInterface[]> {
-        return this.categoryRepository.getAll();
-    }
-} 
+export const getAllCategoriesUseCase = async (
+    categoryRepository: CategoryRepository
+) => {
+    return await categoryRepository.getAll();
+};

@@ -10,16 +10,32 @@ export interface ProductInterface {
     isActive: boolean;
 }
 
-export class ProductEntity {
+export class ProductEntity implements ProductInterface {
+    id: string;
+    name: string;
+    description: string;
+    categoryId: string;
+    mainImageUrl: string;
+    imagesUrl: string[];
+    isActive: boolean;
+
     constructor(
-        public id: UuidValueObject,
-        public name: string,
-        public description: string,
-        public categoryId: UuidValueObject,
-        public mainImageUrl: string,
-        public imagesUrl: string[],
-        public isActive: boolean,
-    ) {}
+        id: UuidValueObject,
+        name: string,
+        description: string,
+        categoryId: UuidValueObject,
+        mainImageUrl: string,
+        imagesUrl: string[],
+        isActive: boolean,
+    ) {
+        this.id = id.toString();
+        this.name = name;
+        this.description = description;
+        this.categoryId = categoryId.toString();
+        this.mainImageUrl = mainImageUrl;
+        this.imagesUrl = imagesUrl;
+        this.isActive = isActive;
+    }
 
     static create(
         id: string,
@@ -29,7 +45,7 @@ export class ProductEntity {
         mainImageUrl: string,
         imagesUrl: string[],
         isActive: boolean,
-    ) {
+    ): ProductEntity {
         return new ProductEntity(
             UuidValueObject.create(id),
             name,
@@ -49,7 +65,7 @@ export class ProductEntity {
         mainImageUrl: string,
         imagesUrl: string[],
         isActive: boolean,
-    ) {
+    ): ProductEntity {
         return new ProductEntity(
             UuidValueObject.create(id),
             name,
@@ -63,10 +79,10 @@ export class ProductEntity {
 
     toJson(): ProductInterface {
         return {
-            id: this.id.toString(),
+            id: this.id,
             name: this.name,
             description: this.description,
-            categoryId: this.categoryId.toString(),
+            categoryId: this.categoryId,
             mainImageUrl: this.mainImageUrl,
             imagesUrl: this.imagesUrl,
             isActive: this.isActive,
