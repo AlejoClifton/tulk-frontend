@@ -28,9 +28,9 @@ export class CategoryApiAdapter implements CategoryRepository {
         return newCategory;
     }
 
-    async update(id: string, category: CategoryInterface): Promise<CategoryInterface> {
+    async update(category: CategoryInterface): Promise<CategoryInterface> {
         const updatedCategory = await this.backendAdapter.putWithData<CategoryInterface>(
-            `${this.url}/${id}`,
+            this.url,
             category,
             this.token,
         );
@@ -38,6 +38,7 @@ export class CategoryApiAdapter implements CategoryRepository {
     }
 
     async delete(id: string): Promise<void> {
+        console.log('delete', id);
         await this.backendAdapter.delete(`${this.url}/${id}`, this.token);
     }
 }

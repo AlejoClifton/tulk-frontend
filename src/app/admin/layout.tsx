@@ -1,53 +1,34 @@
 import { Suspense } from 'react';
-
-import type { Metadata } from 'next';
-import { SessionProvider } from 'next-auth/react';
-import { Toaster } from 'sonner';
+import {
+    HydrationBoundary,
+    QueryClient,
+    dehydrate,
+} from '@tanstack/react-query';
 
 import { SessionGuard } from '@/features/auth/components/SessionGuard';
 import AsideAdmin from '@/layout/admin/AsideAdmin';
 import HeaderAdmin from '@/layout/admin/HeaderAdmin';
-import { getAllCategoriesOptions } from '@/modules/categories/application/getAllCategories.option';
-import { getAllProductsOptions } from '@/modules/products/application/getAllProducts.option';
 import { LoadingSpinner } from '@/shared/components/ui/LoadingSpinner';
-import Hydrate from '@/shared/providers/hydrate';
-import Providers from '@/shared/providers/react-query-provider';
-import { poppins } from '@/styles/Fonts';
+import { getQueryClient } from '@/shared/lib/get-query-client';
 
-import '@styles/tailwind.css';
-import '@styles/globals.css';
-
-
-export const metadata: Metadata = {
-    title: 'Administrador',
-    description: 'Administrador',
-};
-
-export default function RootLayout({
+export default async function AdminLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const queryClient = getQueryClient();
+
     return (
-        <html lang="es">
-            <body className={`${poppins.variable} antialiased`}>
-                <SessionProvider>
-                    <div className="flex flex-col">
-                        <HeaderAdmin />
-                        <div className="flex">
-                            <AsideAdmin />
-                                <Suspense fallback={<LoadingSpinner />}>
-                                    <Providers>
-                                        <Hydrate queryOptions={[getAllProductsOptions, getAllCategoriesOptions]}>
-                                            <SessionGuard>{children}</SessionGuard>
-                                        </Hydrate>
-                                    </Providers>
-                                </Suspense>
-                        </div>
-                    </div>
-                </SessionProvider>
-                <Toaster position="bottom-right" richColors />
-            </body>
-        </html>
+        <div className="flex flex-col">
+            <HeaderAdmin />
+            <div className="flex">
+                <AsideAdmin />
+                <Suspense fallback={<LoadingSpinner />}>
+                    <HydrationBoundary state={dehydrate(queryClient)}>
+                        <SessionGuard>{children}</SessionGuard>
+                    </HydrationBoundary>
+                </Suspense>
+            </div>
+        </div>
     );
 }

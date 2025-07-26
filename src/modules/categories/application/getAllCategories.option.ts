@@ -1,21 +1,14 @@
 import { queryOptions } from '@tanstack/react-query';
-import { auth } from '@/auth';
+import axios from 'axios';
 
-import { getAllCategoriesUseCase } from '@/modules/categories/application/use-cases/getAllCategories.use-case';
-import { CategoryApiAdapter } from '../infrastructure/category.adapter';
+import { CategoryInterface } from '@/modules/categories/domain';
+import { getBaseUrl } from '@/shared/utils/get-base-url';
 
-export const getAllCategoriesOptions = queryOptions({
+export const getAllCategoriesOptions = queryOptions<CategoryInterface[]>({
     queryKey: ['categories'],
     queryFn: async () => {
-        try {
-            const session = await auth();
-            const token = session?.user?.accessToken ?? '';
-            const categoryRepository = new CategoryApiAdapter(token);
-
-            return await getAllCategoriesUseCase(categoryRepository);
-        } catch (error) {
-            console.error('Error fetching categories:', error);
-            return [];
-        }
+        const baseUrl = getBaseUrl();
+        const { data } = await axios.get(`${baseUrl}/api/categories`);
+        return data;
     },
 });

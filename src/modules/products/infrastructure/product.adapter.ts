@@ -22,22 +22,8 @@ export class ProductAdapter implements ProductRepository {
         return newProduct;
     }
 
-    async update(id: string, product: ProductUpdatePayload): Promise<ProductInterface> {
-        if (product instanceof FormData) {
-            product.append('_method', 'PUT');
-            const updatedProduct = await this.backendAdapter.postWithData<ProductInterface>(
-                `${this.url}/${id}`,
-                product,
-                this.token,
-            );
-            return updatedProduct;
-        }
-
-        const updatedProduct = await this.backendAdapter.putWithData<ProductInterface>(
-            `${this.url}/${id}`,
-            product,
-            this.token,
-        );
+    async update(product: ProductUpdatePayload): Promise<ProductInterface> {
+        const updatedProduct = await this.backendAdapter.putWithData<ProductInterface>(this.url, product, this.token);
         return updatedProduct;
     }
 

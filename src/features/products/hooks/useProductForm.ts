@@ -105,7 +105,7 @@ export function useProductForm(product: ProductInterface, onClose: () => void) {
                     : JSON.stringify([]),
             );
 
-            await updateProduct.mutateAsync({ id: data.id, product: formData });
+            await updateProduct.mutateAsync(formData);
             toast.success('Producto actualizado correctamente');
         } else {
             await createProduct.mutateAsync(formData);
