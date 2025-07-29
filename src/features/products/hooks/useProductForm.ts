@@ -1,102 +1,89 @@
 'use client';
 
 import axios from 'axios';
-import { useForm } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 
 import { useProductMutations } from '@/features/products/hooks/useProductMutations';
-import { ProductInterface } from '@/modules/products/domain/product.entity';
+import { Faq, ProductInterface, TechnicalSpecificationGroup } from '@/modules/products/domain/product.entity';
 import { IOptions } from '@/shared/types/selectedOption.interface';
 
-export type ProductFormData = ProductInterface & {
+export type Benefit = { value: string };
+
+export type ProductFormData = Omit<ProductInterface, 'benefits' | 'technicalSpecifications' | 'faq'> & {
     mainImageFile?: File | null;
     imagesFiles?: File[];
     imagesToDelete?: string[];
+    benefits?: Benefit[];
+    technicalSpecifications?: TechnicalSpecificationGroup[];
+    faq?: Faq[];
 };
 
-const defaultValues = {
-    id: '',
-    name: 'Calefactor Diésel 2000 W 1 salida',
-    description:
-        'El Calefactor Diesel 5000 W de Tulk es la solución perfecta para calefaccionar espacios amplios de manera eficiente y económica. Con una potencia de 5000 W, este calefactor proporciona un calor constante y uniforme, ideal para embarcaciones, cabañas, talleres o cualquier espacio que requiera calefacción confiable. Su diseño compacto y tecnología avanzada garantizan un rendimiento superior con mínimo mantenimiento.',
-    categoryId: '7e2d89c2-e688-47fb-aef8-94d7e17a66e1',
+const defaultValues: Partial<ProductFormData> = {
+    name: '',
+    description: '',
+    categoryId: '',
     mainImageUrl: '',
     imagesUrl: [],
     isActive: true,
     imagesToDelete: [],
-    benefits: [
-        {
-            value: 'Alta eficiencia energética',
-        },
-        {
-            value: 'Bajo consumo de combustible',
-        },
-        {
-            value: 'Control digital preciso de temperatura',
-        },
-        {
-            value: 'Instalación sencilla',
-        },
-    ],
-    technicalSpecifications: [
-        {
-            title: 'Potencia y Rendimiento',
-            specifications: [
-                {
-                    key: 'Potencia térmica',
-                    value: '5000 W',
-                },
-                {
-                    key: 'Voltaje de alimentación',
-                    value: '12V DC',
-                },
-                {
-                    key: 'Consumo eléctrico',
-                    value: '8-29 W',
-                },
-                {
-                    key: 'Consumo de combustible',
-                    value: '0.1-0.4 L/h',
-                },
-            ],
-        },
-    ],
-    faq: [
-        {
-            question: 'Tecnología de combustión limpia',
-            answer: 'Este calefactor está diseñado para funcionar con diesel o kerosene de alta calidad.',
-        },
-    ],
     mainImageFile: null,
     imagesFiles: [],
+    benefits: [],
+    technicalSpecifications: [],
+    faq: [],
 };
 
 export function useProductForm(product: ProductInterface, onClose: () => void) {
+    const methods = useForm<ProductFormData>({
+        defaultValues: {
+            ...defaultValues,
+            ...product,
+            benefits: product.benefits ? product.benefits.map((b) => ({ value: b })) : [],
+            technicalSpecifications: product.technicalSpecifications || [],
+            faq: product.faq || [],
+        },
+    });
+
     const {
-        register,
-        handleSubmit,
-        formState: { errors, isSubmitting },
-        reset,
-        setValue,
-        watch,
-    } = useForm<ProductFormData>({
-        defaultValues,
+        fields: benefitFields,
+        append: appendBenefit,
+        remove: removeBenefit,
+    } = useFieldArray({
+        control: methods.control,
+        name: 'benefits',
+    });
+    const {
+        fields: specFields,
+        append: appendSpec,
+        remove: removeSpec,
+    } = useFieldArray({
+        control: methods.control,
+        name: 'technicalSpecifications',
+    });
+    const {
+        fields: faqFields,
+        append: appendFaq,
+        remove: removeFaq,
+    } = useFieldArray({
+        control: methods.control,
+        name: 'faq',
     });
 
     const { createProduct, updateProduct } = useProductMutations();
 
-    const mainImageFile = watch('mainImageFile');
-    const imagesFiles = watch('imagesFiles');
-    const imagesToDelete = watch('imagesToDelete');
-    const categoryId = watch('categoryId');
-    const mainImageUrl = watch('mainImageUrl');
-    const imagesUrl = watch('imagesUrl');
+    const mainImageFile = methods.watch('mainImageFile');
+    const imagesFiles = methods.watch('imagesFiles');
+    const imagesToDelete = methods.watch('imagesToDelete');
+    const categoryId = methods.watch('categoryId');
+    const mainImageUrl = methods.watch('mainImageUrl');
+    const imagesUrl = methods.watch('imagesUrl');
 
     const handleRemoveImage = (type: 'main' | 'secondary', index: number) => {
         if (type === 'main') {
-            setValue('mainImageFile', null);
+            methods.setValue('mainImageFile', null);
             if (mainImageUrl) {
-                setValue('imagesToDelete', [...(imagesToDelete || []), mainImageUrl]);
-                setValue('mainImageUrl', '');
+                methods.setValue('imagesToDelete', [...(imagesToDelete || []), mainImageUrl]);
+                methods.setValue('mainImageUrl', '');
             }
         } else {
             const currentImagesUrl = imagesUrl || [];
@@ -104,20 +91,20 @@ export function useProductForm(product: ProductInterface, onClose: () => void) {
 
             if (index < currentImagesUrl.length) {
                 const urlToRemove = currentImagesUrl[index];
-                setValue('imagesToDelete', [...(imagesToDelete || []), urlToRemove]);
+                methods.setValue('imagesToDelete', [...(imagesToDelete || []), urlToRemove]);
                 const newImagesUrl = currentImagesUrl.filter((_, i) => i !== index);
-                setValue('imagesUrl', newImagesUrl);
+                methods.setValue('imagesUrl', newImagesUrl);
             } else {
                 const fileIndex = index - currentImagesUrl.length;
                 const newImagesFiles = [...currentImagesFiles];
                 newImagesFiles.splice(fileIndex, 1);
-                setValue('imagesFiles', newImagesFiles);
+                methods.setValue('imagesFiles', newImagesFiles);
             }
         }
     };
 
     const handleSelectCategory = (category: IOptions) => {
-        setValue('categoryId', category.value);
+        methods.setValue('categoryId', category.value);
     };
 
     const onSubmit = async (data: ProductFormData) => {
@@ -156,7 +143,9 @@ export function useProductForm(product: ProductInterface, onClose: () => void) {
                 }
             }
 
-            const productData = {
+            const benefits = data.benefits?.map((b) => b.value);
+
+            const productData: ProductInterface = {
                 id: product.id ? product.id : undefined,
                 name: data.name,
                 description: data.description,
@@ -164,13 +153,19 @@ export function useProductForm(product: ProductInterface, onClose: () => void) {
                 isActive: data.isActive,
                 mainImageUrl,
                 imagesUrl,
+                benefits,
+                technicalSpecifications: data.technicalSpecifications,
+                faq: data.faq,
             };
 
             if (product.id && product.id !== '') {
                 await updateProduct.mutateAsync(productData);
             } else {
-                await createProduct.mutateAsync(productData as ProductInterface);
+                await createProduct.mutateAsync(productData);
             }
+
+            methods.reset();
+            onClose();
         } catch (error) {
             console.error('Submission failed, rolling back image uploads...');
             if (axios.isAxiosError(error)) {
@@ -186,27 +181,29 @@ export function useProductForm(product: ProductInterface, onClose: () => void) {
                     body: JSON.stringify({ urls: uploadedImageUrls }),
                 });
             }
-        } finally {
-            reset();
-            onClose();
         }
     };
 
     return {
-        register,
-        handleSubmit,
-        errors,
-        setValue,
-        watch,
+        ...methods,
         mainImageFile,
         imagesFiles,
+        imagesToDelete,
+        categoryId,
+        mainImageUrl,
+        imagesUrl,
+        isLoading: methods.formState.isSubmitting || createProduct.isPending || updateProduct.isPending,
         onSubmit,
         handleRemoveImage,
         handleSelectCategory,
-        categoryId,
-        imagesToDelete,
-        mainImageUrl,
-        imagesUrl,
-        isLoading: isSubmitting || createProduct.isPending || updateProduct.isPending,
+        benefitFields,
+        appendBenefit,
+        removeBenefit,
+        specFields,
+        appendSpec,
+        removeSpec,
+        faqFields,
+        appendFaq,
+        removeFaq,
     };
 }

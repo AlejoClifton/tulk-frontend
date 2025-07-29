@@ -1,79 +1,118 @@
 import { UuidValueObject } from '@/shared/value-objects';
 
+export interface TechnicalSpecification {
+    key: string;
+    value: string;
+}
+
+export interface TechnicalSpecificationGroup {
+    title: string;
+    specifications: TechnicalSpecification[];
+}
+
+export interface Faq {
+    question: string;
+    answer: string;
+}
+
 export interface ProductInterface {
-    id: string;
+    id?: string;
     name: string;
     description: string;
     categoryId: string;
     mainImageUrl: string;
     imagesUrl: string[];
     isActive: boolean;
+    benefits?: string[];
+    technicalSpecifications?: TechnicalSpecificationGroup[];
+    faq?: Faq[];
 }
 
 export class ProductEntity implements ProductInterface {
-    id: string;
+    id?: string;
     name: string;
     description: string;
     categoryId: string;
     mainImageUrl: string;
     imagesUrl: string[];
     isActive: boolean;
+    benefits?: string[];
+    technicalSpecifications?: TechnicalSpecificationGroup[];
+    faq?: Faq[];
 
     constructor(
-        id: UuidValueObject,
+        id: UuidValueObject | undefined,
         name: string,
         description: string,
         categoryId: UuidValueObject,
         mainImageUrl: string,
         imagesUrl: string[],
         isActive: boolean,
+        benefits?: string[],
+        technicalSpecifications?: TechnicalSpecificationGroup[],
+        faq?: Faq[],
     ) {
-        this.id = id.toString();
+        this.id = id ? id.toString() : undefined;
         this.name = name;
         this.description = description;
         this.categoryId = categoryId.toString();
         this.mainImageUrl = mainImageUrl;
         this.imagesUrl = imagesUrl;
         this.isActive = isActive;
+        this.benefits = benefits;
+        this.technicalSpecifications = technicalSpecifications;
+        this.faq = faq;
     }
 
     static create(
-        id: string,
+        id: string | undefined,
         name: string,
         description: string,
         categoryId: string,
         mainImageUrl: string,
         imagesUrl: string[],
         isActive: boolean,
+        benefits?: string[],
+        technicalSpecifications?: TechnicalSpecificationGroup[],
+        faq?: Faq[],
     ): ProductEntity {
         return new ProductEntity(
-            UuidValueObject.create(id),
+            id ? UuidValueObject.create(id) : undefined,
             name,
             description,
             UuidValueObject.create(categoryId),
             mainImageUrl,
             imagesUrl,
             isActive,
+            benefits,
+            technicalSpecifications,
+            faq,
         );
     }
 
     static fromJson(
-        id: string,
+        id: string | undefined,
         name: string,
         description: string,
         categoryId: string,
         mainImageUrl: string,
         imagesUrl: string[],
         isActive: boolean,
+        benefits?: string[],
+        technicalSpecifications?: TechnicalSpecificationGroup[],
+        faq?: Faq[],
     ): ProductEntity {
         return new ProductEntity(
-            UuidValueObject.create(id),
+            id ? UuidValueObject.create(id) : undefined,
             name,
             description,
             UuidValueObject.create(categoryId),
             mainImageUrl,
             imagesUrl,
             isActive,
+            benefits,
+            technicalSpecifications,
+            faq,
         );
     }
 
@@ -86,6 +125,9 @@ export class ProductEntity implements ProductInterface {
             mainImageUrl: this.mainImageUrl,
             imagesUrl: this.imagesUrl,
             isActive: this.isActive,
+            benefits: this.benefits,
+            technicalSpecifications: this.technicalSpecifications,
+            faq: this.faq,
         };
     }
 }
