@@ -8,6 +8,7 @@ const subtitleVariants = cva('', {
     variants: {
         variant: {
             xl: 'text-4xl',
+            '2xl': 'text-3xl',
             lg: 'text-2xl',
             md: 'text-xl',
             sm: 'text-lg',

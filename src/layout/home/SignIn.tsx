@@ -1,20 +1,25 @@
+'use client';
+
 import React from 'react';
 
+import { useRouter } from 'next/navigation';
+
 import { PersonIcon } from '@/assets/SvgContainer';
-import { signIn } from '@/auth';
 
 const SignIn = () => {
-    const handleSignIn = async () => {
-        'use server';
-        await signIn('keycloak', { redirectTo: '/admin' });
+    const router = useRouter();
+
+    const handleSignIn = () => {
+        router.push('/api/auth/signin?callbackUrl=/admin');
     };
 
     return (
-        <form action={handleSignIn} className="flex items-center gap-2">
-            <button type="submit">
-                <PersonIcon className="h-6 w-6 cursor-pointer text-slate-500 transition-colors duration-300 hover:text-slate-700" />
-            </button>
-        </form>
+        <button 
+            onClick={handleSignIn}
+            className="flex items-center gap-2"
+        >
+            <PersonIcon className="h-6 w-6 cursor-pointer text-slate-500 transition-colors duration-300 hover:text-slate-700" />
+        </button>
     );
 };
 

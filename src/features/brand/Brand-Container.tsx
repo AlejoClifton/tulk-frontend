@@ -8,16 +8,18 @@ import { BrandContactInfo, BrandContactForm } from './components';
 
 const BrandContainer = () => {
     return (
-        <div id="contact" className="my-16 flex flex-col gap-8">
+        <div id="contact" className="card-dark flex flex-col gap-8 py-16">
             <div className="flex flex-col items-center gap-4">
-                <Subtitle variant="xl">Contactanos</Subtitle>
-                <Text size="xl" variant="secondary" className="max-w-xl text-center">
+                <Subtitle variant="xl" className="text-white">
+                    Contáctanos
+                </Subtitle>
+                <Text size="xl" variant="secondary" className="max-w-xl text-center text-white/80">
                     Estamos aquí para ayudarte con consultas técnicas, información de productos y soporte especializado
                 </Text>
             </div>
             <div className="flex flex-col gap-8 md:flex-row md:justify-center">
                 <BrandContactForm />
-                {/* <BrandContactInfo /> */}
+                <BrandContactInfo />
             </div>
         </div>
     );

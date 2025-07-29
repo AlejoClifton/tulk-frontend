@@ -1,32 +1,23 @@
+'use client';
 import React from 'react';
 
+import { useSuspenseQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 
-import { BrandApi } from '@/modules/brand/infrastructure/brand-api';
-import { SectionTitle, CustomLink, Text, Navegation } from '@/shared/components';
+import { getBrandOptions } from '@/modules/brand/application/getBrand.option';
+import { SectionTitle, CustomLink, Text } from '@/shared/components';
 
-const Footer = async () => {
-    const brand = await new BrandApi().getBrand();
+const Footer = () => {
+    const { data: brand } = useSuspenseQuery(getBrandOptions);
 
-    return null;
     return (
         <div className="card-dark">
             <div className="container mx-auto flex flex-col flex-wrap justify-between gap-10 px-5 py-10 md:gap-4 lg:flex-row">
                 <div className="flex flex-col gap-4">
-                    <Image src={brand?.image || ''} alt={brand?.name || ''} width={200} height={100} />
+                    <Image src={brand?.image || ''} alt={brand?.name || ''} width={200} height={49} priority />
                     <Text size="sm" variant="tertiary">
                         {brand?.description}
                     </Text>
-                </div>
-                <div className="flex flex-col gap-4">
-                    <SectionTitle variant="sm" color="primary" className="mb-4">
-                        Navegación
-                    </SectionTitle>
-                    <Navegation variant="secondary">
-                        <CustomLink href="/">Inicio</CustomLink>
-                        <CustomLink href="#products">Productos</CustomLink>
-                        <CustomLink href="#contact">Contacto</CustomLink>
-                    </Navegation>
                 </div>
                 <div className="flex flex-col gap-4">
                     <SectionTitle variant="sm" color="primary" className="mb-4">

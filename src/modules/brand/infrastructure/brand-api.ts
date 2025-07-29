@@ -1,4 +1,3 @@
-import { backendApi } from '@/shared/http/clients/backend.client';
 import { Brand, BrandInterface } from '@/modules/brand/domain/brand.entity';
 import { BrandRepository, BrandUpdatePayload } from '@/modules/brand/domain/brand.repository';
 import { BackendAdapter } from '@/shared/http/adapters/backend.adapter';
@@ -11,13 +10,12 @@ export class BrandApi implements BrandRepository {
     constructor(token: string) {
         this.token = token;
         this.backendAdapter = new BackendAdapter();
-        this.url = '/brand';
+        this.url = '/brands';
     }
 
     async getBrand(): Promise<Brand | null> {
         try {
-            const brand = await this.backendAdapter.get<BrandInterface>(this.url, this.token);
-            if (!brand) return null;
+            const brand = await this.backendAdapter.get<BrandInterface>(this.url);
             return brand as Brand;
         } catch (error) {
             console.error(error);

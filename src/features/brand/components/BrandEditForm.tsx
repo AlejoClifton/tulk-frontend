@@ -1,6 +1,9 @@
 'use client';
 
 import React from 'react';
+
+import { useBrandForm } from '@/features/brand/hooks/useBrandForm';
+import { useGetBrand } from '@/features/brand/hooks/useGetBrand';
 import {
     Input,
     Button,
@@ -12,8 +15,6 @@ import {
     ImagePreviewList,
 } from '@/shared/components';
 import { LoadingSpinner } from '@/shared/components/ui/LoadingSpinner';
-import { useGetBrand } from '@/features/brand/hooks/useGetBrand';
-import { useBrandForm } from '@/features/brand/hooks/useBrandForm';
 
 export const BrandEditForm = () => {
     const { brand, isLoading: isBrandLoading } = useGetBrand();

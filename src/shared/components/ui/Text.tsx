@@ -14,6 +14,7 @@ export const textVariants = cva('', {
             success: 'text-success',
             error: 'text-error',
             blue: 'text-blue-600',
+            orange: 'text-orange-05',
         },
         size: {
             sm: 'text-sm',

@@ -4,12 +4,11 @@ import React from 'react';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 
+import SignIn from '@/layout/home/SignIn';
 import { getBrandOptions } from '@/modules/brand/application/getBrand.option';
 import { CustomLink, Navegation } from '@/shared/components';
 
-import SignIn from './SignIn';
-
-const HeaderHome = () => {
+const HeaderProduct = () => {
     const { data: brand } = useSuspenseQuery(getBrandOptions);
 
     return (
@@ -21,11 +20,17 @@ const HeaderHome = () => {
                     <CustomLink href="/" variant="primary">
                         Inicio
                     </CustomLink>
-                    <CustomLink href="#lines-products" variant="primary">
-                        Líneas de Productos
+                    <CustomLink href="#benefits" variant="primary">
+                        Beneficios
+                    </CustomLink>
+                    <CustomLink href="#specifications" variant="primary">
+                        Especificaciones
+                    </CustomLink>
+                    <CustomLink href="#faqs" variant="primary">
+                        Preguntas Frecuentes
                     </CustomLink>
                     <CustomLink href="#contact" variant="primary">
-                        Contacto
+                        Contáctanos
                     </CustomLink>
                 </Navegation>
                 <SignIn />
@@ -34,4 +39,4 @@ const HeaderHome = () => {
     );
 };
 
-export default HeaderHome;
+export default HeaderProduct;

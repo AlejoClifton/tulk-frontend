@@ -9,7 +9,7 @@ export interface BrandInterface {
     phone: string;
     address: string;
     addressLink: string;
-    hours: string[];
+    hours: string;
 }
 
 export class Brand implements BrandInterface {
@@ -21,7 +21,7 @@ export class Brand implements BrandInterface {
     phone: string;
     address: string;
     addressLink: string;
-    hours: string[];
+    hours: string;
 
     constructor(
         id: UuidValueObject,
@@ -32,7 +32,7 @@ export class Brand implements BrandInterface {
         phone: string,
         address: string,
         addressLink: string,
-        hours: string[],
+        hours: string,
     ) {
         this.id = id;
         this.name = name;

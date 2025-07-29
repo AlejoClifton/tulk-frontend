@@ -1,14 +1,18 @@
 import React from 'react';
 
-import { MailIcon, MapPinIcon, PhoneIcon } from '@/assets/SvgContainer';
-import { BrandApi } from '@/modules/brand/infrastructure/brand-api';
-import { PanelCard, SectionTitle, Subtitle, CustomLink } from '@/shared/components';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
-export const BrandContactInfo = async () => {
-    const brand = await new BrandApi().getBrands('123');
+import { MailIcon, PhoneIcon } from '@/assets/SvgContainer';
+import { getBrandOptions } from '@/modules/brand/application/getBrand.option';
+import { SectionTitle, Subtitle, CustomLink } from '@/shared/components';
+
+export const BrandContactInfo = () => {
+    const { data: brand } = useSuspenseQuery(getBrandOptions);
+
+    if (!brand) return null;
 
     return (
-        <PanelCard variant="dark" className="w-full md:w-[31.25rem]">
+        <div className="w-full rounded-2xl bg-white/10 p-8 backdrop-blur-sm md:w-[31.25rem]">
             <Subtitle variant="lg" color="primary" className="mb-8">
                 Información de contacto
             </Subtitle>
@@ -35,29 +39,37 @@ export const BrandContactInfo = async () => {
                         <CustomLink href={`tel:${brand.phone}`}>{brand.phone}</CustomLink>
                     </div>
                 </div>
-                <div className="col-span-1 flex items-center gap-6">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-[.5rem] bg-orange-01">
-                        <MapPinIcon className="h-7 w-7 text-white" />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                        <SectionTitle variant="sm" color="primary">
-                            Dirección
-                        </SectionTitle>
-                        <CustomLink href={brand.addressLink} target="_blank">
-                            {brand.address}
-                        </CustomLink>
-                    </div>
-                </div>
             </div>
-            <hr className="my-8 border-tertiary" />
+            <hr className="my-8 border-white/20" />
             <div className="mt-10 flex flex-col gap-4">
-                <SectionTitle color="primary">Horario de atención</SectionTitle>
-                <ul className="flex list-none flex-col gap-2 text-tertiary">
-                    {brand.hours.map((hour: string) => (
-                        <li key={hour}>{hour}</li>
-                    ))}
+                <SectionTitle className="text-white">Servicios Incluidos</SectionTitle>
+                <ul className="flex list-none flex-col gap-2 text-white">
+                    <li className="flex items-center gap-2">
+                        <div className="flex h-5 w-5 items-center justify-center rounded-full bg-orange-01">
+                            <span className="text-xs text-white">✓</span>
+                        </div>
+                        Asesoramiento en instalación
+                    </li>
+                    <li className="flex items-center gap-2">
+                        <div className="flex h-5 w-5 items-center justify-center rounded-full bg-orange-01">
+                            <span className="text-xs text-white">✓</span>
+                        </div>
+                        Soporte post-venta
+                    </li>
+                    <li className="flex items-center gap-2">
+                        <div className="flex h-5 w-5 items-center justify-center rounded-full bg-orange-01">
+                            <span className="text-xs text-white">✓</span>
+                        </div>
+                        Garantía oficial
+                    </li>
+                    <li className="flex items-center gap-2">
+                        <div className="flex h-5 w-5 items-center justify-center rounded-full bg-orange-01">
+                            <span className="text-xs text-white">✓</span>
+                        </div>
+                        Repuestos originales
+                    </li>
                 </ul>
             </div>
-        </PanelCard>
+        </div>
     );
 };

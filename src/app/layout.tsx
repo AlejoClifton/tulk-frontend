@@ -3,7 +3,6 @@ import { Toaster } from 'sonner';
 
 import Providers from '@/shared/providers/react-query-provider';
 import { poppins } from '@/styles/Fonts';
-import { SessionProvider } from 'next-auth/react';
 
 import '@styles/tailwind.css';
 import '@styles/globals.css';
@@ -21,9 +20,7 @@ export default function RootLayout({
     return (
         <html lang="es">
             <body className={`${poppins.variable} antialiased`}>
-                <SessionProvider>
-                    <Providers>{children}</Providers>
-                </SessionProvider>
+                <Providers>{children}</Providers>
                 <Toaster position="bottom-right" richColors />
             </body>
         </html>

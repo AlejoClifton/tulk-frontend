@@ -2,13 +2,13 @@
 
 import React, { useEffect, useState } from 'react';
 
+import { useBrandMutations } from '@/features/brand/hooks/useBrandMutations';
+import { useGetBrand } from '@/features/brand/hooks/useGetBrand';
 import { Brand } from '@/modules/brand/domain/brand.entity';
+import { PanelCard } from '@/shared/components';
 import { Input, Button, Subtitle, Label, Textarea } from '@/shared/components/ui';
 import { LoadingSpinner } from '@/shared/components/ui/LoadingSpinner';
-import { PanelCard } from '@/shared/components';
 import { UuidValueObject } from '@/shared/value-objects/uuid.vo';
-import { useGetBrand } from '@/features/brand/hooks/useGetBrand';
-import { useBrandMutations } from '@/features/brand/hooks/useBrandMutations';
 
 export const BrandForm = () => {
     const { brand, isLoading } = useGetBrand();
@@ -25,7 +25,7 @@ export const BrandForm = () => {
         if (!form) return;
         const { name, value } = e.target;
         if (name === 'hours') {
-            setForm({ ...form, [name]: value.split(',') });
+            setForm({ ...form, [name]: value.split(',').join(', ') });
         } else {
             setForm({ ...form, [name]: value });
         }

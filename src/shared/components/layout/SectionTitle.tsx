@@ -14,11 +14,20 @@ const SectionTitleVariants = cva('text-xl font-bold', {
         color: {
             default: 'text-slate-900',
             primary: 'text-white',
+            secondary: 'text-orange-05',
+            tertiary: 'text-secondary',
+        },
+        weight: {
+            normal: 'font-normal',
+            medium: 'font-medium',
+            semibold: 'font-semibold',
+            bold: 'font-bold',
         },
     },
     defaultVariants: {
         variant: 'lg',
         color: 'default',
+        weight: 'bold',
     },
 });
 

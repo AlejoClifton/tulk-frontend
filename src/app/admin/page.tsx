@@ -1,13 +1,13 @@
 'use client';
 import React from 'react';
 
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
 import { BarchartIcon, PackageIcon, PlusIcon, TagIcon } from '@/assets/SvgContainer';
-import { Button, Subtitle, Text } from '@/shared/components/ui';
-import { useSuspenseQuery } from '@tanstack/react-query';
-import { getAllProductsOptions } from '@/modules/products/application/getAllProducts.option';
 import { getAllCategoriesOptions } from '@/modules/categories/application/getAllCategories.option';
+import { getAllProductsOptions } from '@/modules/products/application/getAllProducts.option';
+import { Button, Subtitle, Text } from '@/shared/components/ui';
 
 const Admin = () => {
     const router = useRouter();
@@ -66,7 +66,7 @@ const Admin = () => {
                         Nuevo Producto
                     </Button>
                     <Button
-                        onClick={() => handleRedirect('/admin/products')}
+                        onClick={() => handleRedirect('/admin/categories')}
                         variant="blue"
                         className="flex w-full flex-1 items-center justify-center gap-3 px-6 py-4">
                         <PlusIcon className="h-5 w-5" />

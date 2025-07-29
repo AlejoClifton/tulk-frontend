@@ -1,3 +1,4 @@
+import { CategoryInterface } from '@/modules/categories/domain';
 import { UuidValueObject } from '@/shared/value-objects';
 
 export interface TechnicalSpecification {
@@ -26,6 +27,7 @@ export interface ProductInterface {
     benefits?: string[];
     technicalSpecifications?: TechnicalSpecificationGroup[];
     faq?: Faq[];
+    category?: CategoryInterface;
 }
 
 export class ProductEntity implements ProductInterface {
