@@ -17,7 +17,7 @@ export class ProductAdapter implements ProductRepository {
         return products;
     }
 
-    async create(product: ProductInterface | FormData): Promise<ProductInterface> {
+    async create(product: ProductInterface): Promise<ProductInterface> {
         const newProduct = await this.backendAdapter.postWithData<ProductInterface>(this.url, product, this.token);
         return newProduct;
     }

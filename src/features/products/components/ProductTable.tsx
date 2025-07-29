@@ -16,7 +16,7 @@ import { StatusBadge } from '@/shared/components/ui/StatusBadge';
 
 interface ProductTableProps {
     handleOpenModal: (product: ProductInterface) => void;
-    handleDelete: (id: string) => void;
+    handleDelete: (product: ProductInterface) => void;
     isLoading: boolean;
 }
 
@@ -103,7 +103,7 @@ export function ProductTable({ handleOpenModal, handleDelete, isLoading }: Produ
                         variant={isLoading ? 'loading' : 'error'}
                         size="icon"
                         className="flex h-10 w-120 items-center justify-center"
-                        onClick={() => handleDelete(row.original.id)}
+                        onClick={() => handleDelete(row.original)}
                         disabled={isLoading}>
                         {isLoading ? <LoadingSpinner size={20} /> : <TrashIcon className="h-5 w-5" />}
                     </Button>

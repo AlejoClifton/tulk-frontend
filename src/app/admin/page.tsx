@@ -5,9 +5,14 @@ import { useRouter } from 'next/navigation';
 
 import { BarchartIcon, PackageIcon, PlusIcon, TagIcon } from '@/assets/SvgContainer';
 import { Button, Subtitle, Text } from '@/shared/components/ui';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { getAllProductsOptions } from '@/modules/products/application/getAllProducts.option';
+import { getAllCategoriesOptions } from '@/modules/categories/application/getAllCategories.option';
 
 const Admin = () => {
     const router = useRouter();
+    const { data: products } = useSuspenseQuery(getAllProductsOptions);
+    const { data: categories } = useSuspenseQuery(getAllCategoriesOptions);
 
     const handleRedirect = (path: string) => {
         router.push(path);
@@ -24,7 +29,7 @@ const Admin = () => {
                             Total de productos
                         </Text>
                         <Text variant="secondary" size="4xl" weight="semibold">
-                            5
+                            {products?.length}
                         </Text>
                     </div>
                 </div>
@@ -35,7 +40,7 @@ const Admin = () => {
                             Productos activos
                         </Text>
                         <Text variant="success" size="4xl" weight="semibold">
-                            5
+                            {products?.filter((product) => product.isActive).length}
                         </Text>
                     </div>
                 </div>
@@ -46,7 +51,7 @@ const Admin = () => {
                             Total de categorías
                         </Text>
                         <Text variant="blue" size="4xl" weight="semibold">
-                            5
+                            {categories?.length}
                         </Text>
                     </div>
                 </div>

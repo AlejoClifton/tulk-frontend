@@ -1,27 +1,33 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import {
-    createProductUseCase,
-    deleteProductUseCase,
-    updateProductUseCase,
-} from '@/modules/products/application/use-cases';
-import { ProductAdapter } from '@/modules/products/infrastructure/product.adapter';
+
+import { createProductUseCase, updateProductUseCase } from '@/modules/products/application/use-cases';
 import { ProductInterface, ProductUpdatePayload } from '@/modules/products/domain';
+import { ProductAdapter } from '@/modules/products/infrastructure/product.adapter';
 import { useBaseMutation } from '@/shared/hooks/useBaseMutation';
 
-export const useProductMutations = () => {
+export const useProductMutations = (onSuccess?: () => void) => {
     const { data: session } = useSession();
     const token = session?.user?.accessToken ?? '';
 
     const deleteProduct = useBaseMutation({
-        mutationFn: async (id: string) => {
+        mutationFn: async ({ id, imageUrls }: { id: string; imageUrls: string[] }) => {
             const productAdapter = new ProductAdapter(token);
-            return deleteProductUseCase(productAdapter, id);
+            await productAdapter.delete(id);
+
+            if (imageUrls && imageUrls.length > 0) {
+                await fetch('/api/products/images', {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ urls: imageUrls }),
+                });
+            }
         },
         queryKey: ['products'],
         successMessage: 'Producto eliminado correctamente',
         errorMessage: 'Error al eliminar el producto',
+        onSuccess,
     });
 
     const updateProduct = useBaseMutation({
@@ -32,16 +38,18 @@ export const useProductMutations = () => {
         queryKey: ['products'],
         successMessage: 'Producto actualizado correctamente',
         errorMessage: 'Error al actualizar el producto',
+        onSuccess,
     });
 
     const createProduct = useBaseMutation({
-        mutationFn: async (product: ProductInterface | FormData) => {
+        mutationFn: async (product: ProductInterface) => {
             const productAdapter = new ProductAdapter(token);
             return createProductUseCase(productAdapter, product);
         },
         queryKey: ['products'],
         successMessage: 'Producto creado correctamente',
         errorMessage: 'Error al crear el producto',
+        onSuccess,
     });
 
     return {

@@ -1,14 +1,14 @@
-
 import { useMutation, useQueryClient, QueryKey, MutationFunction } from '@tanstack/react-query';
-import { toast } from 'sonner';
-import { signIn } from 'next-auth/react';
 import { AxiosError } from 'axios';
+import { signIn } from 'next-auth/react';
+import { toast } from 'sonner';
 
 interface UseBaseMutationOptions<TData, TVariables> {
     mutationFn: MutationFunction<TData, TVariables>;
     queryKey: QueryKey;
     successMessage: string;
     errorMessage: string;
+    onSuccess?: () => void;
 }
 
 export function useBaseMutation<TData, TVariables>({
@@ -16,6 +16,7 @@ export function useBaseMutation<TData, TVariables>({
     queryKey,
     successMessage,
     errorMessage,
+    onSuccess,
 }: UseBaseMutationOptions<TData, TVariables>) {
     const queryClient = useQueryClient();
 
@@ -38,9 +39,10 @@ export function useBaseMutation<TData, TVariables>({
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey });
             toast.success(successMessage);
+            onSuccess?.();
         },
         onError: handleMutationError,
     });
 
     return mutation;
-} 
+}

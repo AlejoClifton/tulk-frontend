@@ -1,6 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 
+import { useQueryClient } from '@tanstack/react-query';
+
 import { PlusIcon } from '@/assets/SvgContainer';
 import { ModalProduct } from '@/features/products/components/ModalProduct';
 import { ProductTable } from '@/features/products/components/ProductTable';
@@ -21,16 +23,26 @@ const productInitialState: ProductInterface = {
 const Products = () => {
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [product, setProduct] = useState<ProductInterface | null>(null);
+    const queryClient = useQueryClient();
 
-    const { deleteProduct, isLoading } = useProductMutations();
+    const refetchProducts = () => {
+        queryClient.invalidateQueries({ queryKey: ['products'] });
+    };
+
+    const { deleteProduct, isLoading } = useProductMutations(refetchProducts);
 
     const handleOpenModal = (product: ProductInterface) => {
         setIsOpenModal(true);
         setProduct(product);
     };
 
-    const handleDelete = (id: string) => {
-        deleteProduct.mutate(id);
+    const handleDelete = (productToDelete: ProductInterface) => {
+        const imageUrlsToDelete = [
+            ...productToDelete.imagesUrl,
+            ...(productToDelete.mainImageUrl ? [productToDelete.mainImageUrl] : []),
+        ];
+
+        deleteProduct.mutate({ id: productToDelete.id, imageUrls: imageUrlsToDelete });
     };
 
     const handleCloseModal = () => {
