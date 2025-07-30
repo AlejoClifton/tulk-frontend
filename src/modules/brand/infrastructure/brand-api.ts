@@ -1,6 +1,5 @@
-import { auth } from '@/auth';
 import { Brand, BrandInterface } from '@/modules/brand/domain/brand.entity';
-import { BrandRepository, BrandUpdatePayload } from '@/modules/brand/domain/brand.repository';
+import { BrandRepository } from '@/modules/brand/domain/brand.repository';
 import { BackendAdapter } from '@/shared/http/adapters/backend.adapter';
 
 export class BrandApi implements BrandRepository {
@@ -22,14 +21,13 @@ export class BrandApi implements BrandRepository {
         }
     }
 
-    async updateBrand(brand: BrandUpdatePayload): Promise<Brand> {
-        const session = await auth();
+    async updateBrand(brand: Brand, token: string): Promise<Brand> {
 
         try {
             const updatedBrand = await this.backendAdapter.putWithData<BrandInterface>(
                 this.url,
                 brand,
-                session?.user.accessToken || '',
+                token,
             );
             return updatedBrand as Brand;
         } catch (error) {

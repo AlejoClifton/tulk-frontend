@@ -13,26 +13,16 @@ export interface BrandInterface {
 }
 
 export class Brand implements BrandInterface {
-    id: UuidValueObject;
-    name: string;
-    description: string;
-    image: string;
-    email: string;
-    phone: string;
-    address: string;
-    addressLink: string;
-    hours: string;
-
     constructor(
-        id: UuidValueObject,
-        name: string,
-        description: string,
-        image: string,
-        email: string,
-        phone: string,
-        address: string,
-        addressLink: string,
-        hours: string,
+        readonly id: UuidValueObject,
+        readonly name: string,
+        readonly description: string,
+        readonly image: string,
+        readonly email: string,
+        readonly phone: string,
+        readonly address: string,
+        readonly addressLink: string,
+        readonly hours: string,
     ) {
         this.id = id;
         this.name = name;

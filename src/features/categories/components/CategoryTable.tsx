@@ -11,7 +11,7 @@ import {
 } from '@tanstack/react-table';
 
 import { EditIcon, TrashIcon } from '@/assets/SvgContainer';
-import { getAllCategoriesOptions } from '@/modules/categories/application/getAllCategories.query-option';
+import { getAllCategoriesQueryOptions } from '@/modules/categories/application/getAllCategories.query-option';
 import type { CategoryInterface } from '@/modules/categories/domain/category.entity';
 import {
     Button,
@@ -36,7 +36,7 @@ export function CategoryTable({
     handleDelete,
     isLoading,
 }: CategoryTableProps) {
-    const { data: categories } = useSuspenseQuery(getAllCategoriesOptions);
+    const { data: categories } = useSuspenseQuery(getAllCategoriesQueryOptions);
 
     const columns: ColumnDef<CategoryInterface>[] = [
         {

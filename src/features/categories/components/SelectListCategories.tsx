@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { getAllCategoriesOptions } from '@/modules/categories/application/getAllCategories.query-option';
+import { getAllCategoriesQueryOptions } from '@/modules/categories/application/getAllCategories.query-option';
 import { CategoryInterface } from '@/modules/categories/domain/category.entity';
 import CustomSelect from '@/shared/components/form/CustomSelect';
 import { IOptions } from '@/shared/types/selectedOption.interface';
@@ -13,7 +13,7 @@ interface SelectListCategoriesProps {
 }
 
 const SelectListCategories = ({ onSelect, selectedValue }: SelectListCategoriesProps) => {
-    const { data: categories } = useSuspenseQuery(getAllCategoriesOptions);
+    const { data: categories } = useSuspenseQuery(getAllCategoriesQueryOptions);
 
     const options = categories.map((category: CategoryInterface) => ({
         value: category.id,

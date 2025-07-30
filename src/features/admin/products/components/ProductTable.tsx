@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 
 import { EditIcon, TrashIcon } from '@/assets/SvgContainer';
-import { getAllCategoriesOptions } from '@/modules/categories/application/getAllCategories.query-option';
+import { getAllCategoriesQueryOptions } from '@/modules/categories/application/getAllCategories.query-option';
 import { CategoryInterface } from '@/modules/categories/domain/category.entity';
 import { getAllProductsQueryOptions } from '@/modules/products/application/getAllProducts.query-option';
 import type { ProductInterface } from '@/modules/products/domain/product.entity';
@@ -22,7 +22,7 @@ interface ProductTableProps {
 
 export function ProductTable({ handleOpenModal, handleDelete, isLoading }: ProductTableProps) {
     const { data: products } = useSuspenseQuery(getAllProductsQueryOptions);
-    const { data: categories } = useSuspenseQuery(getAllCategoriesOptions);
+    const { data: categories } = useSuspenseQuery(getAllCategoriesQueryOptions);
 
     const columns: ColumnDef<ProductInterface>[] = [
         {

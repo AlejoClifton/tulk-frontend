@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 
 import { Brand } from '@/modules/brand/domain/brand.entity';
 import { useBrandMutations } from '@/shared/hooks/useBrandMutations';
+import { getPublicIdFromUrl } from '@/shared/utils/getPublicIdFromUrl';
 
 export type BrandFormData = Brand & {
     imageFile?: File | null;
@@ -16,10 +17,10 @@ export function useBrandForm(brand: Brand | null) {
         setValue,
         watch,
         reset,
-        formState: { errors },
+        formState: { errors, isSubmitting },
     } = useForm<BrandFormData>();
 
-    const { updateBrand, isLoading } = useBrandMutations();
+    const { updateBrand } = useBrandMutations();
 
     useEffect(() => {
         if (brand) {
@@ -42,19 +43,43 @@ export function useBrandForm(brand: Brand | null) {
         setValue('image', '');
     };
 
-    const onSubmit = (data: BrandFormData) => {
-        const formData = new FormData();
+    const onSubmit = async (data: BrandFormData) => {
+        let imageUrl = data.image;
 
-        Object.keys(data).forEach((key) => {
-            const K = key as keyof BrandFormData;
-            if (K === 'imageFile' && data.imageFile) {
-                formData.append('imageFile', data.imageFile);
-            } else if (K !== 'imageFile' && data[K] !== null && data[K] !== undefined) {
-                formData.append(K, data[K] as string);
+        if (data.imageFile) {
+            try {
+                const formData = new FormData();
+                formData.append('file', data.imageFile!);
+                formData.append('folder', 'branding');
+                formData.append('publicId', getPublicIdFromUrl(brand?.image || '') || '');
+
+                const res = await fetch('/api/replace-image', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (res.ok) {
+                    const { url } = await res.json();
+                    imageUrl = url;
+                }
+            } catch (error) {
+                console.error('Error al cargar la imagen:', error);
             }
-        });
+        }
 
-        updateBrand.mutate(formData);
+        const dataToUpdate = {
+            id: data.id,
+            name: data.name,
+            description: data.description,
+            email: data.email,
+            phone: data.phone,
+            address: data.address,
+            addressLink: data.addressLink,
+            image: imageUrl,
+            hours: data.hours,
+        };
+
+        updateBrand.mutate(dataToUpdate);
     };
 
     return {
@@ -63,7 +88,7 @@ export function useBrandForm(brand: Brand | null) {
         errors,
         imageFile,
         imageUrl,
-        isLoading,
+        isLoading: isSubmitting || updateBrand.isPending,
         onSubmit,
         handleImageChange,
         handleRemoveImage,
