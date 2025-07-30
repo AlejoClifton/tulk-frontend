@@ -9,7 +9,7 @@ interface ProductHeroProps {
 }
 
 const ProductHero: React.FC<ProductHeroProps> = ({ product }) => {
-    const allImages = [product.mainImageUrl, ...product.imagesUrl];
+    // const allImages = [product.mainImageUrl, ...product.imagesUrl];
 
     return (
         <section>

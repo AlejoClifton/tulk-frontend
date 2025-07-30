@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
+import { useSession } from 'next-auth/react';
+
 import { GetBrandUseCase } from '@/modules/brand/application/use-cases';
 import { BrandApi } from '@/modules/brand/infrastructure/brand-api';
-import { useSession } from 'next-auth/react';
 
 export const useGetBrand = () => {
     const { data: session } = useSession();

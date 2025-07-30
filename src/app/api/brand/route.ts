@@ -1,6 +1,7 @@
-import { NextResponse } from 'next/server';
 import { promises as fs } from 'fs';
 import path from 'path';
+
+import { NextResponse } from 'next/server';
 
 const brandFilePath = path.join(process.cwd(), 'brand.json');
 const brandImagesDir = path.join(process.cwd(), 'public', 'brand');
@@ -8,8 +9,9 @@ const brandImagesDir = path.join(process.cwd(), 'public', 'brand');
 async function ensureDirectoryExists(dir: string) {
     try {
         await fs.access(dir);
-    } catch (error) {
+    } catch (error: unknown) {
         await fs.mkdir(dir, { recursive: true });
+        console.error('Error al crear el directorio:', error);
     }
 }
 

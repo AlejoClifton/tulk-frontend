@@ -1,9 +1,9 @@
 'use client';
 
+import { FormCategory } from '@/features/categories/components/FormCategory';
+import { useCategoryMutations } from '@/features/categories/hooks/useCategoryMutations';
 import { CategoryInterface } from '@/modules/categories/domain';
 import { Modal } from '@/shared/components';
-import { useCategoryMutations } from '../hooks/useCategoryMutations';
-import { FormCategory } from './FormCategory';
 
 interface ModalCategoryProps {
     category: CategoryInterface;
