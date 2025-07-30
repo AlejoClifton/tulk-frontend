@@ -11,7 +11,7 @@ import {
 } from '@tanstack/react-table';
 
 import { EditIcon, TrashIcon } from '@/assets/SvgContainer';
-import { getAllCategoriesOptions } from '@/modules/categories/application/getAllCategories.option';
+import { getAllCategoriesOptions } from '@/modules/categories/application/getAllCategories.query-option';
 import type { CategoryInterface } from '@/modules/categories/domain/category.entity';
 import {
     Button,

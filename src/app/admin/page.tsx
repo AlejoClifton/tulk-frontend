@@ -5,21 +5,21 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
 import { BarchartIcon, PackageIcon, PlusIcon, TagIcon } from '@/assets/SvgContainer';
-import { getAllCategoriesOptions } from '@/modules/categories/application/getAllCategories.option';
-import { getAllProductsOptions } from '@/modules/products/application/getAllProducts.option';
+import { getAllCategoriesQueryOptions } from '@/modules/categories/application/getAllCategories.query-option';
+import { getAllProductsQueryOptions } from '@/modules/products/application/getAllProducts.query-option';
 import { Button, Subtitle, Text } from '@/shared/components/ui';
 
 const Admin = () => {
     const router = useRouter();
-    const { data: products } = useSuspenseQuery(getAllProductsOptions);
-    const { data: categories } = useSuspenseQuery(getAllCategoriesOptions);
+    const { data: products } = useSuspenseQuery(getAllProductsQueryOptions);
+    const { data: categories } = useSuspenseQuery(getAllCategoriesQueryOptions);
 
     const handleRedirect = (path: string) => {
         router.push(path);
     };
 
     return (
-        <main className="flex h-full min-h-screen ml-64 flex-1 flex-col gap-8 bg-slate-100 p-8">
+        <main className="ml-64 flex h-full min-h-screen flex-1 flex-col gap-8 bg-slate-100 p-8">
             <Subtitle variant="lg">Bienvenido al panel de administración</Subtitle>
             <div className="flex w-full flex-row justify-between gap-4">
                 <div className="flex w-full flex-row items-center justify-start gap-4 rounded-2xl bg-white p-8 shadow-lg">

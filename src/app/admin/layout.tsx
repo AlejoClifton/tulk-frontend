@@ -1,10 +1,8 @@
-'use client';
-
 import { SessionProvider } from 'next-auth/react';
 
+import AsideAdmin from '@/features/admin/AsideAdmin';
+import HeaderAdmin from '@/features/admin/HeaderAdmin';
 import { SessionGuard } from '@/features/auth/components/SessionGuard';
-import AsideAdmin from '@/layout/admin/AsideAdmin';
-import HeaderAdmin from '@/layout/admin/HeaderAdmin';
 
 export default function AdminLayout({
     children,
@@ -13,13 +11,15 @@ export default function AdminLayout({
 }>) {
     return (
         <SessionProvider>
-            <div className="flex flex-col">
-                <HeaderAdmin />
-                <div className="flex">
-                    <AsideAdmin />
-                    <SessionGuard>{children}</SessionGuard>
+            <SessionGuard>
+                <div className="flex flex-col">
+                    <HeaderAdmin />
+                    <div className="flex">
+                        <AsideAdmin />
+                        {children}
+                    </div>
                 </div>
-            </div>
+            </SessionGuard>
         </SessionProvider>
     );
 }

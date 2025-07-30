@@ -1,9 +1,5 @@
 import { BrandUpdatePayload, BrandRepository } from '@/modules/brand/domain/brand.repository';
 
-export class UpdateBrandUseCase {
-    constructor(private readonly brandRepository: BrandRepository) {}
-
-    async execute(brandRepository: BrandRepository, brand: BrandUpdatePayload) {
-        return this.brandRepository.updateBrand(brand);
-    }
-}
+export const updateBrandUseCase = async (brandRepository: BrandRepository, brand: BrandUpdatePayload) => {
+    return await brandRepository.updateBrand(brand);
+};

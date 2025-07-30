@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { PlusIcon } from '@/assets/SvgContainer';
 import { CategoryTable } from '@/features/categories/components/CategoryTable';
 import { ModalCategory } from '@/features/categories/components/ModalCategory';
-import { useCategoryMutations } from '@/features/categories/hooks/useCategoryMutations';
+import { useCategoryMutations } from '@/shared/hooks/useCategoryMutations';
 import { CategoryInterface } from '@/modules/categories/domain/category.entity';
 import { Button, Subtitle } from '@/shared/components/ui';
 

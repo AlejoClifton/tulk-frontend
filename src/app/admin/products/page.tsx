@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { PlusIcon } from '@/assets/SvgContainer';
-import { ModalProduct } from '@/features/products/components/ModalProduct';
-import { ProductTable } from '@/features/products/components/ProductTable';
-import { useProductMutations } from '@/features/products/hooks/useProductMutations';
+import { ModalProduct } from '@/features/admin/products/components/ModalProduct';
+import { ProductTable } from '@/features/admin/products/components/ProductTable';
 import { ProductInterface } from '@/modules/products/domain/product.entity';
 import { Button, Subtitle } from '@/shared/components/ui';
+import { useProductMutations } from '@/shared/hooks/useProductMutations';
 
 const productInitialState: ProductInterface = {
     id: '',
@@ -42,7 +42,7 @@ const Products = () => {
             ...(productToDelete.mainImageUrl ? [productToDelete.mainImageUrl] : []),
         ];
 
-        deleteProduct.mutate({ id: productToDelete.id, imageUrls: imageUrlsToDelete });
+        deleteProduct.mutate({ id: productToDelete.id || '', imageUrls: imageUrlsToDelete });
     };
 
     const handleCloseModal = () => {

@@ -1,7 +1,7 @@
 'use client';
 
 import { FormCategory } from '@/features/categories/components/FormCategory';
-import { useCategoryMutations } from '@/features/categories/hooks/useCategoryMutations';
+import { useCategoryMutations } from '@/shared/hooks/useCategoryMutations';
 import { CategoryInterface } from '@/modules/categories/domain';
 import { Modal } from '@/shared/components';
 

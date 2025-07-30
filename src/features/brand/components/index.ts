@@ -1,3 +1,2 @@
-export * from './Brand-Contact-Info';
+export * from './BrandContactInfo';
 export * from './BrandContactForm';
-export * from './BrandEditForm';
