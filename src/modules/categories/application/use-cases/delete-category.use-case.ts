@@ -2,7 +2,8 @@ import { CategoryRepository } from '@/modules/categories/domain';
 
 export const deleteCategoryUseCase = async (
     categoryRepository: CategoryRepository,
-    id: string
+    id: string,
+    token: string
 ) => {
-    return await categoryRepository.delete(id);
+    return await categoryRepository.delete(id, token);
 };

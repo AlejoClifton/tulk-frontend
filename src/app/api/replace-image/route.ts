@@ -1,35 +1,40 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 import { deleteImage, uploadImage } from '@/shared/lib/cloudinary';
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
     try {
-        const formData = await request.formData();
-        const folder = formData.get('folder') as string;
-        const oldPublicId = formData.get('publicId') as string | null;
-        const file = formData.get('file') as File;
+        const data = await request.formData();
+        const file = data.get('file') as File;
+        const folder = data.get('folder') as string;
+        const publicId = data.get('publicId') as string;
 
-        if (!folder || !file) {
-            return NextResponse.json({ message: 'Folder and file are required' }, { status: 400 });
+        if (!file) {
+            return NextResponse.json({ message: 'No file provided' }, { status: 400 });
         }
 
-        if (oldPublicId) {
+        if (!folder) {
+            return NextResponse.json({ message: 'No folder provided' }, { status: 400 });
+        }
+
+        if (publicId) {
             try {
-                await deleteImage(oldPublicId);
+                await deleteImage(publicId);
+                console.log('Previous image deleted:', publicId);
             } catch (error) {
-                console.warn('No se pudo eliminar la imagen anterior:', error);
+                console.error('Error deleting previous image:', error);
             }
         }
 
         const buffer = Buffer.from(await file.arrayBuffer());
-        const result = await uploadImage(buffer, folder);
+        const response = await uploadImage(buffer, folder);
 
         return NextResponse.json({
-            url: result.secure_url,
-            public_id: result.public_id,
+            url: response.secure_url,
+            public_id: response.public_id,
         });
     } catch (error) {
-        console.error('Error reemplazando imagen:', error);
+        console.error('Error replacing image:', error);
         return NextResponse.json({ message: 'Error replacing image' }, { status: 500 });
     }
 }

@@ -1,9 +1,9 @@
 'use client';
 
-import { FormCategory } from '@/features/categories/components/FormCategory';
-import { useCategoryMutations } from '@/shared/hooks/useCategoryMutations';
+import { FormCategory } from '@/features/admin/categories/components/FormCategory';
 import { CategoryInterface } from '@/modules/categories/domain';
 import { Modal } from '@/shared/components';
+import { useCategoryMutations } from '@/shared/hooks/useCategoryMutations';
 
 interface ModalCategoryProps {
     category: CategoryInterface;
@@ -23,7 +23,6 @@ export const ModalCategory = ({ category, onClose }: ModalCategoryProps) => {
               })
             : createCategory.mutateAsync({
                   ...values,
-                  id: '',
                   name: values.name || '',
                   isActive: values.isActive || false,
               });

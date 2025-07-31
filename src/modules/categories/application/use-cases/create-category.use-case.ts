@@ -1,8 +1,9 @@
-import { CategoryInterface, CategoryRepository } from '@/modules/categories/domain';
+import { CreateCategoryInterface, CategoryRepository } from '@/modules/categories/domain';
 
 export const createCategoryUseCase = async (
     categoryRepository: CategoryRepository,
-    category: CategoryInterface
+    category: CreateCategoryInterface,
+    token: string
 ) => {
-    return await categoryRepository.create(category);
+    return await categoryRepository.create(category, token);
 };

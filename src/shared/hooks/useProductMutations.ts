@@ -1,22 +1,25 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
+
 import { createProductUseCase, updateProductUseCase } from '@/modules/products/application/use-cases';
-import { ProductInterface, ProductUpdatePayload } from '@/modules/products/domain';
+import { ProductInterface } from '@/modules/products/domain';
 import { ProductApi } from '@/modules/products/infrastructure/product.api';
 import { useBaseMutation } from '@/shared/hooks/useBaseMutation';
 
+import { useImagesController } from './useImagesController';
+
 export const useProductMutations = (onSuccess?: () => void) => {
+    const { data: session } = useSession();
+    const { deleteImages } = useImagesController();
+
     const deleteProduct = useBaseMutation({
         mutationFn: async ({ id, imageUrls }: { id: string; imageUrls: string[] }) => {
             const productApi = new ProductApi();
-            await productApi.delete(id);
+            await productApi.delete(id, session?.user.accessToken || '');
 
             if (imageUrls && imageUrls.length > 0) {
-                await fetch('/api/products/images', {
-                    method: 'DELETE',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ urls: imageUrls }),
-                });
+                await deleteImages(imageUrls);
             }
         },
         queryKey: ['products'],
@@ -26,9 +29,9 @@ export const useProductMutations = (onSuccess?: () => void) => {
     });
 
     const updateProduct = useBaseMutation({
-        mutationFn: async (product: ProductUpdatePayload) => {
+        mutationFn: async (product: ProductInterface) => {
             const productApi = new ProductApi();
-            return updateProductUseCase(productApi, product);
+            return updateProductUseCase(productApi, product, session?.user.accessToken || '');
         },
         queryKey: ['products'],
         successMessage: 'Producto actualizado correctamente',
@@ -39,7 +42,7 @@ export const useProductMutations = (onSuccess?: () => void) => {
     const createProduct = useBaseMutation({
         mutationFn: async (product: ProductInterface) => {
             const productApi = new ProductApi();
-            return createProductUseCase(productApi, product);
+            return createProductUseCase(productApi, product, session?.user.accessToken || '');
         },
         queryKey: ['products'],
         successMessage: 'Producto creado correctamente',

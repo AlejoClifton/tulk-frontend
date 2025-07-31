@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useFieldArray, useForm } from 'react-hook-form';
 
 import { Faq, ProductInterface, TechnicalSpecificationGroup } from '@/modules/products/domain/product.entity';
+import { useImagesController } from '@/shared/hooks/useImagesController';
 import { useProductMutations } from '@/shared/hooks/useProductMutations';
 import { IOptions } from '@/shared/types/selectedOption.interface';
 
@@ -70,6 +71,7 @@ export function useProductForm(product: ProductInterface, onClose: () => void) {
     });
 
     const { createProduct, updateProduct } = useProductMutations();
+    const { isUploading, uploadImages, deleteImages } = useImagesController();
 
     const mainImageFile = methods.watch('mainImageFile');
     const imagesFiles = methods.watch('imagesFiles');
@@ -124,22 +126,25 @@ export function useProductForm(product: ProductInterface, onClose: () => void) {
             if (filesToUpload.length > 0) {
                 const imageFormData = new FormData();
                 filesToUpload.forEach((file) => imageFormData.append('files', file));
+                imageFormData.append('folder', 'products');
 
-                const response = await fetch('/api/products/images', {
-                    method: 'POST',
-                    body: imageFormData,
-                });
+                const response = await uploadImages(filesToUpload, 'products');
 
-                if (!response.ok) throw new Error('Error uploading images');
-
-                const { urls } = await response.json();
-                uploadedImageUrls = [...urls];
+                uploadedImageUrls = [...response.map((image) => image.url)];
 
                 if (data.mainImageFile) {
                     mainImageUrl = uploadedImageUrls[0] || '';
                     imagesUrl = [...imagesUrl, ...uploadedImageUrls.slice(1)];
                 } else {
                     imagesUrl = [...imagesUrl, ...uploadedImageUrls];
+                }
+            }
+
+            if (data.imagesToDelete && data.imagesToDelete.length > 0) {
+                try {
+                    await deleteImages(data.imagesToDelete);
+                } catch (error) {
+                    console.error('Error deleting images:', error);
                 }
             }
 
@@ -158,6 +163,8 @@ export function useProductForm(product: ProductInterface, onClose: () => void) {
                 faq: data.faq,
             };
 
+            console.log('productData', productData);
+
             if (product.id && product.id !== '') {
                 await updateProduct.mutateAsync(productData);
             } else {
@@ -175,11 +182,11 @@ export function useProductForm(product: ProductInterface, onClose: () => void) {
             }
 
             if (uploadedImageUrls.length > 0) {
-                await fetch('/api/products/images', {
-                    method: 'DELETE',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ urls: uploadedImageUrls }),
-                });
+                try {
+                    await deleteImages(uploadedImageUrls);
+                } catch (rollbackError) {
+                    console.error('Error rolling back image uploads:', rollbackError);
+                }
             }
         }
     };
@@ -192,7 +199,7 @@ export function useProductForm(product: ProductInterface, onClose: () => void) {
         categoryId,
         mainImageUrl,
         imagesUrl,
-        isLoading: methods.formState.isSubmitting || createProduct.isPending || updateProduct.isPending,
+        isLoading: methods.formState.isSubmitting || createProduct.isPending || updateProduct.isPending || isUploading,
         onSubmit,
         handleRemoveImage,
         handleSelectCategory,

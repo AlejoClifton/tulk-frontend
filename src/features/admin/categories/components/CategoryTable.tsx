@@ -3,25 +3,12 @@
 import * as React from 'react';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
-import {
-    ColumnDef,
-    flexRender,
-    getCoreRowModel,
-    useReactTable,
-} from '@tanstack/react-table';
+import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 
 import { EditIcon, TrashIcon } from '@/assets/SvgContainer';
 import { getAllCategoriesQueryOptions } from '@/modules/categories/application/getAllCategories.query-option';
 import type { CategoryInterface } from '@/modules/categories/domain/category.entity';
-import {
-    Button,
-    Table,
-    TableBody,
-    TableCell,
-    TableHeader,
-    TableHeaderCell,
-    TableRow,
-} from '@/shared/components';
+import { Button, Table, TableBody, TableCell, TableHeader, TableHeaderCell, TableRow } from '@/shared/components';
 import { LoadingSpinner } from '@/shared/components/ui/LoadingSpinner';
 import { StatusBadge } from '@/shared/components/ui/StatusBadge';
 
@@ -31,22 +18,14 @@ interface CategoryTableProps {
     isLoading: boolean;
 }
 
-export function CategoryTable({
-    handleOpenModal,
-    handleDelete,
-    isLoading,
-}: CategoryTableProps) {
+export function CategoryTable({ handleOpenModal, handleDelete, isLoading }: CategoryTableProps) {
     const { data: categories } = useSuspenseQuery(getAllCategoriesQueryOptions);
 
     const columns: ColumnDef<CategoryInterface>[] = [
         {
             header: 'Nombre',
             accessorKey: 'name',
-            cell: (info) => (
-                <span className="block max-w-[130px] truncate">
-                    {info.getValue() as string}
-                </span>
-            ),
+            cell: (info) => <span className="block max-w-[130px] truncate">{info.getValue() as string}</span>,
         },
         {
             header: 'Estado',
@@ -77,11 +56,7 @@ export function CategoryTable({
                         className="flex h-10 w-120 items-center justify-center"
                         onClick={() => handleDelete(row.original.id)}
                         disabled={isLoading}>
-                        {isLoading ? (
-                            <LoadingSpinner size={20} />
-                        ) : (
-                            <TrashIcon className="h-5 w-5" />
-                        )}
+                        {isLoading ? <LoadingSpinner size={20} /> : <TrashIcon className="h-5 w-5" />}
                     </Button>
                 </div>
             ),
@@ -99,11 +74,7 @@ export function CategoryTable({
     }
 
     if (!categories || categories.length === 0) {
-        return (
-            <div className="flex items-center justify-center">
-                No hay categorías
-            </div>
-        );
+        return <div className="flex items-center justify-center">No hay categorías</div>;
     }
 
     return (
@@ -115,10 +86,7 @@ export function CategoryTable({
                             <TableHeaderCell key={header.id}>
                                 {header.isPlaceholder
                                     ? null
-                                    : flexRender(
-                                          header.column.columnDef.header,
-                                          header.getContext()
-                                      )}
+                                    : flexRender(header.column.columnDef.header, header.getContext())}
                             </TableHeaderCell>
                         ))}
                     </TableRow>
@@ -128,13 +96,8 @@ export function CategoryTable({
                 {table.getRowModel().rows.map((row) => (
                     <TableRow key={row.id}>
                         {row.getVisibleCells().map((cell) => (
-                            <TableCell
-                                key={cell.id}
-                                className="whitespace-nowrap px-6 py-4 text-gray-900 align-middle">
-                                {flexRender(
-                                    cell.column.columnDef.cell,
-                                    cell.getContext()
-                                )}
+                            <TableCell key={cell.id} className="px-6 py-4 align-middle whitespace-nowrap text-gray-900">
+                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
                             </TableCell>
                         ))}
                     </TableRow>
@@ -142,4 +105,4 @@ export function CategoryTable({
             </TableBody>
         </Table>
     );
-} 
+}

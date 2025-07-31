@@ -20,11 +20,7 @@ interface FormCategoryProps {
     isLoading: boolean;
 }
 
-export const FormCategory = ({
-    category,
-    onSubmit,
-    isLoading,
-}: FormCategoryProps) => {
+export const FormCategory = ({ category, onSubmit, isLoading }: FormCategoryProps) => {
     const {
         register,
         handleSubmit,
@@ -41,33 +37,16 @@ export const FormCategory = ({
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
                 <Label htmlFor="name">Nombre</Label>
-                <Input
-                    id="name"
-                    {...register('name')}
-                    placeholder="Nombre de la categoría"
-                />
-                {errors.name && (
-                    <p className="text-red-500 text-sm mt-1">
-                        {errors.name.message}
-                    </p>
-                )}
+                <Input id="name" {...register('name')} placeholder="Nombre de la categoría" />
+                {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>}
             </div>
             <div className="flex items-center gap-2">
-                <input
-                    type="checkbox"
-                    id="isActive"
-                    {...register('isActive')}
-                    className="h-4 w-4"
-                />
+                <input type="checkbox" id="isActive" {...register('isActive')} className="h-4 w-4" />
                 <Label htmlFor="isActive">Activa</Label>
             </div>
             <Button type="submit" disabled={isLoading} className="w-full" size="md">
-                {isLoading
-                    ? 'Guardando...'
-                    : category.id
-                    ? 'Actualizar'
-                    : 'Crear'}
+                {isLoading ? 'Guardando...' : category.id ? 'Actualizar' : 'Crear'}
             </Button>
         </form>
     );
-}; 
+};

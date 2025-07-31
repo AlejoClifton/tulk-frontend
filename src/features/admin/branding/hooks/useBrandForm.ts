@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 
 import { Brand } from '@/modules/brand/domain/brand.entity';
 import { useBrandMutations } from '@/shared/hooks/useBrandMutations';
-import { getPublicIdFromUrl } from '@/shared/utils/getPublicIdFromUrl';
+import { useImagesController } from '@/shared/hooks/useImagesController';
 
 export type BrandFormData = Brand & {
     imageFile?: File | null;
@@ -21,6 +21,7 @@ export function useBrandForm(brand: Brand | null) {
     } = useForm<BrandFormData>();
 
     const { updateBrand } = useBrandMutations();
+    const { isUploading, replaceImage } = useImagesController();
 
     useEffect(() => {
         if (brand) {
@@ -48,20 +49,8 @@ export function useBrandForm(brand: Brand | null) {
 
         if (data.imageFile) {
             try {
-                const formData = new FormData();
-                formData.append('file', data.imageFile!);
-                formData.append('folder', 'branding');
-                formData.append('publicId', getPublicIdFromUrl(brand?.image || '') || '');
-
-                const res = await fetch('/api/replace-image', {
-                    method: 'POST',
-                    body: formData,
-                });
-
-                if (res.ok) {
-                    const { url } = await res.json();
-                    imageUrl = url;
-                }
+                const response = await replaceImage(data.imageFile, brand?.image || '', 'branding');
+                imageUrl = response?.url || '';
             } catch (error) {
                 console.error('Error al cargar la imagen:', error);
             }
@@ -88,7 +77,7 @@ export function useBrandForm(brand: Brand | null) {
         errors,
         imageFile,
         imageUrl,
-        isLoading: isSubmitting || updateBrand.isPending,
+        isLoading: isSubmitting || updateBrand.isPending || isUploading,
         onSubmit,
         handleImageChange,
         handleRemoveImage,

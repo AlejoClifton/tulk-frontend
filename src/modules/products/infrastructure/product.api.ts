@@ -1,5 +1,4 @@
-import { auth } from '@/auth';
-import { ProductInterface, ProductRepository, ProductUpdatePayload } from '@/modules/products/domain';
+import { ProductInterface, ProductRepository } from '@/modules/products/domain';
 import { BackendAdapter } from '@/shared/http/adapters/backend.adapter';
 
 export class ProductApi implements ProductRepository {
@@ -23,31 +22,17 @@ export class ProductApi implements ProductRepository {
         return product;
     }
 
-    async create(product: ProductInterface): Promise<ProductInterface> {
-        const session = await auth();
-
-        const newProduct = await this.backendAdapter.postWithData<ProductInterface>(
-            this.url,
-            product,
-            session?.user.accessToken || '',
-        );
+    async create(product: ProductInterface, token: string): Promise<ProductInterface> {
+        const newProduct = await this.backendAdapter.postWithData<ProductInterface>(this.url, product, token);
         return newProduct;
     }
 
-    async update(product: ProductUpdatePayload): Promise<ProductInterface> {
-        const session = await auth();
-
-        const updatedProduct = await this.backendAdapter.putWithData<ProductInterface>(
-            this.url,
-            product,
-            session?.user.accessToken || '',
-        );
+    async update(product: ProductInterface, token: string): Promise<ProductInterface> {
+        const updatedProduct = await this.backendAdapter.putWithData<ProductInterface>(this.url, product, token);
         return updatedProduct;
     }
 
-    async delete(id: string): Promise<void> {
-        const session = await auth();
-
-        await this.backendAdapter.delete(`${this.url}/${id}`, session?.user.accessToken || '');
+    async delete(id: string, token: string): Promise<void> {
+        await this.backendAdapter.delete(`${this.url}/${id}`, token);
     }
 }

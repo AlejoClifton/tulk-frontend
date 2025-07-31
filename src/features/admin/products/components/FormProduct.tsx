@@ -5,7 +5,7 @@ import { FormProvider } from 'react-hook-form';
 import { TrashIcon } from '@/assets/SvgContainer';
 import { SpecificationGroupFields } from '@/features/admin/products/components/SpecificationGroupFields';
 import { useProductForm } from '@/features/admin/products/hooks/useProductForm';
-import SelectListCategories from '@/features/categories/components/SelectListCategories';
+import SelectListCategories from '@/features/admin/categories/components/SelectListCategories';
 import type { ProductInterface } from '@/modules/products/domain/product.entity';
 import { Button, ImageFileInput, ImagePreviewList, Input, Label, Textarea } from '@/shared/components';
 import { LoadingSpinner } from '@/shared/components/ui/LoadingSpinner';

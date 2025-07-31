@@ -1,9 +1,8 @@
-import { CategoryInterface } from './category.entity';
+import { CategoryInterface, CreateCategoryInterface } from './category.entity';
 
 export interface CategoryRepository {
     getAll(): Promise<CategoryInterface[]>;
-    getById(id: string): Promise<CategoryInterface>;
-    create(category: CategoryInterface): Promise<CategoryInterface>;
-    update(category: CategoryInterface): Promise<CategoryInterface>;
-    delete(id: string): Promise<void>;
+    create(category: CreateCategoryInterface, token: string): Promise<CategoryInterface>;
+    update(category: CategoryInterface, token: string): Promise<CategoryInterface>;
+    delete(id: string, token: string): Promise<void>;
 } 

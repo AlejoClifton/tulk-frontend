@@ -6,6 +6,8 @@ export interface CategoryInterface {
     isActive: boolean;
 }
 
+export type CreateCategoryInterface = Omit<CategoryInterface, 'id'>;
+
 export class CategoryEntity {
     constructor(
         public id: UuidValueObject,

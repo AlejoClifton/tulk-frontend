@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 
 import { PlusIcon } from '@/assets/SvgContainer';
-import { CategoryTable } from '@/features/categories/components/CategoryTable';
-import { ModalCategory } from '@/features/categories/components/ModalCategory';
+import { CategoryTable } from '@/features/admin/categories/components/CategoryTable';
+import { ModalCategory } from '@/features/admin/categories/components/ModalCategory';
 import { useCategoryMutations } from '@/shared/hooks/useCategoryMutations';
 import { CategoryInterface } from '@/modules/categories/domain/category.entity';
 import { Button, Subtitle } from '@/shared/components/ui';
