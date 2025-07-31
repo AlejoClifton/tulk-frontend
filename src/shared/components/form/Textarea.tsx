@@ -26,7 +26,11 @@ export interface TextareaProps
 export const Textarea = ({ className, error, ...inputProps }: TextareaProps) => {
     return (
         <div className="flex flex-col gap-2">
-            <textarea className={TextareaVariants({ ...inputProps, className })} {...inputProps} />
+            <textarea
+                className={TextareaVariants({ ...inputProps, className })}
+                {...inputProps}
+                suppressHydrationWarning={true}
+            />
             {error && <p className="text-sm text-red-500">{error}</p>}
         </div>
     );
