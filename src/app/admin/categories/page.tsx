@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import { PlusIcon } from '@/assets/SvgContainer';
 import { CategoryTable } from '@/features/admin/categories/components/CategoryTable';
 import { ModalCategory } from '@/features/admin/categories/components/ModalCategory';
-import { useCategoryMutations } from '@/shared/hooks/useCategoryMutations';
 import { CategoryInterface } from '@/modules/categories/domain/category.entity';
 import { Button, Subtitle } from '@/shared/components/ui';
+import { useCategoryMutations } from '@/shared/hooks/useCategoryMutations';
 
 const categoryInitialState: CategoryInterface = {
     id: '',
@@ -35,8 +35,8 @@ const Categories = () => {
     };
 
     return (
-        <main className="ml-64 flex h-full min-h-screen flex-1 flex-col gap-8 bg-slate-100 p-8">
-            <div className="flex flex-1 flex-col gap-4">
+        <main className="lg:ml-64 flex h-full flex-col gap-8 bg-slate-100 p-4 lg:p-8">
+            <div className="flex flex-col gap-4">
                 <div className="flex items-center justify-between gap-4">
                     <Subtitle variant="lg">Categorías</Subtitle>
                     <Button

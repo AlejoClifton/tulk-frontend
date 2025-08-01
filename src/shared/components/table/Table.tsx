@@ -4,7 +4,7 @@ import { cva } from 'class-variance-authority';
 
 import type { ClassedComponentProps } from '@/shared/types/classed-component-props';
 
-const tableVariants = cva('w-full border border-gray-200 shadow shadow-sm overflow-x-auto', {
+const tableVariants = cva('w-full border border-gray-200 shadow shadow-sm overflow-y-auto', {
     variants: {
         variant: {
             default: 'bg-white',
@@ -23,7 +23,7 @@ const tableVariants = cva('w-full border border-gray-200 shadow shadow-sm overfl
     },
 });
 
-const tableElementVariants = cva('min-w-full', {
+const tableElementVariants = cva('w-full', {
     variants: {
         variant: {
             default: '',

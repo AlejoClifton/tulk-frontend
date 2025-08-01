@@ -6,10 +6,9 @@ import { TrashIcon } from '@/assets/SvgContainer';
 import { Subtitle, Button } from '@/shared/components/ui';
 import type { ClassedComponentProps } from '@/shared/types/classed-component-props';
 
-
 export const modalVariants = cva(
     `fixed inset-0 z-50 flex items-center justify-center
-    rounded-lg p-10 shadow-lg shadow-slate-200 border-1 border-slate-200 w-full max-w-2xl overflow-y-auto
+    rounded-lg px-4 py-8 shadow-lg shadow-slate-200 border-1 border-slate-200 w-[90%] lg:w-full shadow-md max-w-2xl overflow-y-auto
     top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
     `,
     {
@@ -31,7 +30,7 @@ export interface ModalProps extends ClassedComponentProps<typeof modalVariants> 
 export const Modal = ({ children, className, title, onClose, ...variantProps }: ModalProps) => {
     return (
         <dialog className={modalVariants({ ...variantProps, className })}>
-            <div className="flex max-h-[90vh] flex-col gap-4 overflow-y-auto">
+            <div className="flex max-h-[80vh] flex-col gap-4 overflow-y-auto">
                 <div className="flex items-center justify-between">
                     <Subtitle weight="semibold" variant="lg">
                         {title}

@@ -19,9 +19,9 @@ const Admin = () => {
     };
 
     return (
-        <main className="ml-64 flex h-full min-h-screen flex-1 flex-col gap-8 bg-slate-100 p-8">
+        <main className="lg:ml-64 flex w-[90%] h-full flex-1 flex-col gap-8 bg-slate-100 p-4 lg:p-8">
             <Subtitle variant="lg">Bienvenido al panel de administración</Subtitle>
-            <div className="flex w-full flex-row justify-between gap-4">
+            <div className="flex w-full flex-col lg:flex-row justify-between gap-4">
                 <div className="flex w-full flex-row items-center justify-start gap-4 rounded-2xl bg-white p-8 shadow-lg">
                     <PackageIcon className="h-15 w-15 rounded-2xl bg-orange-01/10 p-3 text-orange-01" />
                     <div className="flex flex-col gap-2">
@@ -58,7 +58,7 @@ const Admin = () => {
             </div>
             <div className="flex flex-col gap-4 rounded-2xl bg-white p-8 shadow-lg">
                 <Subtitle variant="lg">Acciones rápidas</Subtitle>
-                <div className="flex w-full flex-row gap-4">
+                <div className="flex w-full flex-col lg:flex-row gap-4">
                     <Button
                         onClick={() => handleRedirect('/admin/products')}
                         className="flex w-full flex-1 items-center justify-center gap-3 px-6 py-4">

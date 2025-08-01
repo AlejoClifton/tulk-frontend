@@ -40,9 +40,12 @@ export const BrandEditForm = () => {
             <Subtitle variant="lg" className="mb-8">
                 Información de la Marca
             </Subtitle>
-            <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data" className="flex flex-col gap-6">
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                    <div className="flex flex-col gap-2">
+            <form
+                onSubmit={handleSubmit(onSubmit)}
+                encType="multipart/form-data"
+                className="flex w-full flex-col gap-6">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 w-full">
+                    <div className="flex flex-col gap-2 w-full">
                         <Label>Nombre</Label>
                         <Input {...register('name')} />
                         {errors.name && <span className="text-red-500">{errors.name.message}</span>}
@@ -90,7 +93,7 @@ export const BrandEditForm = () => {
                         files={imageFile ? [imageFile] : []}
                         urls={imageUrl ? [imageUrl] : []}
                         onRemoveImage={handleRemoveImage}
-                        className="w-100"
+                        className="w-90 lg:w-100"
                     />
                 </div>
                 <Button size="lg" type="submit" disabled={isUpdating}>

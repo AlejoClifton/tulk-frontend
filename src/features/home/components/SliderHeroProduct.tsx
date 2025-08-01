@@ -44,7 +44,7 @@ export const SliderHeroProduct = () => {
                             fill
                             priority
                         />
-                        <div className="absolute inset-0 flex flex-col justify-end bg-black/40 p-6 text-white">
+                        <div className="inset-0 hidden flex-col justify-end bg-black/40 p-6 text-white md:absolute md:flex">
                             <Subtitle variant="lg" color="primary">
                                 {slide.name}
                             </Subtitle>

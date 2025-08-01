@@ -4,7 +4,7 @@ import { PanelCard, Subtitle, Text } from '@/shared/components';
 
 const LinesProducts = () => {
     return (
-        <div id="lines-products" className="my-16 flex flex-col gap-8">
+        <div id="lines-products" className="mx-6 my-16 flex flex-col gap-8 md:mx-0">
             <div className="flex flex-col items-center gap-4">
                 <Subtitle variant="xl">Nuestras Líneas de Productos</Subtitle>
                 <Text size="xl" variant="secondary" className="max-w-xl text-center">

@@ -14,7 +14,7 @@ export default function Logout() {
 
     return (
         <form onSubmit={handleLogout}>
-            <Button type="submit" className="flex w-full items-center justify-center gap-2 p-2" size="md">
+            <Button type="submit" className="flex w-full items-center justify-center gap-2" size="md">
                 <PersonIcon className="h-6 w-6 cursor-pointer text-white transition-colors duration-300 hover:text-slate-700" />
                 Cerrar sesión
             </Button>

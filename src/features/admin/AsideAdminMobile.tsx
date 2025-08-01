@@ -5,13 +5,11 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-
 import { BarchartIcon, BuildingIcon, PackageIcon, TagIcon } from '@/assets/SvgContainer';
 import Logout from '@/features/auth/components/Logout';
 import { Navegation } from '@/shared/components';
 
-
-const AsideAdmin = () => {
+const AsideAdminMobile = () => {
     const pathname = usePathname();
 
     const isActive = (href: string) => pathname === href;
@@ -27,8 +25,8 @@ const AsideAdmin = () => {
     };
 
     return (
-        <aside className="hidden fixed top-0 left-0 z-40 lg:flex h-full w-full max-w-64 flex-col justify-between border-r border-slate-200 bg-white p-4">
-            <Navegation variant="secondary" className="flex flex-col gap-4 mt-15">
+        <aside className="fixed top-22 left-0 z-100 min-h-full w-full flex-col justify-between border-slate-200 bg-white p-4 lg:border-r lg:hidden">
+            <Navegation variant="secondary" className="flex flex-col gap-4">
                 <Link href="/admin" className={className('/admin')}>
                     <BarchartIcon className="h-6 w-6" />
                     Dashboard
@@ -45,10 +43,10 @@ const AsideAdmin = () => {
                     <BuildingIcon className="h-6 w-6" />
                     Marca
                 </Link>
+                <Logout />
             </Navegation>
-            <Logout />
         </aside>
     );
 };
 
-export default AsideAdmin;
+export default AsideAdminMobile;

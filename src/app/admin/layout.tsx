@@ -12,9 +12,9 @@ export default function AdminLayout({
     return (
         <SessionProvider>
             <SessionGuard>
-                <div className="flex flex-col">
+                <div className="flex flex-col bg-slate-100 min-h-screen">
                     <HeaderAdmin />
-                    <div className="flex">
+                    <div className="flex overflow-y-auto">
                         <AsideAdmin />
                         {children}
                     </div>

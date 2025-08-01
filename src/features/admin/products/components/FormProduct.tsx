@@ -3,9 +3,9 @@ import React from 'react';
 import { FormProvider } from 'react-hook-form';
 
 import { TrashIcon } from '@/assets/SvgContainer';
+import SelectListCategories from '@/features/admin/categories/components/SelectListCategories';
 import { SpecificationGroupFields } from '@/features/admin/products/components/SpecificationGroupFields';
 import { useProductForm } from '@/features/admin/products/hooks/useProductForm';
-import SelectListCategories from '@/features/admin/categories/components/SelectListCategories';
 import type { ProductInterface } from '@/modules/products/domain/product.entity';
 import { Button, ImageFileInput, ImagePreviewList, Input, Label, Textarea } from '@/shared/components';
 import { LoadingSpinner } from '@/shared/components/ui/LoadingSpinner';
@@ -24,7 +24,7 @@ export const FormProduct = ({ product, onClose }: FormProductProps) => {
                 onSubmit={methods.handleSubmit(methods.onSubmit)}
                 encType="multipart/form-data"
                 className="flex flex-col gap-8">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                     <div className="flex flex-col gap-2">
                         <Label>Nombre</Label>
                         <Input {...methods.register('name', { required: true })} placeholder="Nombre del producto" />
