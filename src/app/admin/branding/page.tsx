@@ -1,7 +1,7 @@
 'use client';
 
-import { BrandEditForm } from '@/features/admin/branding/components/BrandEditForm';
-import { Subtitle } from '@/shared/components';
+import { Subtitle } from '@/components';
+import { BrandEditForm } from '@/features/branding/components/BrandEditForm';
 
 const BrandingPage = () => {
     return (

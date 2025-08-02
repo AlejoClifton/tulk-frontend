@@ -5,14 +5,14 @@ import React, { Fragment } from 'react';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 
-import BrandContainer from '@/features/brand/BrandContainer';
-import BenefitsSection from '@/features/products[ID]/components/BenefitsSection';
-import FaqsSection from '@/features/products[ID]/components/FaqsSection';
-import HeaderProduct from '@/features/products[ID]/components/HeaderProduct';
-import ProductHero from '@/features/products[ID]/components/ProductHero';
-import SpecificationsSection from '@/features/products[ID]/components/SpecificationsSection';
-import { getProductQueryOptions } from '@/modules/products/application/getProduct.query-option';
-import Footer from '@/shared/components/common/Footer';
+import BenefitsSection from '@/app/products/[ID]/components/BenefitsSection';
+import FaqsSection from '@/app/products/[ID]/components/FaqsSection';
+import HeaderProduct from '@/app/products/[ID]/components/HeaderProduct';
+import ProductHero from '@/app/products/[ID]/components/ProductHero';
+import SpecificationsSection from '@/app/products/[ID]/components/SpecificationsSection';
+import Footer from '@/components/Footer';
+import BrandContainer from '@/features/branding/BrandContainer';
+import { getProductQueryOptions } from '@/features/products/hooks/queries/getProduct.query-option';
 
 const ProductDetail = () => {
     const { ID } = useParams();

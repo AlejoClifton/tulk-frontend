@@ -1,8 +1,8 @@
 import { SessionProvider } from 'next-auth/react';
 
-import AsideAdmin from '@/features/admin/AsideAdmin';
-import HeaderAdmin from '@/features/admin/HeaderAdmin';
-import { SessionGuard } from '@/features/auth/components/SessionGuard';
+import AsideAdmin from '@/features/admin/components/AsideAdmin';
+import HeaderAdmin from '@/features/admin/components/HeaderAdmin';
+import { SessionGuard } from '@/features/admin/providers/SessionGuard';
 
 export default function AdminLayout({
     children,

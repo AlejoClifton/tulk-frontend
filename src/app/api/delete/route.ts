@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { deleteImage } from '@/shared/lib/cloudinary';
+import { deleteImage } from '@/lib/cloudinary';
 
 export async function POST(request: Request) {
     try {

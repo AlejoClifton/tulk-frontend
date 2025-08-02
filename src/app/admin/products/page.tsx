@@ -1,14 +1,12 @@
 'use client';
 import React, { useState } from 'react';
 
-import { useQueryClient } from '@tanstack/react-query';
-
 import { PlusIcon } from '@/assets/SvgContainer';
-import { ModalProduct } from '@/features/admin/products/components/ModalProduct';
-import { ProductTable } from '@/features/admin/products/components/ProductTable';
-import { ProductInterface } from '@/modules/products/domain/product.entity';
-import { Button, Subtitle } from '@/shared/components/ui';
-import { useProductMutations } from '@/shared/hooks/useProductMutations';
+import { Button, Subtitle } from '@/components/ui';
+import { ModalProduct } from '@/features/products/components/ModalProduct';
+import { ProductTable } from '@/features/products/components/ProductTable';
+import { useProductMutations } from '@/features/products/hooks/queries/useProductMutations';
+import { ProductInterface } from '@/features/products/interfaces/product.interface';
 
 const productInitialState: ProductInterface = {
     id: '',
@@ -23,13 +21,8 @@ const productInitialState: ProductInterface = {
 const Products = () => {
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [product, setProduct] = useState<ProductInterface | null>(null);
-    const queryClient = useQueryClient();
 
-    const refetchProducts = () => {
-        queryClient.invalidateQueries({ queryKey: ['products'] });
-    };
-
-    const { deleteProduct, isLoading } = useProductMutations(refetchProducts);
+    const { deleteProduct, isLoading } = useProductMutations();
 
     const handleOpenModal = (product: ProductInterface) => {
         setIsOpenModal(true);

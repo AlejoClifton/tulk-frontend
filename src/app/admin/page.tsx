@@ -5,9 +5,9 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
 import { BarchartIcon, PackageIcon, PlusIcon, TagIcon } from '@/assets/SvgContainer';
-import { getAllCategoriesQueryOptions } from '@/modules/categories/application/getAllCategories.query-option';
-import { getAllProductsQueryOptions } from '@/modules/products/application/getAllProducts.query-option';
-import { Button, Subtitle, Text } from '@/shared/components/ui';
+import { Button, Subtitle, Text } from '@/components/ui';
+import { getAllCategoriesQueryOptions } from '@/features/categories/hooks/queries/getAllCategories.query-option';
+import { getAllProductsQueryOptions } from '@/features/products/hooks/queries/getAllProducts.query-option';
 
 const Admin = () => {
     const router = useRouter();

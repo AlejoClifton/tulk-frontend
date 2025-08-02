@@ -1,8 +1,8 @@
-import BrandContainer from '@/features/brand/BrandContainer';
+import Footer from '@/components/Footer';
+import BrandContainer from '@/features/branding/BrandContainer';
 import HeaderHome from '@/features/home/components/HeaderHome';
 import LinesProducts from '@/features/home/components/LinesProducts';
-import { SliderHeroProduct } from '@/features/home/components/SliderHeroProduct';
-import Footer from '@/shared/components/common/Footer';
+import { SliderHeroProduct } from '@/features/products/components/SliderHeroProduct';
 
 export default function Home() {
     return (

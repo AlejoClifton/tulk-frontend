@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PanelCard, Subtitle, Text } from '@/shared/components';
+import { PanelCard, Subtitle, Text } from '@/components';
 
 const LinesProducts = () => {
     return (

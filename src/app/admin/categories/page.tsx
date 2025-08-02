@@ -2,11 +2,11 @@
 import React, { useState } from 'react';
 
 import { PlusIcon } from '@/assets/SvgContainer';
-import { CategoryTable } from '@/features/admin/categories/components/CategoryTable';
-import { ModalCategory } from '@/features/admin/categories/components/ModalCategory';
-import { CategoryInterface } from '@/modules/categories/domain/category.entity';
-import { Button, Subtitle } from '@/shared/components/ui';
-import { useCategoryMutations } from '@/shared/hooks/useCategoryMutations';
+import { Button, Subtitle } from '@/components/ui';
+import { CategoryTable } from '@/features/categories/components/CategoryTable';
+import { ModalCategory } from '@/features/categories/components/ModalCategory';
+import { useCategoryMutations } from '@/features/categories/hooks/queries/useCategoryMutations';
+import { CategoryInterface } from '@/features/categories/interfaces/category.interface';
 
 const categoryInitialState: CategoryInterface = {
     id: '',
