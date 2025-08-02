@@ -9,7 +9,7 @@ interface SpecificationsSectionProps {
 
 const SpecificationsSection: React.FC<SpecificationsSectionProps> = ({ product }) => {
     return (
-        <section id="specifications" className="flex flex-col gap-8 rounded-lg bg-slate-50 py-32">
+        <section id="specifications" className="flex flex-col gap-8 rounded-lg bg-slate-50 px-6 py-32 md:px-0">
             <div className="flex flex-col gap-2">
                 <Subtitle variant="2xl" className="text-center">
                     Especificaciones técnicas

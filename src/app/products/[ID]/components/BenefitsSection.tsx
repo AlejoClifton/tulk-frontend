@@ -10,7 +10,7 @@ interface BenefitsSectionProps {
 
 const BenefitsSection: React.FC<BenefitsSectionProps> = ({ product }) => {
     return (
-        <section id="benefits" className="flex flex-col gap-8 py-32">
+        <section id="benefits" className="flex flex-col gap-8 px-6 md:px-0 py-32">
             <div className="flex flex-col gap-2">
                 <Subtitle variant="2xl" className="text-center">
                     Beneficios y Características

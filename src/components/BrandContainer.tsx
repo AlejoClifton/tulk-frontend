@@ -3,8 +3,7 @@
 import React from 'react';
 
 import { Subtitle, Text } from '@/components';
-
-import { BrandContactInfo, BrandContactForm } from './components';
+import { BrandContactInfo, BrandContactForm } from '@/features/branding/components';
 
 const BrandContainer = () => {
     return (
@@ -17,7 +16,7 @@ const BrandContainer = () => {
                     Estamos aquí para ayudarte con consultas técnicas, información de productos y soporte especializado
                 </Text>
             </div>
-            <div className="mx-6 flex flex-col gap-8 md:mx-0 md:flex-row md:justify-center">
+            <div className="mx-6 flex flex-col gap-8 lg:mx-0 md:flex-row md:justify-center">
                 <BrandContactForm />
                 <BrandContactInfo />
             </div>

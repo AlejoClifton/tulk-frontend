@@ -11,7 +11,7 @@ interface FaqsSectionProps {
 
 const FaqsSection: React.FC<FaqsSectionProps> = ({ product }) => {
     return (
-        <section id="faqs" className="flex flex-col gap-8 py-32">
+        <section id="faqs" className="flex flex-col gap-8 px-6 py-32 md:px-0">
             <div className="flex flex-col gap-2">
                 <Subtitle variant="2xl" className="text-center">
                     Preguntas frecuentes
@@ -38,4 +38,4 @@ const FaqsSection: React.FC<FaqsSectionProps> = ({ product }) => {
     );
 };
 
-export default FaqsSection; 
+export default FaqsSection;

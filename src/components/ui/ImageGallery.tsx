@@ -42,23 +42,9 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
     if (!images.length) return null;
 
     return (
-        <div className={`flex gap-4 ${className}`}>
-            {images.length > 1 && (
-                <div className="flex flex-col gap-2">
-                    {images.map((image, index) => (
-                        <div
-                            key={index}
-                            className={`relative aspect-square ${thumbnailSizes[thumbnailSize]} cursor-pointer overflow-hidden rounded-lg border-2 transition-all hover:opacity-80 ${
-                                currentImageIndex === index ? 'border-orange-01' : 'border-gray-200'
-                            }`}
-                            onClick={() => handleImageChange(index)}>
-                            <Image src={image} alt={`${alt} - Imagen ${index + 1}`} fill className="object-contain" />
-                        </div>
-                    ))}
-                </div>
-            )}
-
-            <div className={`relative aspect-[1/1] ${mainImageHeight} flex-1 overflow-hidden rounded-2xl`}>
+        <div className={`flex flex-col gap-4 ${className}`}>
+            <div
+                className={`relative aspect-[1/1] ${mainImageHeight} flex-1 overflow-hidden rounded-2xl`}>
                 <Image src={images[currentImageIndex]} alt={alt} fill className="object-contain" />
 
                 {images.length > 1 && (
@@ -93,6 +79,20 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
                     </>
                 )}
             </div>
+            {images.length > 1 && (
+                <div className="flex flex-row gap-2">
+                    {images.map((image, index) => (
+                        <div
+                            key={index}
+                            className={`relative aspect-square ${thumbnailSizes[thumbnailSize]} cursor-pointer overflow-hidden rounded-lg border-2 transition-all hover:opacity-80 ${
+                                currentImageIndex === index ? 'border-orange-01' : 'border-gray-200'
+                            }`}
+                            onClick={() => handleImageChange(index)}>
+                            <Image src={image} alt={`${alt} - Imagen ${index + 1}`} fill className="object-contain" />
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

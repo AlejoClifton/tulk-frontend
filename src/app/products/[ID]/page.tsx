@@ -10,8 +10,8 @@ import FaqsSection from '@/app/products/[ID]/components/FaqsSection';
 import HeaderProduct from '@/app/products/[ID]/components/HeaderProduct';
 import ProductHero from '@/app/products/[ID]/components/ProductHero';
 import SpecificationsSection from '@/app/products/[ID]/components/SpecificationsSection';
+import BrandContainer from '@/components/BrandContainer';
 import Footer from '@/components/Footer';
-import BrandContainer from '@/features/branding/BrandContainer';
 import { getProductQueryOptions } from '@/features/products/hooks/queries/getProduct.query-option';
 
 const ProductDetail = () => {
