@@ -2,9 +2,9 @@ import React from 'react';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 
+import CustomSelect from '@/components/form/CustomSelect';
 import { getAllCategoriesQueryOptions } from '@/features/categories/hooks/queries/getAllCategories.query-option';
 import { CategoryInterface } from '@/features/categories/interfaces/category.interface';
-import CustomSelect from '@/components/form/CustomSelect';
 import { IOptions } from '@/interfaces/selectedOption.interface';
 
 interface SelectListCategoriesProps {

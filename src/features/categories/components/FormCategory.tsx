@@ -4,8 +4,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import type { CategoryInterface } from '@/features/categories/interfaces/category.interface';
 import { Button, Input, Label } from '@/components';
+import type { CategoryInterface } from '@/features/categories/interfaces/category.interface';
 
 const formSchema = z.object({
     name: z.string().min(1, 'El nombre es requerido'),

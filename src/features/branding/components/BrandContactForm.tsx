@@ -2,8 +2,8 @@
 
 import React from 'react';
 
-import { useContactForm } from '@/features/branding/hooks/useContactForm';
 import { Input, Button, Subtitle, Label, Textarea } from '@/components';
+import { useContactForm } from '@/features/branding/hooks/useContactForm';
 
 export const BrandContactForm = () => {
     const { form, loading, handleChange, handleSubmit } = useContactForm();

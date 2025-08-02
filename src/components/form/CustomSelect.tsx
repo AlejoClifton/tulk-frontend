@@ -6,7 +6,6 @@ import classNames from 'classnames';
 
 import { Text } from '@/components';
 import { IOptions } from '@/interfaces/selectedOption.interface';
-
 import OutsideClickHandler from '@/utils/OutsideClickHandler';
 
 

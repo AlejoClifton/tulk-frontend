@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs';
 import type { AxiosInstance, AxiosError, AxiosRequestConfig } from 'axios';
 
 export type AuthHandlers = {
@@ -20,6 +21,7 @@ export class BaseAxiosAdapter {
         } catch (err: unknown) {
             const axiosError = err as AxiosError;
             console.error('[AxiosAdapter] Error:', axiosError?.response?.status, axiosError?.response?.data || err);
+            Sentry.captureException(axiosError);
 
             if (axiosError?.response?.status === 401) {
                 try {

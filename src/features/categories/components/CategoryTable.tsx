@@ -6,11 +6,11 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 
 import { EditIcon, TrashIcon } from '@/assets/SvgContainer';
-import { getAllCategoriesQueryOptions } from '@/features/categories/hooks/queries/getAllCategories.query-option';
-import type { CategoryInterface } from '@/features/categories/interfaces/category.interface';
 import { Button, Table, TableBody, TableCell, TableHeader, TableHeaderCell, TableRow } from '@/components';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { StatusBadge } from '@/components/ui/StatusBadge';
+import { getAllCategoriesQueryOptions } from '@/features/categories/hooks/queries/getAllCategories.query-option';
+import type { CategoryInterface } from '@/features/categories/interfaces/category.interface';
 
 interface CategoryTableProps {
     handleOpenModal: (category: CategoryInterface) => void;
