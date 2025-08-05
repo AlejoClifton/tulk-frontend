@@ -1,20 +1,19 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
-
 import type { ProductInterface } from '@/features/products/interfaces/product.interface';
 import {
     createProduct,
     updateProduct,
     deleteProduct as deleteProductService,
 } from '@/features/products/services/product.service';
+import { useAuth } from '@/hooks/useAuth';
 import { useBaseMutation } from '@/hooks/useBaseMutation';
 import { useImagesController } from '@/hooks/useImagesController';
 
 export const useProductMutations = (onSuccess?: () => void) => {
-    const { data: session } = useSession();
+    const { session } = useAuth();
     const { deleteImages } = useImagesController();
-    const token = session?.user.accessToken || '';
+    const token = session?.access_token || '';
 
     const deleteProduct = useBaseMutation({
         mutationFn: async ({ id, imageUrls }: { id: string; imageUrls: string[] }) => {

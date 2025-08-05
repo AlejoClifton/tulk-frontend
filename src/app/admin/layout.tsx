@@ -1,8 +1,6 @@
-import { SessionProvider } from 'next-auth/react';
-
 import AsideAdmin from '@/features/admin/components/AsideAdmin';
 import HeaderAdmin from '@/features/admin/components/HeaderAdmin';
-import { SessionGuard } from '@/features/admin/providers/SessionGuard';
+import { ProtectedRouteClient } from '@/features/auth/ProtectedRouteClient';
 
 export default function AdminLayout({
     children,
@@ -10,16 +8,14 @@ export default function AdminLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <SessionProvider>
-            <SessionGuard>
-                <div className="flex flex-col bg-slate-100 min-h-screen">
-                    <HeaderAdmin />
-                    <div className="flex overflow-y-auto">
-                        <AsideAdmin />
-                        {children}
-                    </div>
+        <ProtectedRouteClient>
+            <div className="flex min-h-screen flex-col bg-slate-100">
+                <HeaderAdmin />
+                <div className="flex overflow-y-auto">
+                    <AsideAdmin />
+                    {children}
                 </div>
-            </SessionGuard>
-        </SessionProvider>
+            </div>
+        </ProtectedRouteClient>
     );
 }

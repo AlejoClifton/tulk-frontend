@@ -1,12 +1,11 @@
-import { useSession } from 'next-auth/react';
-
 import type { CategoryInterface } from '@/features/categories/interfaces/category.interface';
 import { createCategory, updateCategory, deleteCategory } from '@/features/categories/services/categories.service';
+import { useAuth } from '@/hooks/useAuth';
 import { useBaseMutation } from '@/hooks/useBaseMutation';
 
 export const useCategoryMutations = () => {
-    const { data: session } = useSession();
-    const token = session?.user.accessToken || '';
+    const { session } = useAuth();
+    const token = session?.access_token || '';
 
     const createCategoryMutation = useBaseMutation({
         mutationFn: (category: CategoryInterface) => createCategory(category, token),

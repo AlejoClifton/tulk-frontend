@@ -4,3 +4,4 @@ export * from './ImageGallery';
 export * from './Subtitle';
 export * from './Text';
 export * from './Title';
+export * from './LoadingSpinner';

@@ -5,12 +5,17 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 
 import { PersonIcon } from '@/assets/SvgContainer';
+import { useAuth } from '@/hooks/useAuth';
 
 const SignIn = () => {
+    const { user } = useAuth();
     const router = useRouter();
 
     const handleSignIn = () => {
-        router.push('/api/auth/signin?callbackUrl=/admin');
+        if (!user) {
+            router.push('/login');
+        }
+        router.push('/admin');
     };
 
     return (
