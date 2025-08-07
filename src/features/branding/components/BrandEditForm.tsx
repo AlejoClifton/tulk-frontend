@@ -4,19 +4,23 @@ import React from 'react';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 
-import {
-    Input,
-    Button,
-    PanelCard,
-    Subtitle,
-    Label,
-    Textarea,
-    ImageFileInput,
-    ImagePreviewList,
-} from '@/components';
+import { Input, Button, PanelCard, Subtitle, Label, Textarea, ImageFileInput, ImagePreviewList } from '@/components';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { getBrandingQueryOptions } from '@/features/branding/hooks/queries/getBrand.query-option';
 import { useBrandForm } from '@/features/branding/hooks/useBrandForm';
+import { BrandingInterface } from '../interfaces/branding.interface';
+
+const initialState: BrandingInterface = {
+    id: '',
+    name: '',
+    description: '',
+    image: '',
+    email: '',
+    phone: '',
+    address: '',
+    addressLink: '',
+    hours: '',
+};
 
 export const BrandEditForm = () => {
     const { data: branding, isLoading: isBrandLoading } = useSuspenseQuery(getBrandingQueryOptions);
@@ -30,10 +34,9 @@ export const BrandEditForm = () => {
         onSubmit,
         handleImageChange,
         handleRemoveImage,
-    } = useBrandForm(branding || null);
+    } = useBrandForm(branding || initialState);
 
     if (isBrandLoading) return <LoadingSpinner />;
-    if (!branding) return <p>No se encontró la información de la marca.</p>;
 
     return (
         <PanelCard className="w-full">
@@ -42,10 +45,9 @@ export const BrandEditForm = () => {
             </Subtitle>
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                encType="multipart/form-data"
                 className="flex w-full flex-col gap-6">
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 w-full">
-                    <div className="flex flex-col gap-2 w-full">
+                <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
+                    <div className="flex w-full flex-col gap-2">
                         <Label>Nombre</Label>
                         <Input {...register('name')} />
                         {errors.name && <span className="text-red-500">{errors.name.message}</span>}

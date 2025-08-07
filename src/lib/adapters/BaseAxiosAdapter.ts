@@ -20,8 +20,13 @@ export class BaseAxiosAdapter {
             return await fn();
         } catch (err: unknown) {
             const axiosError = err as AxiosError;
-            console.error('[AxiosAdapter] Error:', axiosError?.response?.status, axiosError?.response?.data || err);
-            Sentry.captureException(axiosError);
+
+            Sentry.captureException(axiosError, {
+                tags: {
+                    route: axiosError?.config?.url,
+                    method: axiosError?.config?.method,
+                },
+            });
 
             if (axiosError?.response?.status === 401) {
                 try {

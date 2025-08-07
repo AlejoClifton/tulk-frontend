@@ -45,7 +45,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
         <div className={`flex flex-col gap-4 ${className}`}>
             <div
                 className={`relative aspect-[1/1] ${mainImageHeight} flex-1 overflow-hidden rounded-2xl`}>
-                <Image src={images[currentImageIndex]} alt={alt} fill className="object-contain" />
+                <Image src={images[currentImageIndex]} alt={alt} fill className="object-contain" priority />
 
                 {images.length > 1 && (
                     <div className="absolute top-4 right-4 rounded-lg bg-black/50 px-3 py-1 text-sm text-white">
@@ -88,7 +88,13 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
                                 currentImageIndex === index ? 'border-orange-01' : 'border-gray-200'
                             }`}
                             onClick={() => handleImageChange(index)}>
-                            <Image src={image} alt={`${alt} - Imagen ${index + 1}`} fill className="object-contain" />
+                            <Image
+                                src={image}
+                                alt={`${alt} - Imagen ${index + 1}`}
+                                fill
+                                className="object-contain"
+                                priority
+                            />
                         </div>
                     ))}
                 </div>

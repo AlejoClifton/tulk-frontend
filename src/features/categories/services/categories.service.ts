@@ -1,7 +1,7 @@
 import type { CategoryInterface } from '@/features/categories/interfaces/category.interface';
-import { BackendAdapter } from '@/lib/adapters/backend.adapter';
+import { NextjsAdapter } from '@/lib/adapters/next-js.adapter';
 
-const backend = new BackendAdapter();
+const backend = new NextjsAdapter();
 const BASE_URL = '/categories';
 
 export const getAllCategories = async (): Promise<CategoryInterface[]> => {
@@ -13,7 +13,7 @@ export const createCategory = async (category: CategoryInterface, token: string)
 };
 
 export const updateCategory = async (category: CategoryInterface, token: string): Promise<CategoryInterface> => {
-    return backend.putWithData<CategoryInterface>(BASE_URL, category, token);
+    return backend.putWithData<CategoryInterface>(`${BASE_URL}/${category.id}`, category, token);
 };
 
 export const deleteCategory = async (id: string, token: string): Promise<void> => {

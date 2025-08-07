@@ -1,25 +1,13 @@
 import type { BrandingInterface } from '@/features/branding/interfaces/branding.interface';
-import { BackendAdapter } from '@/lib/adapters/backend.adapter';
+import { NextjsAdapter } from '@/lib/adapters/next-js.adapter';
 
-const backend = new BackendAdapter();
+const backend = new NextjsAdapter();
 const BASE_URL = '/branding';
 
 export const getBranding = async (): Promise<BrandingInterface | null> => {
-    try {
-        const brand = await backend.get<BrandingInterface>(BASE_URL);
-        return brand;
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
+    return await backend.get<BrandingInterface>(BASE_URL);
 };
 
 export const updateBranding = async (branding: BrandingInterface, token: string): Promise<BrandingInterface> => {
-    try {
-        const updated = await backend.putWithData<BrandingInterface>(BASE_URL, branding, token);
-        return updated;
-    } catch (error) {
-        console.error(error);
-        throw new Error('Error updating brand');
-    }
+    return await backend.putWithData<BrandingInterface>(BASE_URL, branding, token);
 };

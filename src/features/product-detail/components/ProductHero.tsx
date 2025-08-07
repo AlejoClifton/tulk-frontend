@@ -16,7 +16,7 @@ const ProductHero: React.FC<ProductHeroProps> = ({ product }) => {
             <div className="container mx-auto flex flex-col items-center gap-12 py-10 md:flex-row md:justify-center">
                 <div className="max-w-[32rem] rounded-2xl bg-gray-50 p-8 md:w-1/2">
                     <ImageGallery
-                        images={product.imagesUrl}
+                        images={product.imagesUrl || []}
                         alt={product.name}
                         thumbnailSize="md"
                         mainImageHeight="h-[32rem]"

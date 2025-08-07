@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const nextjsClient = axios.create({
-    baseURL: `/api`,
+    baseURL: `/api/v1`,
 });
 
 nextjsClient.interceptors.request.use((config) => {

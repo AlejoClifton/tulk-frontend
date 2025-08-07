@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Branding {
+  id          String @id @default(uuid())
+  name        String
+  description String
+  image       String
+  email       String
+  phone       String
+  address     String
+  addressLink String
+  hours       String
+}
+
+model Product {
+  id                     String   @id @default(uuid())
+  name                   String
+  description            String
+  categoryId             String   @map("category_id")
+  manualUrl              String?  @map("manual_url")
+  isActive               Boolean  @map("is_active")
+  mainImageUrl           String   @map("main_image_url")
+  imagesUrl              Json?    @map("images_url")
+  benefits               Json?
+  technicalSpecification Json?    @map("technical_specification")
+  faq                    Json?
+  createdAt              DateTime @default(now()) @map("created_at")
+  updatedAt              DateTime @updatedAt @map("updated_at")
+  category               Category @relation(fields: [categoryId], references: [id])
+}
+
+model Category {
+  id       String    @id @default(uuid())
+  name     String
+  isActive Boolean   @map("is_active")
+  products Product[]
+}

@@ -1,7 +1,7 @@
 import type { ProductInterface } from '@/features/products/interfaces/product.interface';
-import { BackendAdapter } from '@/lib/adapters/backend.adapter';
+import { NextjsAdapter } from '@/lib/adapters/next-js.adapter';
 
-const backend = new BackendAdapter();
+const backend = new NextjsAdapter();
 const BASE_URL = '/products';
 
 export const getAllProducts = async (): Promise<ProductInterface[]> => {
@@ -17,7 +17,7 @@ export const createProduct = async (product: ProductInterface, token: string): P
 };
 
 export const updateProduct = async (product: ProductInterface, token: string): Promise<ProductInterface> => {
-    return backend.putWithData<ProductInterface>(BASE_URL, product, token);
+    return backend.putWithData<ProductInterface>(`${BASE_URL}/${product.id}`, product, token);
 };
 
 export const deleteProduct = async (id: string, token: string): Promise<void> => {

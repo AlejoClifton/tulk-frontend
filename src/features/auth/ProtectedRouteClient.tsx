@@ -26,7 +26,7 @@ export function ProtectedRouteClient({ children, redirectTo = '/login' }: Protec
         return (
             <div className="flex min-h-screen items-center justify-center">
                 <div className="text-center">
-                    <LoadingSpinner className="mx-auto mb-4 h-8 w-8" />
+                    <LoadingSpinner />
                     <p className="text-gray-600">Cargando...</p>
                 </div>
             </div>

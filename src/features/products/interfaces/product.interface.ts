@@ -1,30 +1,35 @@
 import type { CategoryInterface } from '@/features/categories/interfaces/category.interface';
 
-export interface TechnicalSpecification {
+export interface TechnicalSpecificationItem {
     key: string;
     value: string;
 }
 
 export interface TechnicalSpecificationGroup {
     title: string;
-    specifications: TechnicalSpecification[];
+    specifications: TechnicalSpecificationItem[];
 }
 
-export interface Faq {
+export interface FaqItem {
     question: string;
     answer: string;
 }
 
+export interface ProductWithCategoryName extends ProductInterface {
+    category: CategoryInterface;
+}
+
 export interface ProductInterface {
-    id?: string;
+    id: string;
     name: string;
     description: string;
     categoryId: string;
+    categoryName?: string;
     mainImageUrl: string;
-    imagesUrl: string[];
+    imagesUrl?: string[];
     isActive: boolean;
     benefits?: string[];
-    technicalSpecifications?: TechnicalSpecificationGroup[];
-    faq?: Faq[];
+    technicalSpecification?: TechnicalSpecificationGroup[];
+    faq?: FaqItem[];
     category?: CategoryInterface;
 }

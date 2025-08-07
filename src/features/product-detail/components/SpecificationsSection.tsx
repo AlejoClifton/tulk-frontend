@@ -19,7 +19,7 @@ const SpecificationsSection: React.FC<SpecificationsSectionProps> = ({ product }
                 </SectionTitle>
             </div>
             <div className="container mx-auto flex flex-col gap-4">
-                {product.technicalSpecifications?.map((specification, index) => (
+                {product.technicalSpecification?.map((specification, index) => (
                     <div key={index} className="flex flex-col gap-4">
                         <SectionTitle variant="lg" color="secondary" className="rounded-lg bg-orange-04 px-4 py-2">
                             {specification.title}
