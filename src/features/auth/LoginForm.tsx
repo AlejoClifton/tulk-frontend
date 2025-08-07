@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 
 import { Text, Title, Button, Input, Label, LoadingSpinner } from '@/components';
 import { useAuth } from '@/hooks/useAuth';
+import { trackUmamiEvent } from '@/lib/analytics';
+import { ANALYTICS_EVENTS } from '@/lib/analyticsEvents';
 
 export function LoginForm() {
     const [email, setEmail] = useState('');
@@ -19,6 +21,8 @@ export function LoginForm() {
         e.preventDefault();
         setIsLoading(true);
         setError('');
+
+        trackUmamiEvent(ANALYTICS_EVENTS.SIGN_IN);
 
         try {
             const { error } = await signIn(email, password);

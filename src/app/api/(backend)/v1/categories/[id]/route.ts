@@ -7,7 +7,7 @@ interface Params {
     params: Promise<{ id: string }>;
 }
 
-export async function GET({ params }: Params) {
+export async function GET(request: NextRequest, { params }: Params) {
     const { id } = await params;
 
     try {

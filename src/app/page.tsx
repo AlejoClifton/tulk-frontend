@@ -1,13 +1,13 @@
 import BrandContainer from '@/components/BrandContainer';
 import Footer from '@/components/Footer';
-import HeaderHome from '@/features/home/components/HeaderHome';
+import Header from '@/features/home/components/Header';
 import LinesProducts from '@/features/home/components/LinesProducts';
 import { SliderHeroProduct } from '@/features/products/components/SliderHeroProduct';
 
 export default function Home() {
     return (
         <>
-            <HeaderHome />
+            <Header />
             <main className="py-16">
                 <SliderHeroProduct />
                 <div className="container mx-auto">

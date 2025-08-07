@@ -20,10 +20,11 @@ export interface ProductWithCategoryName extends ProductInterface {
 }
 
 export interface ProductInterface {
-    id: string;
+    id: string | undefined;
     name: string;
     description: string;
     categoryId: string;
+    manualUrl?: string;
     categoryName?: string;
     mainImageUrl: string;
     imagesUrl?: string[];

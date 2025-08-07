@@ -12,6 +12,8 @@ import { getAllCategoriesQueryOptions } from '@/features/categories/hooks/querie
 import { CategoryInterface } from '@/features/categories/interfaces/category.interface';
 import { getAllProductsQueryOptions } from '@/features/products/hooks/queries/getAllProducts.query-option';
 import type { ProductInterface } from '@/features/products/interfaces/product.interface';
+import { trackUmamiEvent } from '@/lib/analytics';
+import { ANALYTICS_EVENTS } from '@/lib/analyticsEvents';
 
 interface ProductTableProps {
     handleOpenModal: (product: ProductInterface) => void;
@@ -95,14 +97,28 @@ export function ProductTable({ handleOpenModal, handleDelete, isLoading }: Produ
                         variant="success"
                         size="icon"
                         className="flex h-10 w-120 items-center justify-center"
-                        onClick={() => handleOpenModal(row.original)}>
+                        onClick={() => {
+                            trackUmamiEvent(ANALYTICS_EVENTS.UPDATE_PRODUCT, {
+                                productId: row.original.id,
+                                productName: row.original.name,
+                                category: row.original.category?.name,
+                            });
+                            handleOpenModal(row.original);
+                        }}>
                         <EditIcon className="h-5 w-5" />
                     </Button>
                     <Button
                         variant={isLoading ? 'loading' : 'error'}
                         size="icon"
                         className="flex h-10 w-120 items-center justify-center"
-                        onClick={() => handleDelete(row.original)}
+                        onClick={() => {
+                            trackUmamiEvent(ANALYTICS_EVENTS.DELETE_PRODUCT, {
+                                productId: row.original.id,
+                                productName: row.original.name,
+                                category: row.original.category?.name,
+                            });
+                            handleDelete(row.original);
+                        }}
                         disabled={isLoading}>
                         {isLoading ? <LoadingSpinner size={20} /> : <TrashIcon className="h-5 w-5" />}
                     </Button>

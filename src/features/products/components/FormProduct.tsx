@@ -40,6 +40,12 @@ export const FormProduct = ({ product, onClose }: FormProductProps) => {
                 </div>
 
                 <div className="flex flex-col gap-2">
+                    <Label>URL del manual</Label>
+                    <Input {...methods.register('manualUrl')} placeholder="URL del manual" />
+                    {methods.formState.errors.manualUrl && <span className="text-sm text-red-500">Requerido</span>}
+                </div>
+
+                <div className="flex flex-col gap-2">
                     <Label>Descripción</Label>
                     <Textarea {...methods.register('description', { required: true })} placeholder="Descripción" />
                     {methods.formState.errors.description && <span className="text-sm text-red-500">Requerido</span>}

@@ -8,22 +8,27 @@ import { CustomLink, Navegation } from '@/components';
 import { getBrandingQueryOptions } from '@/features/branding/hooks/queries/getBrand.query-option';
 import SignIn from '@/features/home/components/SignIn';
 
-const HeaderHome = () => {
+const Header = () => {
     const { data: branding } = useSuspenseQuery(getBrandingQueryOptions);
 
     return (
         <div className="sticky top-0 z-50 border-b border-slate-200 bg-white shadow-sm">
             <div className="relative container mx-auto flex flex-wrap items-center justify-between gap-4 p-4 lg:gap-0">
                 <div className="flex w-full items-center justify-between gap-4 md:w-auto">
-                    <Image src={branding?.image || ''} alt={branding?.name || ''} width={200} height={49} priority />
+                    <CustomLink href="/">
+                        <Image
+                            src={branding?.image || ''}
+                            alt={branding?.name || ''}
+                            width={200}
+                            height={49}
+                            priority
+                        />
+                    </CustomLink>
                     <div className="md:hidden">
                         <SignIn />
                     </div>
                 </div>
                 <Navegation className="flex justify-center gap-4 md:absolute md:left-1/2 md:-translate-x-1/2">
-                    <CustomLink href="/" variant="primary">
-                        Inicio
-                    </CustomLink>
                     <CustomLink href="#lines-products" variant="primary">
                         Líneas de Productos
                     </CustomLink>
@@ -39,4 +44,4 @@ const HeaderHome = () => {
     );
 };
 
-export default HeaderHome;
+export default Header;

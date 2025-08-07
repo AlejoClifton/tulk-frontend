@@ -8,6 +8,8 @@ import { usePathname } from 'next/navigation';
 import { BarchartIcon, BuildingIcon, PackageIcon, TagIcon } from '@/assets/SvgContainer';
 import { Navegation } from '@/components';
 import Logout from '@/features/admin/components/Logout';
+import { trackUmamiEvent } from '@/lib/analytics';
+import { ANALYTICS_EVENTS } from '@/lib/analyticsEvents';
 
 const AsideAdmin = () => {
     const pathname = usePathname();
@@ -25,21 +27,33 @@ const AsideAdmin = () => {
     };
 
     return (
-        <aside className="hidden fixed top-0 left-0 z-40 lg:flex h-full w-full max-w-64 flex-col justify-between border-r border-slate-200 bg-white p-4">
-            <Navegation variant="secondary" className="flex flex-col gap-4 mt-15">
-                <Link href="/admin" className={className('/admin')}>
+        <aside className="fixed top-0 left-0 z-40 hidden h-full w-full max-w-64 flex-col justify-between border-r border-slate-200 bg-white p-4 lg:flex">
+            <Navegation variant="secondary" className="mt-15 flex flex-col gap-4">
+                <Link
+                    href="/admin"
+                    className={className('/admin')}
+                    onClick={() => trackUmamiEvent(ANALYTICS_EVENTS.NAVIGATE_TO_ADMIN)}>
                     <BarchartIcon className="h-6 w-6" />
                     Dashboard
                 </Link>
-                <Link href="/admin/products" className={className('/admin/products')}>
+                <Link
+                    href="/admin/products"
+                    className={className('/admin/products')}
+                    onClick={() => trackUmamiEvent(ANALYTICS_EVENTS.NAVIGATE_TO_PRODUCTS)}>
                     <PackageIcon className="h-6 w-6" />
                     Productos
                 </Link>
-                <Link href="/admin/categories" className={className('/admin/categories')}>
+                <Link
+                    href="/admin/categories"
+                    className={className('/admin/categories')}
+                    onClick={() => trackUmamiEvent(ANALYTICS_EVENTS.NAVIGATE_TO_CATEGORIES)}>
                     <TagIcon className="h-6 w-6" />
                     Categorías
                 </Link>
-                <Link href="/admin/branding" className={className('/admin/branding')}>
+                <Link
+                    href="/admin/branding"
+                    className={className('/admin/branding')}
+                    onClick={() => trackUmamiEvent(ANALYTICS_EVENTS.NAVIGATE_TO_BRANDING)}>
                     <BuildingIcon className="h-6 w-6" />
                     Marca
                 </Link>

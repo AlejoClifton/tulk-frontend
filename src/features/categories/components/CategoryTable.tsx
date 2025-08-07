@@ -11,6 +11,8 @@ import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { StatusBadge } from '@/components/ui/StatusBadge';
 import { getAllCategoriesQueryOptions } from '@/features/categories/hooks/queries/getAllCategories.query-option';
 import type { CategoryInterface } from '@/features/categories/interfaces/category.interface';
+import { trackUmamiEvent } from '@/lib/analytics';
+import { ANALYTICS_EVENTS } from '@/lib/analyticsEvents';
 
 interface CategoryTableProps {
     handleOpenModal: (category: CategoryInterface) => void;
@@ -47,14 +49,26 @@ export function CategoryTable({ handleOpenModal, handleDelete, isLoading }: Cate
                         variant="success"
                         size="icon"
                         className="flex h-10 w-120 items-center justify-center"
-                        onClick={() => handleOpenModal(row.original)}>
+                        onClick={() => {
+                            trackUmamiEvent(ANALYTICS_EVENTS.UPDATE_CATEGORY, {
+                                categoryId: row.original.id,
+                                categoryName: row.original.name
+                            });
+                            handleOpenModal(row.original);
+                        }}>
                         <EditIcon className="h-5 w-5" />
                     </Button>
                     <Button
                         variant={isLoading ? 'loading' : 'error'}
                         size="icon"
                         className="flex h-10 w-120 items-center justify-center"
-                        onClick={() => handleDelete(row.original.id)}
+                        onClick={() => {
+                            trackUmamiEvent(ANALYTICS_EVENTS.DELETE_CATEGORY, {
+                                categoryId: row.original.id,
+                                categoryName: row.original.name
+                            });
+                            handleDelete(row.original.id);
+                        }}
                         disabled={isLoading}>
                         {isLoading ? <LoadingSpinner size={20} /> : <TrashIcon className="h-5 w-5" />}
                     </Button>

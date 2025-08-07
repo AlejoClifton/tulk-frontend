@@ -14,7 +14,7 @@ const SignIn = () => {
     const router = useRouter();
 
     const handleSignIn = () => {
-        trackUmamiEvent(ANALYTICS_EVENTS.SIGN_IN);
+        trackUmamiEvent(ANALYTICS_EVENTS.LOGIN_BUTTON_HEADER);
 
         if (!user) {
             router.push('/login');

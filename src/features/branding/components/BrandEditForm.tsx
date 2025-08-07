@@ -4,6 +4,9 @@ import React from 'react';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 
+import { trackUmamiEvent } from '@/lib/analytics';
+import { ANALYTICS_EVENTS } from '@/lib/analyticsEvents';
+
 import { Input, Button, PanelCard, Subtitle, Label, Textarea, ImageFileInput, ImagePreviewList } from '@/components';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { getBrandingQueryOptions } from '@/features/branding/hooks/queries/getBrand.query-option';
@@ -44,7 +47,13 @@ export const BrandEditForm = () => {
                 Información de la Marca
             </Subtitle>
             <form
-                onSubmit={handleSubmit(onSubmit)}
+                onSubmit={handleSubmit((data) => {
+                    trackUmamiEvent(ANALYTICS_EVENTS.UPDATE_BRAND, {
+                        brandName: data.name,
+                        hasNewImage: !!imageFile
+                    });
+                    onSubmit(data);
+                })}
                 className="flex w-full flex-col gap-6">
                 <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
                     <div className="flex w-full flex-col gap-2">

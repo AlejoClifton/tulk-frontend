@@ -3,12 +3,16 @@
 import { PersonIcon } from '@/assets/SvgContainer';
 import { Button } from '@/components';
 import { useAuth } from '@/hooks/useAuth';
+import { trackUmamiEvent } from '@/lib/analytics';
+import { ANALYTICS_EVENTS } from '@/lib/analyticsEvents';
 
 export default function Logout() {
     const { signOut } = useAuth();
 
     const handleLogout = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        trackUmamiEvent(ANALYTICS_EVENTS.LOGOUT);
 
         await signOut();
     };

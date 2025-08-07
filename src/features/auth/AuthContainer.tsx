@@ -1,13 +1,16 @@
 'use client';
 
+import Header from '@/features/home/components/Header';
+
 import { LoginForm } from './LoginForm';
 
 export function AuthContainer() {
     return (
-        <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 p-4">
-            <div className="w-full max-w-md">
+        <>
+            <Header />
+            <div className="absolute inset-0 flex items-center justify-center">
                 <LoginForm />
             </div>
-        </div>
+        </>
     );
 }

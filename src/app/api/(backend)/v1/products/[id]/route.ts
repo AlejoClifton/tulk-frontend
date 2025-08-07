@@ -8,7 +8,7 @@ interface Params {
     params: Promise<{ id: string }>;
 }
 
-export async function GET({ params }: Params) {
+export async function GET(request: NextRequest, { params }: Params) {
     const { id } = await params;
 
     try {
@@ -37,11 +37,32 @@ export async function PUT(request: NextRequest, { params }: Params) {
     if (auth.response) return auth.response;
 
     try {
-        const { name, description, categoryId, mainImageUrl, imagesUrl, isActive, benefits, technicalSpecifi, faq } =
-            await request.json();
+        const {
+            name,
+            description,
+            categoryId,
+            mainImageUrl,
+            imagesUrl,
+            isActive,
+            benefits,
+            technicalSpecification,
+            faq,
+            manualUrl,
+        } = await request.json();
         const product = await prisma.product.update({
             where: { id },
-            data: { name, description, categoryId, mainImageUrl, imagesUrl, isActive, benefits, technicalSpecifi, faq },
+            data: {
+                name,
+                description,
+                categoryId,
+                mainImageUrl,
+                imagesUrl,
+                isActive,
+                benefits,
+                technicalSpecification,
+                faq,
+                manualUrl,
+            },
         });
         return NextResponse.json(product);
     } catch (error) {

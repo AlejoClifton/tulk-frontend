@@ -4,7 +4,11 @@ import axios from 'axios';
 import { useFieldArray, useForm } from 'react-hook-form';
 
 import { useProductMutations } from '@/features/products/hooks/queries/useProductMutations';
-import { Faq, ProductInterface, TechnicalSpecificationGroup } from '@/features/products/interfaces/product.interface';
+import {
+    FaqItem,
+    ProductInterface,
+    TechnicalSpecificationGroup,
+} from '@/features/products/interfaces/product.interface';
 import { useImagesController } from '@/hooks/useImagesController';
 import { IOptions } from '@/interfaces/selectedOption.interface';
 
@@ -16,7 +20,7 @@ export type ProductFormData = Omit<ProductInterface, 'benefits' | 'technicalSpec
     imagesToDelete?: string[];
     benefits?: Benefit[];
     technicalSpecifications?: TechnicalSpecificationGroup[];
-    faq?: Faq[];
+    faq?: FaqItem[];
 };
 
 const defaultValues: Partial<ProductFormData> = {
@@ -27,6 +31,7 @@ const defaultValues: Partial<ProductFormData> = {
     imagesUrl: [],
     isActive: true,
     imagesToDelete: [],
+    manualUrl: '',
     mainImageFile: null,
     imagesFiles: [],
     benefits: [],
@@ -40,7 +45,7 @@ export function useProductForm(product: ProductInterface, onClose: () => void) {
             ...defaultValues,
             ...product,
             benefits: product.benefits ? product.benefits.map((b) => ({ value: b })) : [],
-            technicalSpecifications: product.technicalSpecifications || [],
+            technicalSpecification: product.technicalSpecification || [],
             faq: product.faq || [],
         },
     });
@@ -151,7 +156,7 @@ export function useProductForm(product: ProductInterface, onClose: () => void) {
             const benefits = data.benefits?.map((b) => b.value);
 
             const productData: ProductInterface = {
-                id: product.id ? product.id : undefined,
+                id: product.id || undefined,
                 name: data.name,
                 description: data.description,
                 categoryId: data.categoryId,
@@ -159,11 +164,10 @@ export function useProductForm(product: ProductInterface, onClose: () => void) {
                 mainImageUrl,
                 imagesUrl,
                 benefits,
-                technicalSpecifications: data.technicalSpecifications,
+                technicalSpecification: data.technicalSpecification,
+                manualUrl: data.manualUrl,
                 faq: data.faq,
             };
-
-            console.log('productData', productData);
 
             if (product.id && product.id !== '') {
                 await updateProduct.mutateAsync(productData);

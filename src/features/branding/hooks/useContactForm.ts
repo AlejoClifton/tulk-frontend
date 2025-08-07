@@ -4,6 +4,9 @@ import axios from 'axios';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
+import { trackUmamiEvent } from '@/lib/analytics';
+import { ANALYTICS_EVENTS } from '@/lib/analyticsEvents';
+
 const schema = z.object({
     name: z.string().min(1, 'El nombre es obligatorio'),
     email: z.string().email('Email inválido'),
@@ -21,6 +24,13 @@ export const useContactForm = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        trackUmamiEvent(ANALYTICS_EVENTS.CONTACT_FORM_SUBMIT, {
+            name: form.name,
+            email: form.email,
+            phone: form.phone,
+            message: form.message,
+        });
 
         try {
             schema.parse(form);
