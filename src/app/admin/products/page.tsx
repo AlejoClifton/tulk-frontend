@@ -31,7 +31,7 @@ const Products = () => {
 
     const handleDelete = (productToDelete: ProductInterface) => {
         const imageUrlsToDelete = [
-            ...productToDelete.imagesUrl,
+            ...(productToDelete.imagesUrl || []),
             ...(productToDelete.mainImageUrl ? [productToDelete.mainImageUrl] : []),
         ];
 
@@ -44,7 +44,7 @@ const Products = () => {
     };
 
     return (
-        <main className="lg:ml-64 flex flex-col bg-slate-100 p-4 lg:p-8">
+        <main className="flex flex-col bg-slate-100 p-4 lg:ml-64 lg:p-8">
             <div className="flex flex-col gap-4">
                 <div className="flex items-center justify-between gap-4">
                     <Subtitle variant="lg">Productos</Subtitle>

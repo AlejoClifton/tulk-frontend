@@ -1,5 +1,6 @@
 import BrandContainer from '@/components/BrandContainer';
 import Footer from '@/components/Footer';
+import PointsSales from '@/components/layout/PointsSales';
 import Header from '@/features/home/components/Header';
 import LinesProducts from '@/features/home/components/LinesProducts';
 import { SliderHeroProduct } from '@/features/products/components/SliderHeroProduct';
@@ -14,6 +15,7 @@ export default function Home() {
                     <LinesProducts />
                 </div>
             </main>
+            <PointsSales />
             <BrandContainer />
             <Footer />
         </>

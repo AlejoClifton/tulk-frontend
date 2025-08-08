@@ -33,8 +33,18 @@ export async function POST(request: NextRequest) {
     if (auth.response) return auth.response;
 
     try {
-        const { name, description, categoryId, mainImageUrl, imagesUrl, isActive, benefits, technicalSpecifi, faq } =
-            await request.json();
+        const {
+            name,
+            description,
+            categoryId,
+            mainImageUrl,
+            imagesUrl,
+            isActive,
+            manualUrl,
+            benefits,
+            technicalSpecification,
+            faq,
+        } = await request.json();
 
         const product = await prisma.product.create({
             data: {
@@ -43,9 +53,10 @@ export async function POST(request: NextRequest) {
                 categoryId,
                 mainImageUrl,
                 imagesUrl,
+                manualUrl,
                 isActive,
                 benefits,
-                technicalSpecifi,
+                technicalSpecification,
                 faq,
             },
         });

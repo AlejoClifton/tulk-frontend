@@ -57,6 +57,13 @@ const AsideAdmin = () => {
                     <BuildingIcon className="h-6 w-6" />
                     Marca
                 </Link>
+                <Link
+                    href="/admin/stores"
+                    className={className('/admin/stores')}
+                    onClick={() => trackUmamiEvent(ANALYTICS_EVENTS.NAVIGATE_TO_STORES)}>
+                    <BuildingIcon className="h-6 w-6" />
+                    Sucursales
+                </Link>
             </Navegation>
             <Logout />
         </aside>

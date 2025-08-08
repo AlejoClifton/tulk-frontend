@@ -30,9 +30,15 @@ export const ANALYTICS_EVENTS = {
     // Brand events
     UPDATE_BRAND: `${prefix}_update_brand`,
 
+    // Store events
+    CREATE_STORE: `${prefix}_create_store`,
+    UPDATE_STORE: `${prefix}_update_store`,
+    DELETE_STORE: `${prefix}_delete_store`,
+
     // Navigation events
     NAVIGATE_TO_ADMIN: `${prefix}_navigate_to_admin`,
     NAVIGATE_TO_PRODUCTS: `${prefix}_navigate_to_products`,
     NAVIGATE_TO_CATEGORIES: `${prefix}_navigate_to_categories`,
     NAVIGATE_TO_BRANDING: `${prefix}_navigate_to_branding`,
+    NAVIGATE_TO_STORES: `${prefix}_navigate_to_stores`,
 };

@@ -4,6 +4,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 
 import BrandContainer from '@/components/BrandContainer';
 import Footer from '@/components/Footer';
+import PointsSales from '@/components/layout/PointsSales';
 import Header from '@/features/home/components/Header';
 import BenefitsSection from '@/features/product-detail/components/BenefitsSection';
 import FaqsSection from '@/features/product-detail/components/FaqsSection';
@@ -39,6 +40,7 @@ const ProductDetail = ({ id }: { id: string }) => {
                 )}
                 {product.faq && product.faq.length > 0 && <FaqsSection product={product} />}
             </main>
+            <PointsSales />
             <BrandContainer />
             <Footer />
         </Fragment>
