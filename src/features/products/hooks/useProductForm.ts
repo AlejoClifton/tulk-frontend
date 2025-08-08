@@ -19,7 +19,7 @@ export type ProductFormData = Omit<ProductInterface, 'benefits' | 'technicalSpec
     imagesFiles?: File[];
     imagesToDelete?: string[];
     benefits?: Benefit[];
-    technicalSpecifications?: TechnicalSpecificationGroup[];
+    technicalSpecification?: TechnicalSpecificationGroup[];
     faq?: FaqItem[];
 };
 
@@ -35,7 +35,7 @@ const defaultValues: Partial<ProductFormData> = {
     mainImageFile: null,
     imagesFiles: [],
     benefits: [],
-    technicalSpecifications: [],
+    technicalSpecification: [],
     faq: [],
 };
 
@@ -64,7 +64,7 @@ export function useProductForm(product: ProductInterface, onClose: () => void) {
         remove: removeSpec,
     } = useFieldArray({
         control: methods.control,
-        name: 'technicalSpecifications',
+        name: 'technicalSpecification',
     });
     const {
         fields: faqFields,

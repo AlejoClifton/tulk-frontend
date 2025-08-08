@@ -3,7 +3,7 @@
 import React from 'react';
 
 import { SectionTitle, Subtitle, Text } from '@/components';
-import { Faq, ProductInterface } from '@/features/products/interfaces/product.interface';
+import { FaqItem, ProductInterface } from '@/features/products/interfaces/product.interface';
 
 interface FaqsSectionProps {
     product: ProductInterface;
@@ -21,10 +21,10 @@ const FaqsSection: React.FC<FaqsSectionProps> = ({ product }) => {
                 </SectionTitle>
             </div>
             <div className="container mx-auto flex flex-col gap-4">
-                {product.faq?.map((faq: Faq, index: number) => (
+                {product.faq?.map((faq: FaqItem, index: number) => (
                     <div
                         key={index}
-                        className="mx-auto flex max-w-4xl flex-col gap-4 rounded-lg border border-slate-200 bg-slate-50 p-6">
+                        className="mx-auto flex w-full max-w-4xl flex-col gap-4 rounded-lg border border-slate-200 bg-slate-50 p-6">
                         <Text variant="secondary" weight="semibold" size="lg">
                             {faq.question}
                         </Text>

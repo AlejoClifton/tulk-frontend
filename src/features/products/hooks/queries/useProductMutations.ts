@@ -17,10 +17,11 @@ export const useProductMutations = (onSuccess?: () => void) => {
 
     const deleteProduct = useBaseMutation({
         mutationFn: async ({ id, imageUrls }: { id: string; imageUrls: string[] }) => {
-            await deleteProductService(id, token);
             if (imageUrls && imageUrls.length > 0) {
                 await deleteImages(imageUrls);
             }
+
+            await deleteProductService(id, token);
         },
         queryKey: ['products'],
         successMessage: 'Producto eliminado correctamente',

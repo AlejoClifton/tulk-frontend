@@ -49,6 +49,7 @@ export async function PUT(request: NextRequest, { params }: Params) {
             faq,
             manualUrl,
         } = await request.json();
+
         const product = await prisma.product.update({
             where: { id },
             data: {

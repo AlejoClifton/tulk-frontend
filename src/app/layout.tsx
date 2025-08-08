@@ -7,13 +7,12 @@ import { poppins } from '@/styles/Fonts';
 
 import '@styles/tailwind.css';
 import '@styles/globals.css';
-
 export const metadata: Metadata = {
     title: 'Tulk',
     description: 'Soluciones Náuticas de Alta Tecnología',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;

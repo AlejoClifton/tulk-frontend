@@ -20,14 +20,14 @@ export const SpecificationGroupFields = ({ groupIndex, removeGroup }: Specificat
         remove,
     } = useFieldArray({
         control,
-        name: `technicalSpecifications.${groupIndex}.specifications`,
+        name: `technicalSpecification.${groupIndex}.specifications`,
     });
 
     return (
         <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2">
                 <Input
-                    {...register(`technicalSpecifications.${groupIndex}.title`)}
+                    {...register(`technicalSpecification.${groupIndex}.title`)}
                     placeholder="Título del Grupo (ej. Potencia y Rendimiento)"
                     className="flex-grow font-semibold"
                 />
@@ -38,12 +38,12 @@ export const SpecificationGroupFields = ({ groupIndex, removeGroup }: Specificat
             {specFields.map((field, index) => (
                 <div key={field.id} className="flex items-center gap-2 pl-4">
                     <Input
-                        {...register(`technicalSpecifications.${groupIndex}.specifications.${index}.key`)}
+                        {...register(`technicalSpecification.${groupIndex}.specifications.${index}.key`)}
                         placeholder="Clave (ej. Potencia térmica)"
                         className="w-1/3"
                     />
                     <Input
-                        {...register(`technicalSpecifications.${groupIndex}.specifications.${index}.value`)}
+                        {...register(`technicalSpecification.${groupIndex}.specifications.${index}.value`)}
                         placeholder="Valor (ej. 5000 W)"
                         className="flex-grow"
                     />

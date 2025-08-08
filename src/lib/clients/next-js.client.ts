@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const API_URL_CLIENT = process.env.NEXT_PUBLIC_API_URL_CLIENT;
+
 const nextjsClient = axios.create({
-    baseURL: `/api/v1`,
+    baseURL: `${API_URL_CLIENT}/api/`,
 });
 
 nextjsClient.interceptors.request.use((config) => {

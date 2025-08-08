@@ -19,8 +19,6 @@ export async function POST(request: NextRequest) {
     if (auth.response) return auth.response;
 
     try {
-        return NextResponse.json({ message: 'Hello, world!' });
-
         const { name, isActive } = await request.json();
         const category = await prisma.category.create({
             data: { name, isActive },

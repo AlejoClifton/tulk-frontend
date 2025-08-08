@@ -1,7 +1,7 @@
 import type { ProductInterface } from '@/features/products/interfaces/product.interface';
-import { NextjsAdapter } from '@/lib/adapters/next-js.adapter';
+import { BackendAdapter } from '@/lib/adapters/backend.adapter';
 
-const backend = new NextjsAdapter();
+const backend = new BackendAdapter();
 const BASE_URL = '/products';
 
 export const getAllProducts = async (): Promise<ProductInterface[]> => {

@@ -3,6 +3,8 @@
 import axios from 'axios';
 import { z } from 'zod';
 
+const API_URL_CLIENT = process.env.NEXT_PUBLIC_API_URL_CLIENT;
+
 const schema = z.object({
     name: z.string().min(1),
     email: z.string().email(),
@@ -19,7 +21,7 @@ export const sendContactEmail = async (formData: FormData) => {
     const validatedData = schema.parse({ name, email, phone, message });
 
     try {
-        const response = await axios.post('http://localhost:3000/api/contact', validatedData);
+        const response = await axios.post(`${API_URL_CLIENT}/api/contact`, validatedData);
 
         return response;
     } catch (error) {

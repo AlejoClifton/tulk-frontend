@@ -52,7 +52,7 @@ export function CategoryTable({ handleOpenModal, handleDelete, isLoading }: Cate
                         onClick={() => {
                             trackUmamiEvent(ANALYTICS_EVENTS.UPDATE_CATEGORY, {
                                 categoryId: row.original.id,
-                                categoryName: row.original.name
+                                categoryName: row.original.name,
                             });
                             handleOpenModal(row.original);
                         }}>
@@ -65,7 +65,7 @@ export function CategoryTable({ handleOpenModal, handleDelete, isLoading }: Cate
                         onClick={() => {
                             trackUmamiEvent(ANALYTICS_EVENTS.DELETE_CATEGORY, {
                                 categoryId: row.original.id,
-                                categoryName: row.original.name
+                                categoryName: row.original.name,
                             });
                             handleDelete(row.original.id);
                         }}
@@ -82,10 +82,6 @@ export function CategoryTable({ handleOpenModal, handleDelete, isLoading }: Cate
         columns,
         getCoreRowModel: getCoreRowModel(),
     });
-
-    if (isLoading) {
-        return <LoadingSpinner size={20} />;
-    }
 
     if (!categories || categories.length === 0) {
         return <div className="flex items-center justify-center">No hay categorías</div>;

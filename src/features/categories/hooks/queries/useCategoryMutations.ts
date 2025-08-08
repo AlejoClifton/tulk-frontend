@@ -1,4 +1,4 @@
-import type { CategoryInterface } from '@/features/categories/interfaces/category.interface';
+import type { CategoryInterface, CreateCategoryInterface } from '@/features/categories/interfaces/category.interface';
 import { createCategory, updateCategory, deleteCategory } from '@/features/categories/services/categories.service';
 import { useAuth } from '@/hooks/useAuth';
 import { useBaseMutation } from '@/hooks/useBaseMutation';
@@ -8,7 +8,7 @@ export const useCategoryMutations = () => {
     const token = session?.access_token || '';
 
     const createCategoryMutation = useBaseMutation({
-        mutationFn: (category: CategoryInterface) => createCategory(category, token),
+        mutationFn: (category: CreateCategoryInterface) => createCategory(category, token),
         queryKey: ['categories'],
         successMessage: 'Categoría creada con éxito',
         errorMessage: 'Error al crear la categoría',

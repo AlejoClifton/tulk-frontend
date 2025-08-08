@@ -92,7 +92,7 @@ export function ProductTable({ handleOpenModal, handleDelete, isLoading }: Produ
         {
             header: 'Acciones',
             cell: ({ row }) => (
-                <div className="flex max-w-30 items-center justify-center gap-2 truncate text-center">
+                <div className="flex max-w-40 items-center justify-center gap-2 truncate text-center">
                     <Button
                         variant="success"
                         size="icon"
@@ -132,10 +132,6 @@ export function ProductTable({ handleOpenModal, handleDelete, isLoading }: Produ
         columns,
         getCoreRowModel: getCoreRowModel(),
     });
-
-    if (isLoading) {
-        return <LoadingSpinner size={20} />;
-    }
 
     if (products.length === 0) {
         return <div className="flex items-center justify-center">No hay productos</div>;

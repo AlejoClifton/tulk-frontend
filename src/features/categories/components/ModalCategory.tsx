@@ -3,8 +3,7 @@
 import { Modal } from '@/components';
 import { FormCategory } from '@/features/categories/components/FormCategory';
 import { useCategoryMutations } from '@/features/categories/hooks/queries/useCategoryMutations';
-
-import { CategoryInterface } from '@/modules/categories/domain';
+import { CategoryInterface, CreateCategoryInterface } from '@/features/categories/interfaces/category.interface';
 
 interface ModalCategoryProps {
     category: CategoryInterface;
@@ -14,7 +13,7 @@ interface ModalCategoryProps {
 export const ModalCategory = ({ category, onClose }: ModalCategoryProps) => {
     const { createCategory, updateCategory, isLoading } = useCategoryMutations();
 
-    const handleSubmit = async (values: Partial<CategoryInterface>) => {
+    const handleSubmit = async (values: Partial<CreateCategoryInterface>) => {
         const promise = category.id
             ? updateCategory.mutateAsync({
                   ...values,

@@ -4,7 +4,7 @@ import React from 'react';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 
-import { CustomLink, Navegation } from '@/components';
+import { CustomLink } from '@/components';
 import { getBrandingQueryOptions } from '@/features/branding/hooks/queries/getBrand.query-option';
 import SignIn from '@/features/home/components/SignIn';
 
@@ -17,8 +17,8 @@ const Header = () => {
                 <div className="flex w-full items-center justify-between gap-4 md:w-auto">
                     <CustomLink href="/">
                         <Image
-                            src={branding?.image || ''}
-                            alt={branding?.name || ''}
+                            src={branding?.image || '/tulk.png'}
+                            alt={branding?.name || 'Tulk'}
                             width={200}
                             height={49}
                             priority
@@ -28,14 +28,6 @@ const Header = () => {
                         <SignIn />
                     </div>
                 </div>
-                <Navegation className="flex justify-center gap-4 md:absolute md:left-1/2 md:-translate-x-1/2">
-                    <CustomLink href="#lines-products" variant="primary">
-                        Líneas de Productos
-                    </CustomLink>
-                    <CustomLink href="#contact" variant="primary">
-                        Contacto
-                    </CustomLink>
-                </Navegation>
                 <div className="hidden md:block">
                     <SignIn />
                 </div>

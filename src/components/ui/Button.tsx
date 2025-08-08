@@ -12,7 +12,7 @@ export const buttonVariants = cva('rounded-2xl font-bold transition-all duration
             outline: 'cursor-pointer border border-tertiary text-tertiary hover:bg-tertiary-hover hover:text-secondary',
             success: 'cursor-pointer bg-success text-white hover:bg-success-hover',
             error: 'cursor-pointer bg-error text-white hover:bg-error-hover',
-            loading: 'flex items-center gap-2 px-4 py-2 bg-gray-400 cursor-not-allowed',
+            loading: 'flex items-center gap-2 bg-gray-400 cursor-not-allowed',
             blue: 'cursor-pointer bg-blue-600 text-white hover:bg-blue-600/80',
             gray: 'cursor-pointer bg-gray-500 text-white hover:bg-gray-500/80',
         },

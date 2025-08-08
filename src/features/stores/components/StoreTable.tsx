@@ -18,6 +18,7 @@ import { useStoreMutations } from '@/features/stores/hooks/queries/useStoreMutat
 import type { StoreInterface } from '@/features/stores/interfaces/store.interface';
 import { trackUmamiEvent } from '@/lib/analytics';
 import { ANALYTICS_EVENTS } from '@/lib/analyticsEvents';
+import { LoadingSpinner } from '@/components';
 
 interface Props {
     onEdit: (store: StoreInterface) => void;
@@ -25,7 +26,7 @@ interface Props {
 
 export function StoreTable({ onEdit }: Props) {
     const { data: stores = [] } = useQuery(getAllStoresQueryOptions);
-    const { deleteStoreMutation } = useStoreMutations();
+    const { deleteStoreMutation, isLoading } = useStoreMutations();
 
     const handleDelete = async (id: string) => {
         await deleteStoreMutation.mutateAsync(id);
@@ -63,16 +64,17 @@ export function StoreTable({ onEdit }: Props) {
             header: 'Acciones',
             accessorKey: 'actions',
             cell: ({ row }) => (
-                <div className="flex gap-2">
+                <div className="flex max-w-40 items-center justify-center gap-2 truncate text-center">
                     <Button variant="success" size="md" onClick={() => onEdit(row.original)}>
                         <EditIcon className="h-4 w-4" />
                     </Button>
                     <Button
-                        variant="error"
+                        variant={isLoading ? 'loading' : 'error'}
                         size="md"
                         onClick={() => handleDelete(row.original.id)}
-                        className="flex items-center gap-2">
-                        <TrashIcon className="h-4 w-4" />
+                        className="flex items-center gap-2"
+                        disabled={isLoading}>
+                        {isLoading ? <LoadingSpinner size={20} /> : <TrashIcon className="h-4 w-4" />}
                     </Button>
                 </div>
             ),

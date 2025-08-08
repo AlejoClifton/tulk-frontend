@@ -26,7 +26,7 @@ const ProductHero: React.FC<ProductHeroProps> = ({ product }) => {
                 const fileId = product.manualUrl.match(/[-\w]{25,}/);
                 if (fileId) {
                     const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId[0]}`;
-                    window.open(downloadUrl, '_blank');
+                    window.open(downloadUrl, '_self');
                     return;
                 }
             }

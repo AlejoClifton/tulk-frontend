@@ -34,30 +34,30 @@ export async function POST(request: NextRequest) {
 
     try {
         const {
-            name,
-            description,
+            benefits,
             categoryId,
-            mainImageUrl,
+            description,
+            faq,
             imagesUrl,
             isActive,
+            mainImageUrl,
             manualUrl,
-            benefits,
+            name,
             technicalSpecification,
-            faq,
         } = await request.json();
 
         const product = await prisma.product.create({
             data: {
-                name,
-                description,
-                categoryId,
-                mainImageUrl,
-                imagesUrl,
-                manualUrl,
-                isActive,
                 benefits,
-                technicalSpecification,
+                categoryId,
+                description,
                 faq,
+                imagesUrl,
+                isActive,
+                mainImageUrl,
+                manualUrl,
+                name,
+                technicalSpecification,
             },
         });
 

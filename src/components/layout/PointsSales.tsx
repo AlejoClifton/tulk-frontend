@@ -25,8 +25,15 @@ export default function PointsSales() {
               ]
             : [-34.6037, -58.3816];
 
-    const handleStoreClick = (storeId: string) => {
-        setSelectedStore(storeId);
+    const handleStoreClick = (storeId: string, lat?: number, lng?: number) => {
+        if (selectedStore === storeId) {
+            setSelectedStore(null);
+            setTimeout(() => {
+                setSelectedStore(storeId);
+            }, 0);
+        } else {
+            setSelectedStore(storeId);
+        }
     };
     return (
         <div className="container mx-auto flex flex-col gap-4 py-16">
@@ -41,7 +48,7 @@ export default function PointsSales() {
                     {stores.map((store) => (
                         <div
                             key={store.id}
-                            onClick={() => handleStoreClick(store.id)}
+                            onClick={() => handleStoreClick(store.id, store.latitude, store.longitude)}
                             className={`mb-2 cursor-pointer rounded-lg p-4 transition-colors ${
                                 selectedStore === store.id ? 'bg-blue-600' : 'bg-gray-700 hover:bg-gray-600'
                             }`}>

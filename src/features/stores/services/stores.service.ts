@@ -1,7 +1,7 @@
 import type { CreateStoreDTO, StoreInterface, UpdateStoreDTO } from '@/features/stores/interfaces/store.interface';
-import { NextjsAdapter } from '@/lib/adapters/next-js.adapter';
+import { BackendAdapter } from '@/lib/adapters/backend.adapter';
 
-const backend = new NextjsAdapter();
+const backend = new BackendAdapter();
 const BASE_URL = '/stores';
 
 export const getStores = async (): Promise<StoreInterface[]> => {

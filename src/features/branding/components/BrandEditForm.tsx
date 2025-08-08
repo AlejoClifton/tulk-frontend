@@ -4,14 +4,15 @@ import React from 'react';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { trackUmamiEvent } from '@/lib/analytics';
-import { ANALYTICS_EVENTS } from '@/lib/analyticsEvents';
 
 import { Input, Button, PanelCard, Subtitle, Label, Textarea, ImageFileInput, ImagePreviewList } from '@/components';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { getBrandingQueryOptions } from '@/features/branding/hooks/queries/getBrand.query-option';
 import { useBrandForm } from '@/features/branding/hooks/useBrandForm';
-import { BrandingInterface } from '../interfaces/branding.interface';
+import { BrandingInterface } from '@/features/branding/interfaces/branding.interface';
+import { trackUmamiEvent } from '@/lib/analytics';
+import { ANALYTICS_EVENTS } from '@/lib/analyticsEvents';
+
 
 const initialState: BrandingInterface = {
     id: '',
@@ -26,7 +27,7 @@ const initialState: BrandingInterface = {
 };
 
 export const BrandEditForm = () => {
-    const { data: branding, isLoading: isBrandLoading } = useSuspenseQuery(getBrandingQueryOptions);
+    const { data: branding } = useSuspenseQuery(getBrandingQueryOptions);
     const {
         register,
         handleSubmit,
@@ -38,8 +39,6 @@ export const BrandEditForm = () => {
         handleImageChange,
         handleRemoveImage,
     } = useBrandForm(branding || initialState);
-
-    if (isBrandLoading) return <LoadingSpinner />;
 
     return (
         <PanelCard className="w-full">

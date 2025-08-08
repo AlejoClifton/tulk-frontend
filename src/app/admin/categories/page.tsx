@@ -35,7 +35,7 @@ const Categories = () => {
     };
 
     return (
-        <main className="lg:ml-64 flex h-full flex-col gap-8 bg-slate-100 p-4 lg:p-8">
+        <main className="flex h-full flex-col gap-8 bg-slate-100 p-4 lg:ml-64 lg:p-8">
             <div className="flex flex-col gap-4">
                 <div className="flex items-center justify-between gap-4">
                     <Subtitle variant="lg">Categorías</Subtitle>
@@ -48,15 +48,9 @@ const Categories = () => {
                         Agregar
                     </Button>
                 </div>
-                <CategoryTable
-                    handleOpenModal={handleOpenModal}
-                    handleDelete={handleDelete}
-                    isLoading={isLoading}
-                />
+                <CategoryTable handleOpenModal={handleOpenModal} handleDelete={handleDelete} isLoading={isLoading} />
             </div>
-            {isOpenModal && category && (
-                <ModalCategory category={category} onClose={handleCloseModal} />
-            )}
+            {isOpenModal && category && <ModalCategory category={category} onClose={handleCloseModal} />}
         </main>
     );
 };

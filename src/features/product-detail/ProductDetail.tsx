@@ -4,8 +4,8 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 
 import BrandContainer from '@/components/BrandContainer';
 import Footer from '@/components/Footer';
+import Header from '@/components/layout/Header';
 import PointsSales from '@/components/layout/PointsSales';
-import Header from '@/features/home/components/Header';
 import BenefitsSection from '@/features/product-detail/components/BenefitsSection';
 import FaqsSection from '@/features/product-detail/components/FaqsSection';
 import ProductHero from '@/features/product-detail/components/ProductHero';

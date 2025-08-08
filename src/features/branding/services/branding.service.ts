@@ -1,7 +1,7 @@
 import type { BrandingInterface } from '@/features/branding/interfaces/branding.interface';
-import { NextjsAdapter } from '@/lib/adapters/next-js.adapter';
+import { BackendAdapter } from '@/lib/adapters/backend.adapter';
 
-const backend = new NextjsAdapter();
+const backend = new BackendAdapter();
 const BASE_URL = '/branding';
 
 export const getBranding = async (): Promise<BrandingInterface | null> => {

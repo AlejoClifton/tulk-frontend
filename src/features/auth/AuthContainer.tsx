@@ -1,6 +1,6 @@
 'use client';
 
-import Header from '@/features/home/components/Header';
+import Header from '@/components/layout/Header';
 
 import { LoginForm } from './LoginForm';
 

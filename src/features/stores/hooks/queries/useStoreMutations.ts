@@ -41,5 +41,6 @@ export const useStoreMutations = (onSuccess?: () => void) => {
         createStoreMutation,
         updateStoreMutation,
         deleteStoreMutation,
+        isLoading: createStoreMutation.isPending || updateStoreMutation.isPending || deleteStoreMutation.isPending,
     };
 };
