@@ -5,6 +5,7 @@ import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack
 import { toast } from 'sonner';
 
 import { EditIcon, TrashIcon } from '@/assets/SvgContainer';
+import { LoadingSpinner } from '@/components';
 import { Table } from '@/components/table/Table';
 import { TableBody } from '@/components/table/TableBody';
 import { TableCell } from '@/components/table/TableCell';
@@ -18,7 +19,6 @@ import { useStoreMutations } from '@/features/stores/hooks/queries/useStoreMutat
 import type { StoreInterface } from '@/features/stores/interfaces/store.interface';
 import { trackUmamiEvent } from '@/lib/analytics';
 import { ANALYTICS_EVENTS } from '@/lib/analyticsEvents';
-import { LoadingSpinner } from '@/components';
 
 interface Props {
     onEdit: (store: StoreInterface) => void;

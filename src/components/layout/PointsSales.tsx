@@ -25,7 +25,7 @@ export default function PointsSales() {
               ]
             : [-34.6037, -58.3816];
 
-    const handleStoreClick = (storeId: string, lat?: number, lng?: number) => {
+    const handleStoreClick = (storeId: string) => {
         if (selectedStore === storeId) {
             setSelectedStore(null);
             setTimeout(() => {
@@ -51,7 +51,7 @@ export default function PointsSales() {
                     {stores.map((store) => (
                         <div
                             key={store.id}
-                            onClick={() => handleStoreClick(store.id, store.latitude, store.longitude)}
+                            onClick={() => handleStoreClick(store.id)}
                             className={`mb-2 cursor-pointer rounded-lg p-4 transition-colors ${
                                 selectedStore === store.id ? 'bg-blue-600' : 'bg-gray-700 hover:bg-gray-600'
                             }`}>

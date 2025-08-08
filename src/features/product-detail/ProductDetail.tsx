@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 
+import { Button, Text } from '@/components';
 import BrandContainer from '@/components/BrandContainer';
 import Footer from '@/components/Footer';
 import Header from '@/components/layout/Header';
@@ -13,7 +14,6 @@ import SpecificationsSection from '@/features/product-detail/components/Specific
 import { getProductQueryOptions } from '@/features/products/hooks/queries/getProduct.query-option';
 import { trackUmamiEvent } from '@/lib/analytics';
 import { ANALYTICS_EVENTS } from '@/lib/analyticsEvents';
-import { Button, Subtitle, Text } from '@/components';
 
 const ProductDetail = ({ id }: { id: string }) => {
     const { data: product } = useSuspenseQuery(getProductQueryOptions(id));

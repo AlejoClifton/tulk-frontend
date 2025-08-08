@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 import { Toaster } from 'sonner';
 
+import { brandingInitialData } from '@/features/branding/interfaces/branding';
 import Providers from '@/providers/react-query-provider';
 import { poppins } from '@/styles/Fonts';
-import { brandingInitialData } from '@/features/branding/interfaces/branding';
 
 import '@styles/tailwind.css';
 import '@styles/globals.css';

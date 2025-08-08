@@ -6,7 +6,6 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 
 
 import { Input, Button, PanelCard, Subtitle, Label, Textarea, ImageFileInput, ImagePreviewList } from '@/components';
-import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
 import { getBrandingQueryOptions } from '@/features/branding/hooks/queries/getBrand.query-option';
 import { useBrandForm } from '@/features/branding/hooks/useBrandForm';
 import { BrandingInterface } from '@/features/branding/interfaces/branding.interface';

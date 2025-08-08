@@ -2,7 +2,6 @@ FROM node:lts AS dependencies
 
 ARG API_URL_CLIENT
 ARG DOMAIN
-ARG PORT
 
 ENV API_URL_CLIENT=${API_URL_CLIENT}
 ENV DOMAIN=${DOMAIN}
@@ -18,6 +17,6 @@ COPY . .
 
 RUN pnpm run build
 
-EXPOSE ${PORT}
+EXPOSE 3000
 
 CMD ["pnpm", "start"]
