@@ -11,7 +11,9 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "next lint",
-    "lint:fix": "eslint src --ext .ts,.tsx --fix"
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "prisma-create": "prisma generate",
+    "prisma-pull": "prisma db pull"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.0",
