@@ -13,6 +13,7 @@ import SpecificationsSection from '@/features/product-detail/components/Specific
 import { getProductQueryOptions } from '@/features/products/hooks/queries/getProduct.query-option';
 import { trackUmamiEvent } from '@/lib/analytics';
 import { ANALYTICS_EVENTS } from '@/lib/analyticsEvents';
+import { Button, Subtitle, Text } from '@/components';
 
 const ProductDetail = ({ id }: { id: string }) => {
     const { data: product } = useSuspenseQuery(getProductQueryOptions(id));
@@ -27,7 +28,23 @@ const ProductDetail = ({ id }: { id: string }) => {
         }
     }, [product]);
 
-    if (!product) return <div>Producto no encontrado</div>;
+    if (!product)
+        return (
+            <Fragment>
+                <Header />
+                <main className="container mx-auto mt-10 flex flex-col items-start justify-center gap-10">
+                    <Text size="lg" variant="primary">
+                        Error 404: El producto que estás buscando no existe
+                    </Text>
+                    <Button variant="default" size="lg" onClick={() => (window.location.href = '/')}>
+                        Volver a la página principal
+                    </Button>
+                </main>
+                <PointsSales />
+                <BrandContainer />
+                <Footer />
+            </Fragment>
+        );
 
     return (
         <Fragment key={product.id}>
@@ -39,9 +56,9 @@ const ProductDetail = ({ id }: { id: string }) => {
                     <SpecificationsSection product={product} />
                 )}
                 {product.faq && product.faq.length > 0 && <FaqsSection product={product} />}
+                <PointsSales />
+                <BrandContainer />
             </main>
-            <PointsSales />
-            <BrandContainer />
             <Footer />
         </Fragment>
     );

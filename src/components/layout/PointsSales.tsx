@@ -35,6 +35,9 @@ export default function PointsSales() {
             setSelectedStore(storeId);
         }
     };
+
+    if (stores.length === 0) return null;
+
     return (
         <div className="container mx-auto flex flex-col gap-4 py-16">
             <div className="flex flex-col items-center gap-4">

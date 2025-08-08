@@ -1,6 +1,10 @@
 {
   "name": "tulk-frontend",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "Tulk es una empresa que se dedica a la venta de productos.",
+  "author": "Alejo Clifton",
+  "license": "MIT",
+  "homepage": "https://tulk.com.ar",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",

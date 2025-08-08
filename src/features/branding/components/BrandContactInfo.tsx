@@ -5,11 +5,10 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { MailIcon, PhoneIcon } from '@/assets/SvgContainer';
 import { SectionTitle, Subtitle, CustomLink } from '@/components';
 import { getBrandingQueryOptions } from '@/features/branding/hooks/queries/getBrand.query-option';
+import { brandingInitialData } from '@/features/branding/interfaces/branding';
 
 export const BrandContactInfo = () => {
     const { data: branding } = useSuspenseQuery(getBrandingQueryOptions);
-
-    if (!branding) return null;
 
     return (
         <div className="w-full rounded-2xl bg-white/10 p-8 backdrop-blur-sm md:w-[31.25rem]">
@@ -25,7 +24,9 @@ export const BrandContactInfo = () => {
                         <SectionTitle variant="sm" color="primary">
                             Correo electrónico
                         </SectionTitle>
-                        <CustomLink href={`mailto:${branding.email}`}>{branding.email}</CustomLink>
+                        <CustomLink href={`mailto:${branding?.email || brandingInitialData.email}`}>
+                            {branding?.email || brandingInitialData.email}
+                        </CustomLink>
                     </div>
                 </div>
                 <div className="col-span-1 flex items-center gap-6">
@@ -36,7 +37,9 @@ export const BrandContactInfo = () => {
                         <SectionTitle variant="sm" color="primary">
                             Teléfono
                         </SectionTitle>
-                        <CustomLink href={`tel:${branding.phone}`}>{branding.phone}</CustomLink>
+                        <CustomLink href={`tel:${branding?.phone || brandingInitialData.phone}`}>
+                            {branding?.phone || brandingInitialData.phone}
+                        </CustomLink>
                     </div>
                 </div>
             </div>
