@@ -66,6 +66,7 @@ export function useBrandForm(brand: BrandingInterface | null) {
             addressLink: data.addressLink,
             image: imageUrl,
             hours: data.hours,
+            webActive: data.webActive,
         };
 
         updateBrand.mutate(dataToUpdate);

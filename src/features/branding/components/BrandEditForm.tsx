@@ -4,14 +4,12 @@ import React from 'react';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 
-
 import { Input, Button, PanelCard, Subtitle, Label, Textarea, ImageFileInput, ImagePreviewList } from '@/components';
 import { getBrandingQueryOptions } from '@/features/branding/hooks/queries/getBrand.query-option';
 import { useBrandForm } from '@/features/branding/hooks/useBrandForm';
 import { BrandingInterface } from '@/features/branding/interfaces/branding.interface';
 import { trackUmamiEvent } from '@/lib/analytics';
 import { ANALYTICS_EVENTS } from '@/lib/analyticsEvents';
-
 
 const initialState: BrandingInterface = {
     id: '',
@@ -23,6 +21,7 @@ const initialState: BrandingInterface = {
     address: '',
     addressLink: '',
     hours: '',
+    webActive: true,
 };
 
 export const BrandEditForm = () => {
@@ -48,7 +47,7 @@ export const BrandEditForm = () => {
                 onSubmit={handleSubmit((data) => {
                     trackUmamiEvent(ANALYTICS_EVENTS.UPDATE_BRAND, {
                         brandName: data.name,
-                        hasNewImage: !!imageFile
+                        hasNewImage: !!imageFile,
                     });
                     onSubmit(data);
                 })}
@@ -93,6 +92,12 @@ export const BrandEditForm = () => {
                     <Label>Horarios (separados por comas)</Label>
                     <Input {...register('hours')} />
                     {errors.hours && <span className="text-red-500">{errors.hours.message}</span>}
+                </div>
+
+                <div className="flex items-center gap-2">
+                    <Label>Habilitar la web</Label>
+                    <input type="checkbox" {...register('webActive')} className="h-4 w-4" />
+                    {errors.webActive && <span className="text-red-500">{errors.webActive.message}</span>}
                 </div>
 
                 <div className="flex flex-col gap-2">

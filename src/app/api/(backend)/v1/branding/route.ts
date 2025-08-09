@@ -24,16 +24,17 @@ export async function PUT(request: NextRequest) {
     if (auth.response) return auth.response;
 
     try {
-        const { name, description, image, email, phone, address, addressLink, hours } = await request.json();
+        const { name, description, image, email, phone, address, addressLink, hours, webActive } = await request.json();
         const branding = await prisma.branding.upsert({
             where: { id: '6cb2f66e-9bc4-4817-a3c3-a1c132c10e7e' },
-            update: { name, description, image, email, phone, address, addressLink, hours },
+            update: { name, description, image, email, phone, address, addressLink, hours, webActive },
             create: {
                 id: '6cb2f66e-9bc4-4817-a3c3-a1c132c10e7e',
                 name,
                 description,
                 image,
                 email,
+                webActive,
                 phone,
                 address,
                 addressLink,

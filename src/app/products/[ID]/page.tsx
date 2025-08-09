@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 
 import { LoadingSpinner } from '@/components';
 import ProductDetail from '@/features/product-detail/ProductDetail';
+import HomeGate from '@/features/home/components/HomeGate';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,16 +16,18 @@ const ProductDetailContent = () => {
 
 const ProductDetailPage = () => {
     return (
-        <Suspense
-            fallback={
-                <div className="min-h-screen bg-white">
-                    <div className="flex min-h-screen items-center justify-center">
-                        <LoadingSpinner size={48} label="Cargando producto..." />
+        <HomeGate>
+            <Suspense
+                fallback={
+                    <div className="min-h-screen bg-white">
+                        <div className="flex min-h-screen items-center justify-center">
+                            <LoadingSpinner size={48} label="Cargando producto..." />
+                        </div>
                     </div>
-                </div>
-            }>
-            <ProductDetailContent />
-        </Suspense>
+                }>
+                <ProductDetailContent />
+            </Suspense>
+        </HomeGate>
     );
 };
 

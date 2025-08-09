@@ -7,50 +7,53 @@ import Header from '@/components/layout/Header';
 import PointsSales from '@/components/layout/PointsSales';
 import LinesProducts from '@/features/home/components/LinesProducts';
 import { SliderHeroProduct } from '@/features/products/components/SliderHeroProduct';
+import HomeGate from '@/features/home/components/HomeGate';
 
 export const dynamic = 'force-dynamic';
 
-export default function Home() {
+export default async function Home() {
     return (
         <>
-            <Header />
-            <main className="py-16">
-                <Suspense
-                    fallback={
-                        <div className="flex items-center justify-center py-16">
-                            <LoadingSpinner size={48} label="Cargando productos destacados..." />
-                        </div>
-                    }>
-                    <SliderHeroProduct />
-                </Suspense>
-                <div className="container mx-auto">
+            <HomeGate>
+                <Header />
+                <main className="py-16">
                     <Suspense
                         fallback={
                             <div className="flex items-center justify-center py-16">
-                                <LoadingSpinner size={48} label="Cargando productos..." />
+                                <LoadingSpinner size={48} label="Cargando productos destacados..." />
                             </div>
                         }>
-                        <LinesProducts />
+                        <SliderHeroProduct />
                     </Suspense>
-                </div>
-            </main>
-            <Suspense
-                fallback={
-                    <div className="flex items-center justify-center py-16">
-                        <LoadingSpinner size={48} label="Cargando puntos de venta..." />
+                    <div className="container mx-auto">
+                        <Suspense
+                            fallback={
+                                <div className="flex items-center justify-center py-16">
+                                    <LoadingSpinner size={48} label="Cargando productos..." />
+                                </div>
+                            }>
+                            <LinesProducts />
+                        </Suspense>
                     </div>
-                }>
-                <PointsSales />
-            </Suspense>
-            <Suspense
-                fallback={
-                    <div className="flex items-center justify-center py-16">
-                        <LoadingSpinner size={48} label="Cargando información de marca..." />
-                    </div>
-                }>
-                <BrandContainer />
-            </Suspense>
-            <Footer />
+                </main>
+                <Suspense
+                    fallback={
+                        <div className="flex items-center justify-center py-16">
+                            <LoadingSpinner size={48} label="Cargando puntos de venta..." />
+                        </div>
+                    }>
+                    <PointsSales />
+                </Suspense>
+                <Suspense
+                    fallback={
+                        <div className="flex items-center justify-center py-16">
+                            <LoadingSpinner size={48} label="Cargando información de marca..." />
+                        </div>
+                    }>
+                    <BrandContainer />
+                </Suspense>
+                <Footer />
+            </HomeGate>
         </>
     );
 }

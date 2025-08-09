@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Branding {
-  id          String @id @default(uuid())
+  id          String  @id @default(uuid())
   name        String
   description String
   image       String
@@ -17,6 +17,9 @@ model Branding {
   address     String
   addressLink String
   hours       String
+  webActive   Boolean @default(true) @map("web_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime? @updatedAt @map("updated_at")
 }
 
 model Product {
@@ -39,7 +42,9 @@ model Product {
 model Category {
   id       String    @id @default(uuid())
   name     String
-  isActive Boolean   @map("is_active")
+  isActive Boolean   @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
   products Product[]
 }
 

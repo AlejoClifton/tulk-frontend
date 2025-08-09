@@ -1,11 +1,12 @@
 export interface BrandingInterface {
-    id: string;
-    name: string;
-    description: string;
-    image: string;
-    email: string;
-    phone: string;
     address: string;
     addressLink: string;
+    description: string;
+    email: string;
     hours: string;
+    id: string;
+    image: string;
+    name: string;
+    phone: string;
+    webActive: boolean;
 }
