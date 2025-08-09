@@ -4,8 +4,8 @@ import { Suspense } from 'react';
 import { useParams } from 'next/navigation';
 
 import { LoadingSpinner } from '@/components';
-import ProductDetail from '@/features/product-detail/ProductDetail';
 import HomeGate from '@/features/home/components/HomeGate';
+import ProductDetail from '@/features/product-detail/ProductDetail';
 
 export const dynamic = 'force-dynamic';
 

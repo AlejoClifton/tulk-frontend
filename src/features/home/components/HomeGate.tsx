@@ -2,11 +2,11 @@
 
 import React from 'react';
 
+import { useSuspenseQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 
 import { Subtitle, Title } from '@/components';
 import { getBrandingQueryOptions } from '@/features/branding/hooks/queries/getBrand.query-option';
-import { useSuspenseQuery } from '@tanstack/react-query';
 
 interface HomeGateProps {
     children: React.ReactNode;

@@ -5,9 +5,9 @@ import BrandContainer from '@/components/BrandContainer';
 import Footer from '@/components/Footer';
 import Header from '@/components/layout/Header';
 import PointsSales from '@/components/layout/PointsSales';
+import HomeGate from '@/features/home/components/HomeGate';
 import LinesProducts from '@/features/home/components/LinesProducts';
 import { SliderHeroProduct } from '@/features/products/components/SliderHeroProduct';
-import HomeGate from '@/features/home/components/HomeGate';
 
 export const dynamic = 'force-dynamic';
 
