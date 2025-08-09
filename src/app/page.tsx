@@ -13,47 +13,45 @@ export const dynamic = 'force-dynamic';
 
 export default async function Home() {
     return (
-        <>
-            <HomeGate>
-                <Header />
-                <main className="py-16">
+        <HomeGate>
+            <Header />
+            <main className="py-16">
+                <Suspense
+                    fallback={
+                        <div className="flex items-center justify-center py-16">
+                            <LoadingSpinner size={48} label="Cargando productos destacados..." />
+                        </div>
+                    }>
+                    <SliderHeroProduct />
+                </Suspense>
+                <div className="container mx-auto">
                     <Suspense
                         fallback={
                             <div className="flex items-center justify-center py-16">
-                                <LoadingSpinner size={48} label="Cargando productos destacados..." />
+                                <LoadingSpinner size={48} label="Cargando productos..." />
                             </div>
                         }>
-                        <SliderHeroProduct />
+                        <LinesProducts />
                     </Suspense>
-                    <div className="container mx-auto">
-                        <Suspense
-                            fallback={
-                                <div className="flex items-center justify-center py-16">
-                                    <LoadingSpinner size={48} label="Cargando productos..." />
-                                </div>
-                            }>
-                            <LinesProducts />
-                        </Suspense>
+                </div>
+            </main>
+            <Suspense
+                fallback={
+                    <div className="flex items-center justify-center py-16">
+                        <LoadingSpinner size={48} label="Cargando puntos de venta..." />
                     </div>
-                </main>
-                <Suspense
-                    fallback={
-                        <div className="flex items-center justify-center py-16">
-                            <LoadingSpinner size={48} label="Cargando puntos de venta..." />
-                        </div>
-                    }>
-                    <PointsSales />
-                </Suspense>
-                <Suspense
-                    fallback={
-                        <div className="flex items-center justify-center py-16">
-                            <LoadingSpinner size={48} label="Cargando información de marca..." />
-                        </div>
-                    }>
-                    <BrandContainer />
-                </Suspense>
-                <Footer />
-            </HomeGate>
-        </>
+                }>
+                <PointsSales />
+            </Suspense>
+            <Suspense
+                fallback={
+                    <div className="flex items-center justify-center py-16">
+                        <LoadingSpinner size={48} label="Cargando información de marca..." />
+                    </div>
+                }>
+                <BrandContainer />
+            </Suspense>
+            <Footer />
+        </HomeGate>
     );
 }
